@@ -1,0 +1,151 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WhatsAppButton from '../components/WhatsAppButton.jsx';
+import { CircleCheck, TriangleAlert } from 'lucide-react';
+import { motCheckGroups, notCovered } from '../content/mot-checks';
+import { url } from '../config/site';
+
+const totalChecks = motCheckGroups.reduce((n, group) => n + group.items.length, 0);
+---
+
+<BaseLayout
+  title="What's Checked at an MOT? Every Part Tested | Toyotech, Bletchley"
+  description="A plain-English guide to every part checked at a car MOT — brakes, tyres, steering, lights, emissions and more — plus what an MOT doesn't cover. Book your MOT in Bletchley, Milton Keynes."
+>
+  <section class="bg-navy text-white">
+    <div class="mx-auto max-w-6xl px-4 py-12">
+      <h1 class="text-4xl font-black">What's checked at an MOT?</h1>
+      <p class="mt-3 max-w-2xl text-lg text-white/80">
+        {totalChecks} parts of your car are inspected, grouped into {motCheckGroups.length} areas. Here's what
+        our testers look at in Bletchley, in plain English.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-slate-50">
+    <div class="mx-auto max-w-3xl px-4 py-10">
+      <p class="text-lg text-slate-700">
+        An MOT is an annual safety and emissions check, required by law once your car is three years old. It
+        looks at whether the car meets the legal standard on the day of the test — it is not a service, and it
+        is not a guarantee that nothing will go wrong afterwards.
+      </p>
+      <p class="mt-4 text-lg text-slate-700">
+        Below is the full list of what a tester inspects. If something on your car worries you before the test,
+        <a class="font-semibold text-brand-blue underline underline-offset-4" href={url('/contact')}>get in touch</a>
+        and we'll take a look first — it's usually cheaper than failing and retesting.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-slate-50" aria-labelledby="checks-heading">
+    <div class="mx-auto max-w-6xl px-4 pb-12">
+      <h2 id="checks-heading" class="sr-only">Parts checked at an MOT</h2>
+      <div class="grid gap-6 lg:grid-cols-2">
+        {
+          motCheckGroups.map((group) => {
+            const Icon = group.icon;
+            return (
+              <div data-reveal id={group.slug} class="min-w-0 scroll-mt-24">
+                <article class="flex h-full flex-col rounded-2xl bg-white p-6 shadow-md ring-1 ring-slate-200">
+                  <div class="mb-3 flex items-center gap-3">
+                    <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue">
+                      <Icon className="h-6 w-6" />
+                    </span>
+                    <h3 class="text-xl font-bold text-navy">{group.title}</h3>
+                  </div>
+                  <p class="mb-4 text-slate-600">{group.intro}</p>
+                  <dl class="flex flex-col gap-4 border-t border-slate-200 pt-4">
+                    {group.items.map((item) => (
+                      <div>
+                        <dt class="font-bold text-navy">{item.name}</dt>
+                        <dd class="text-slate-600">{item.description}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </article>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white" aria-labelledby="not-covered-heading">
+    <div class="mx-auto max-w-3xl px-4 py-12">
+      <h2 id="not-covered-heading" class="text-3xl font-black text-navy">What an MOT doesn't cover</h2>
+      <p class="mt-3 text-slate-600">
+        This catches a lot of people out. A pass certificate means the car met the legal standard on the day —
+        it says nothing about these:
+      </p>
+      <ul class="mt-5 flex flex-col gap-3">
+        {
+          notCovered.map((item) => (
+            <li class="flex items-start gap-3">
+              <TriangleAlert className="mt-1 h-5 w-5 shrink-0 text-brand-red" aria-hidden="true" />
+              <span class="text-slate-700">{item}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-5 text-slate-600">
+        That's what a <a class="font-semibold text-brand-blue underline underline-offset-4" href={url('/services')}
+          >service</a
+        > is for. Booking both together saves you a second trip, and we can do them the same day.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-navy-light text-white" aria-labelledby="before-heading">
+    <div class="mx-auto max-w-3xl px-4 py-12">
+      <h2 id="before-heading" class="text-3xl font-black">Check these yourself before the test</h2>
+      <p class="mt-3 text-white/80">
+        A good share of failures are things you can spot on your driveway in five minutes.
+      </p>
+      <ul class="mt-5 grid gap-3 sm:grid-cols-2">
+        {
+          [
+            'Every bulb — sidelights, indicators, brake lights, number plate lamp',
+            'Tyre tread and pressures, including any spare',
+            'Screenwash topped up, wipers not smearing',
+            'Chips or cracks in the windscreen in front of the driver',
+            'Horn works',
+            'Warning lights on the dashboard — especially ABS and airbag',
+            'Number plates clean, secure and readable',
+            'Seat belts latch and retract properly',
+          ].map((item) => (
+            <li class="flex items-start gap-3">
+              <CircleCheck className="mt-1 h-5 w-5 shrink-0 text-brand-green" aria-hidden="true" />
+              <span class="text-white/90">{item}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="mx-auto flex max-w-6xl flex-col items-center gap-5 px-4 py-12 text-center">
+    <h2 class="text-3xl font-black text-navy">Book your MOT in Bletchley</h2>
+    <p class="max-w-lg text-slate-600">
+      Same-day bookings, open 7 days a week. If anything fails, we'll explain it and show you before any work
+      starts.
+    </p>
+    <WhatsAppButton variant="large" />
+  </section>
+
+  <section class="bg-slate-50">
+    <div class="mx-auto max-w-3xl px-4 py-8">
+      <p class="text-sm text-slate-500">
+        Based on DVSA's list of <a
+          class="underline underline-offset-4"
+          href="https://www.gov.uk/government/publications/car-parts-checked-at-an-mot/car-parts-checked-at-an-mot"
+          rel="nofollow">car parts checked at an MOT</a
+        >. Contains public sector information licensed under the <a
+          class="underline underline-offset-4"
+          href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+          rel="nofollow">Open Government Licence v3.0</a
+        >. Requirements can change — gov.uk is the authority.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

@@ -16,7 +16,7 @@ const mainPhone = phones[0];
       <Logo />
     </a>
 
-    <nav class="hidden items-center gap-6 md:flex" aria-label="Main">
+    <nav class="hidden items-center gap-5 lg:flex" aria-label="Main">
       {
         nav.map((item) => (
           <a
@@ -36,7 +36,7 @@ const mainPhone = phones[0];
       <WhatsAppButton variant="header" label="WhatsApp us" />
     </nav>
 
-    <div class="flex items-center gap-1 md:hidden">
+    <div class="flex items-center gap-1 lg:hidden">
       <a
         href={`tel:${mainPhone.tel}`}
         class="btn-motion flex h-12 w-12 items-center justify-center rounded-full hover:bg-white/10 active:bg-white/20"
@@ -58,7 +58,7 @@ const mainPhone = phones[0];
     </div>
   </div>
 
-  <nav id="mobile-nav" class="border-t border-white/10 md:hidden" aria-label="Mobile" hidden>
+  <nav id="mobile-nav" class="border-t border-white/10 lg:hidden" aria-label="Mobile" hidden>
     <ul class="mx-auto flex max-w-6xl flex-col px-4 py-2">
       {
         nav.map((item) => (

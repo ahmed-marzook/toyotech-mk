@@ -44,7 +44,15 @@
    - Each service: icon + short description
    - No images on service cards (icon + text only, keeps the focus on the service info)
    - Feature "Genuine Parts and Warranty" and hybrid specialism callouts
-3. **Contact**
+3. **MOT Checks** (`/mot-checks/`)
+   - Plain-English guide to every part inspected at a car MOT, grouped into 6 areas
+   - Content lives in `src/content/mot-checks.ts`, sourced from DVSA's "Car parts checked at an MOT" under the Open Government Licence v3.0 — reworded, not copied, and attributed at the foot of the page
+   - Also covers what an MOT does *not* include (engine, clutch, gearbox condition, servicing) as a bridge to the Services page
+4. **Hybrid Battery** (`/hybrid-battery/`)
+   - Local SEO landing page for the business's strongest differentiator and least contested search term
+   - Failure symptoms, the diagnose-repair-replace approach, and the hybrid models covered
+   - Claims are deliberately kept to what this file records; the model list and repair-vs-replace wording need confirming with Mumthaz
+5. **Contact**
    - Primary CTA: "Message us on WhatsApp" button (deep link, see below)
    - Phone numbers listed as tap-to-call links (mobile-first)
    - Address + Google Maps embed (see Map Embed section below) — always shown alongside a plain-text address and "Get directions" link, never as the only way to find the workshop
