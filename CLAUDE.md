@@ -117,6 +117,61 @@ Parsing rules:
 - Always paired with a plain-text address and a "Get directions" link plus a fallback link if the iframe fails — the map is never the only way to find the workshop.
 - Note: the iframe loads Google's cookies — Home and Contact are the only pages making this third-party request (besides the client-side opening-hours CSV fetch).
 
+## Social / Link Previews (Open Graph)
+
+Currently the site's WhatsApp/social link preview shows text only, no image — because there's no `og:image` set. Fix by adding proper Open Graph + Twitter Card meta tags to the shared `<head>` (e.g. a `<SEO.astro>` partial imported by every page's layout, with per-page overrides for title/description):
+
+```html
+<meta
+  property="og:title"
+  content="Toyotech MOT Centre | Hybrid Specialists in Milton Keynes"
+/>
+<meta
+  property="og:description"
+  content="Toyotech MOT Centre in Bletchley, Milton Keynes — hybrid vehicle specialists offering MOTs, servicing, brakes, repairs and diagnostics. Open 7 days, same-day bookings."
+/>
+<meta
+  property="og:image"
+  content="https://ahmed-marzook.github.io/toyotech-mot-centre/og-image.png"
+/>
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta
+  property="og:url"
+  content="https://ahmed-marzook.github.io/toyotech-mot-centre/"
+/>
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+```
+
+- `og:image` must be an **absolute URL** (not relative), or crawlers (WhatsApp, Facebook, etc.) won't resolve it.
+- Target roughly **1200×630px** landscape for the large WhatsApp/Facebook card style — a smaller/square image falls back to a tiny thumbnail.
+- Until real photography exists, generate a placeholder `og-image.png` from the logo on a branded red/blue background (`src/assets/og-image.png`), swap for a real workshop photo later.
+- Each page (`index.astro`, `services.astro`, `contact.astro`) should be able to override `title`/`description`/`og:image` via props passed into the shared `<SEO>` partial, rather than one static tag set site-wide.
+- WhatsApp/Facebook cache previews aggressively — after deploying, re-scrape the URL via [Facebook's Sharing Debugger](https://developers.facebook.com/tools/debug/) (same crawler WhatsApp uses) to force a refresh rather than waiting.
+
+## Accessibility
+
+- Semantic HTML throughout (`<nav>`, `<main>`, `<header>`, `<footer>`, one `<h1>` per page, logical heading order — no skipped levels)
+- All images have descriptive `alt` text; purely decorative images (background swooshes, dividers) use `alt=""`
+- Colour contrast: verify the red (`#D5222A`) and navy (`#0B2545`) palette meets **WCAG AA** (4.5:1 for body text, 3:1 for large text/UI components) — check text-on-red and text-on-navy combinations specifically, since brand reds often fail on white
+- All interactive elements (WhatsApp button, nav links, tap-to-call, "Get directions") are keyboard-reachable with a visible focus state — don't strip default outlines without replacing them
+- Touch targets ≥44×44px (mobile-first requirement already noted, but applies to accessibility too — motor-impaired users benefit equally)
+- `MapEmbed` iframe has a descriptive `title` (already specified above) — screen readers otherwise announce an unnamed "frame"
+- Sticky/floating WhatsApp button must not permanently obscure content or trap keyboard focus; ensure it's reachable and dismissible/collapsible
+- Run an automated pass (Lighthouse or axe DevTools) before launch, then a manual keyboard-only and screen-reader (VoiceOver/NVDA) pass on the Home, Services and Contact pages
+
+## SEO
+
+- **Per-page `<title>` and meta description** — distinct for Home, Services, Contact (feeds directly into the Open Graph tags above; don't reuse one generic description everywhere)
+- **Local SEO focus** — work "Bletchley", "Milton Keynes", "MOT", "hybrid" naturally into headings and body copy across pages, since this is a local search business, not a national brand
+- **Structured data (JSON-LD)** — add an `AutoRepair`/`LocalBusiness` schema block (name, address, phone, opening hours, geo-coordinates, price range if known) on the Home page so Google can show rich results (map pin, hours, rating) directly in search
+- **`sitemap.xml`** — use `@astrojs/sitemap` integration to auto-generate on build
+- **`robots.txt`** — allow all crawling (no reason to block anything on a small static marketing site)
+- **Canonical URLs** — `<link rel="canonical">` per page to avoid duplicate-content issues if the site is ever reachable via both a GitHub Pages subpath and a future custom domain
+- **Fast builds, small payloads** — Astro's static output already helps Core Web Vitals; keep images optimised (`astro:assets` for automatic resizing/format conversion) once real photos are added
+- **Google Business Profile** — since reviews/ratings are already pulled from the confirmed listing, make sure the site's NAP (name, address, phone) matches the Google Business Profile exactly — mismatches hurt local ranking
+
 ## Future Ideas (not in initial build)
 
 - **Vehicle reg / MOT & tax status checker** — using the free DVLA Vehicle Enquiry Service API and DVSA MOT History API. Both are free to use with no per-lookup charges, but a static GitHub Pages site can't call them directly (API key can't live client-side), so this needs a small serverless proxy (Cloudflare Worker / Netlify Function) in front of it. Park this as a v2 feature once hosting supports it.
@@ -134,6 +189,7 @@ Parsing rules:
   - Hero background
   - Service card thumbnails
   - Workshop/team photos
+  - Social preview (`og-image.png`) — see Social / Link Previews section above
 - Structure image references so real photos can be dropped into `src/assets/` later without code changes (use a consistent naming convention, e.g. `service-mot.jpg`, `service-brakes.jpg`)
 
 ## Mobile-First Requirements
@@ -160,8 +216,10 @@ src/
     OpeningHours.jsx
     ServiceCard.astro
     ImagePlaceholder.astro
+    MapEmbed.astro
+    SEO.astro
   config/
-    site.ts          # phone numbers, address, CSV URL, WhatsApp link
+    site.ts          # phone numbers, address, CSV URL, WhatsApp link, map config
   content/
     services.ts       # array of services with name/description/icon
   pages/

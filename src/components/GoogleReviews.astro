@@ -42,7 +42,7 @@ const stars = Array.from({ length: 5 }, (_, i) => Math.max(0, Math.min(1, rating
         rel="noopener noreferrer"
         class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-brand-blue px-5 py-3 font-bold text-brand-blue transition-colors hover:bg-brand-blue hover:text-white"
       >
-        Read more reviews on Google <ExternalLink className="h-4 w-4" />
+        Read more reviews on Google<span class="sr-only"> (opens in a new tab)</span> <ExternalLink className="h-4 w-4" />
       </a>
     </div>
 

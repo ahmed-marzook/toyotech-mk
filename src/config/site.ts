@@ -83,8 +83,14 @@ export const nav = [
   { label: 'Contact', path: '/contact' },
 ];
 
-/** Prefix an internal path with the GitHub Pages base path. */
+/**
+ * Prefix an internal path with the GitHub Pages base path. Page paths get a
+ * trailing slash (trailingSlash: 'always'); file paths like /favicon.svg don't.
+ */
 export function url(path: string): string {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-  return `${base}${path.startsWith('/') ? path : `/${path}`}`;
+  const [pathname, hash] = path.split('#');
+  let p = pathname.startsWith('/') ? pathname : `/${pathname}`;
+  if (!p.endsWith('/') && !/\.\w+$/.test(p)) p += '/';
+  return `${base}${p}${hash ? `#${hash}` : ''}`;
 }

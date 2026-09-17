@@ -10,6 +10,11 @@ import { ImageIcon } from 'lucide-react';
 
 interface Props {
   name: string;
+  /**
+   * Describes the real photo once it exists. Pass "" for purely decorative
+   * images (e.g. the hero background). The grey placeholder itself carries no
+   * information, so it is always hidden from screen readers.
+   */
   alt: string;
   class?: string;
   /** Tailwind aspect-ratio class, e.g. "aspect-video" */
@@ -37,12 +42,11 @@ const src = match ? (await images[match]()).default : undefined;
     <Image src={src} alt={alt} class:list={['h-full w-full object-cover', aspect, className]} />
   ) : (
     <div
-      role="img"
-      aria-label={`${alt} (placeholder)`}
+      aria-hidden="true"
       data-image-name={name}
       class:list={[
         'flex h-full w-full flex-col items-center justify-center gap-2 border-2 border-dashed',
-        dark ? 'border-white/20 bg-white/5 text-white/40' : 'border-slate-300 bg-slate-100 text-slate-400',
+        dark ? 'border-white/20 bg-white/5 text-white/40' : 'border-slate-300 bg-slate-100 text-slate-600',
         aspect,
         className,
       ]}

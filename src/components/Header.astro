@@ -23,7 +23,7 @@ const mainPhone = phones[0];
             href={url(item.path)}
             aria-current={isActive(item.path) ? 'page' : undefined}
             class:list={[
-              'font-semibold transition-colors hover:text-white',
+              'inline-flex min-h-11 items-center font-semibold transition-colors hover:text-white',
               isActive(item.path)
                 ? 'text-white underline decoration-brand-red decoration-2 underline-offset-8'
                 : 'text-white/75',
@@ -50,7 +50,7 @@ const mainPhone = phones[0];
         class="flex h-12 w-12 items-center justify-center rounded-full hover:bg-white/10"
         aria-controls="mobile-nav"
         aria-expanded="false"
-        aria-label="Open menu"
+        aria-label="Menu"
       >
         <span data-icon="open"><Menu className="h-7 w-7" /></span>
         <span data-icon="close" hidden><X className="h-7 w-7" /></span>
@@ -67,8 +67,9 @@ const mainPhone = phones[0];
               href={url(item.path)}
               aria-current={isActive(item.path) ? 'page' : undefined}
               class:list={[
-                'block rounded-lg px-3 py-4 text-lg font-semibold hover:bg-white/10',
-                isActive(item.path) && 'text-brand-red',
+                'block rounded-lg border-l-4 px-3 py-4 text-lg font-semibold hover:bg-white/10',
+                // Red text on navy is only 3:1 at this size (fails AA), so mark the current page with a red bar
+                isActive(item.path) ? 'border-brand-red bg-white/10 text-white' : 'border-transparent',
               ]}
             >
               {item.label}
@@ -91,10 +92,16 @@ const mainPhone = phones[0];
     const open = menu.hidden;
     menu.hidden = !open;
     toggle.setAttribute('aria-expanded', String(open));
-    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     const openIcon = toggle.querySelector<HTMLElement>('[data-icon="open"]');
     const closeIcon = toggle.querySelector<HTMLElement>('[data-icon="close"]');
     if (openIcon) openIcon.hidden = open;
     if (closeIcon) closeIcon.hidden = !open;
+  });
+
+  // Escape closes the menu and returns focus to the toggle
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape' || !menu || menu.hidden) return;
+    toggle?.click();
+    toggle?.focus();
   });
 </script>

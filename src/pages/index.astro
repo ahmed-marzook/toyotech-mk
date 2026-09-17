@@ -6,6 +6,7 @@ import OpeningHours from '../components/OpeningHours.jsx';
 import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 import GoogleReviews from '../components/GoogleReviews.astro';
 import MapEmbed from '../components/MapEmbed.astro';
+import LocalBusinessSchema from '../components/LocalBusinessSchema.astro';
 import { services } from '../content/services';
 import { site, address, phones, map, url } from '../config/site';
 
@@ -16,18 +17,23 @@ const highlights = [
 ];
 ---
 
-<BaseLayout>
+<BaseLayout
+  title="Toyotech MOT Centre | Hybrid Specialists in Milton Keynes"
+  description="Toyotech MOT Centre in Bletchley, Milton Keynes — hybrid vehicle specialists offering MOTs, servicing, brakes, repairs and diagnostics. Open 7 days, same-day bookings."
+>
+  <LocalBusinessSchema slot="head" />
+
   <!-- Hero -->
   <section class="relative isolate overflow-hidden bg-navy text-white">
     <div class="absolute inset-0 -z-10 opacity-30">
-      <ImagePlaceholder name="hero" alt="Toyotech workshop" aspect="" dark label="Hero photo coming soon" />
+      <ImagePlaceholder name="hero" alt="" aspect="" dark label="Hero photo coming soon" />
     </div>
     <div class="absolute inset-0 -z-10 bg-linear-to-b from-navy/60 via-navy/80 to-navy"></div>
 
     <div class="mx-auto max-w-6xl px-4 py-14 sm:py-20">
       <h1 class="text-5xl font-black uppercase leading-[0.95] sm:text-7xl">
         <span
-          class="inline-block -skew-x-6 bg-linear-to-r from-brand-green to-green-500 px-3 py-1 text-3xl sm:text-5xl"
+          class="inline-block -skew-x-6 bg-linear-to-r from-brand-green to-green-500 px-3 py-1 text-3xl text-navy sm:text-5xl"
           ><span class="inline-block skew-x-6">MOT Centre</span></span
         ><br />
         <span class="mt-2 inline-block">Is <span class="text-brand-green">Open</span></span>
@@ -40,7 +46,7 @@ const highlights = [
         <WhatsAppButton variant="large" label="Book on WhatsApp" />
         <a
           href={`tel:${phones[0].tel}`}
-          class="inline-flex items-center justify-center rounded-full border-2 border-white/40 px-6 py-4 text-lg font-bold hover:bg-white/10"
+          class="inline-flex min-h-14 items-center justify-center rounded-full border-2 border-white/40 px-6 py-4 text-lg font-bold hover:bg-white/10"
         >
           Call {phones[0].display}
         </a>
@@ -49,14 +55,15 @@ const highlights = [
   </section>
 
   <!-- Highlights -->
-  <section class="border-y-2 border-brand-green bg-navy-light text-white">
+  <section class="border-y-2 border-brand-green bg-navy-light text-white" aria-labelledby="highlights-heading">
+    <h2 id="highlights-heading" class="sr-only">Why choose Toyotech</h2>
     <ul class="mx-auto grid max-w-6xl gap-px sm:grid-cols-3">
       {
         highlights.map(({ icon: Icon, title, text }) => (
           <li class="flex items-start gap-4 px-4 py-6">
             <Icon className="h-9 w-9 shrink-0 text-brand-green" />
             <div>
-              <h2 class="text-lg font-bold">{title}</h2>
+              <h3 class="text-lg font-bold">{title}</h3>
               <p class="text-sm text-white/80">{text}</p>
             </div>
           </li>
@@ -126,7 +133,7 @@ const highlights = [
           rel="noopener noreferrer"
           class="inline-flex items-center justify-center gap-2 rounded-full bg-brand-blue px-5 py-3 font-bold text-white hover:bg-navy"
         >
-          <Navigation className="h-4 w-4" /> Get directions
+          <Navigation className="h-4 w-4" /> Get directions<span class="sr-only"> (opens in a new tab)</span>
         </a>
         <a
           href={`tel:${phones[0].tel}`}

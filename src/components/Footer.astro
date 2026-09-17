@@ -14,7 +14,7 @@ const year = new Date().getFullYear();
     </div>
 
     <div>
-      <h2 class="mb-3 font-bold text-white">Find us</h2>
+      <h2 class="mb-3 font-bold text-white">Address</h2>
       <p class="flex gap-2 text-sm">
         <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-red" />
         <span>
@@ -27,11 +27,11 @@ const year = new Date().getFullYear();
 
     <div>
       <h2 class="mb-3 font-bold text-white">Call us</h2>
-      <ul class="space-y-2 text-sm">
+      <ul class="space-y-1 text-sm">
         {
           phones.map((p) => (
             <li>
-              <a href={`tel:${p.tel}`} class="inline-flex items-center gap-2 py-1 hover:text-white">
+              <a href={`tel:${p.tel}`} class="inline-flex min-h-11 items-center gap-2 hover:text-white">
                 <Phone className="h-4 w-4 text-brand-red" />
                 {p.display}
               </a>
@@ -47,17 +47,19 @@ const year = new Date().getFullYear();
         <Clock className="mt-0.5 h-4 w-4 shrink-0 text-brand-red" />
         <span>Open 7 days a week<br />Same-day bookings available</span>
       </p>
-      <ul class="mt-4 flex gap-4 text-sm">
-        {
-          nav.map((item) => (
-            <li>
-              <a href={url(item.path)} class="hover:text-white">
-                {item.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+      <nav aria-label="Footer">
+        <ul class="mt-4 flex gap-4 text-sm">
+          {
+            nav.map((item) => (
+              <li>
+                <a href={url(item.path)} class="inline-flex min-h-11 items-center hover:text-white">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
     </div>
   </div>
   <div class="border-t border-white/10 py-4 text-center text-xs text-white/60">

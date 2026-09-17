@@ -1,0 +1,75 @@
+---
+/**
+ * JSON-LD structured data (schema.org AutoRepair, a LocalBusiness subtype)
+ * for the Home page, so Google can show the map pin, hours and contact
+ * details in search results.
+ *
+ * Opening hours are read from the published Google Sheet at build time,
+ * falling back to `fallbackHours` if the fetch fails. The on-page widget still
+ * refetches client-side; this block refreshes on each deploy.
+ *
+ * No aggregateRating: Google ignores "self-serving" review markup a business
+ * puts on its own site, and the rating already lives on the Business Profile.
+ */
+import { site, address, phones, map, fallbackHours, OPENING_HOURS_CSV_URL, type HoursRow } from '../config/site';
+import { services } from '../content/services';
+import { parseHours } from './OpeningHours.jsx';
+
+let hours: HoursRow[] = fallbackHours;
+try {
+  const res = await fetch(OPENING_HOURS_CSV_URL);
+  if (res.ok) hours = parseHours(await res.text());
+} catch {
+  // keep fallback hours
+}
+
+const origin = new URL(import.meta.env.BASE_URL, Astro.site).href;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'AutoRepair',
+  '@id': `${origin}#business`,
+  name: site.name,
+  alternateName: site.altName,
+  description: site.description,
+  url: origin,
+  image: new URL('og-image.png', origin).href,
+  logo: new URL('favicon.svg', origin).href,
+  telephone: phones[0].tel,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '80-86 Tavistock Street',
+    addressLocality: 'Bletchley',
+    addressRegion: 'Milton Keynes',
+    postalCode: address.postcode,
+    addressCountry: 'GB',
+  },
+  // Postcode centroid for MK2 2PB (postcodes.io) — replace with the exact pin from the Business Profile if needed
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 51.999794,
+    longitude: -0.724739,
+  },
+  hasMap: map.directionsUrl,
+  areaServed: ['Bletchley', 'Fenny Stratford', 'Milton Keynes'],
+  openingHoursSpecification: hours
+    .filter((h) => !h.closedFlag)
+    .map((h) => ({
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: `https://schema.org/${h.day}`,
+      opens: h.open,
+      closes: h.close,
+    })),
+  knowsAbout: services.map((s) => s.name),
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Services',
+    itemListElement: services.map((s) => ({
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name: s.name, description: s.description },
+    })),
+  },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

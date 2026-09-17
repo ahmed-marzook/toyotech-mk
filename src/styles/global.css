@@ -8,14 +8,32 @@
   --color-brand-red-dark: #b01b22;
   --color-brand-green: #6cd12a;
   --color-whatsapp: #25d366;
+  --color-whatsapp-hover: #20c05c; /* navy text on this is 6.42:1 */
   --color-whatsapp-dark: #128c7e;
+  --color-focus: #ffbf47;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
   }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
   body {
     @apply bg-white text-slate-800 antialiased;
+  }
+
+  /*
+   * One visible focus ring for every interactive element: a navy outline
+   * inside a yellow halo. Navy shows on white (15.4:1), yellow shows on the
+   * navy header/footer (9.4:1), so it's visible on every background we use.
+   */
+  :focus-visible {
+    outline: 3px solid var(--color-navy);
+    outline-offset: 0;
+    box-shadow: 0 0 0 6px var(--color-focus);
   }
 }

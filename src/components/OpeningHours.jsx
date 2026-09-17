@@ -128,7 +128,8 @@ export default function OpeningHours({ dark = false }) {
   const isOpen =
     today && !today.closedFlag && now.minutes >= toMinutes(today.open) && now.minutes < toMinutes(today.close);
 
-  const muted = dark ? 'text-white/60' : 'text-slate-500';
+  // slate-600, not 500: 500 drops below 4.5:1 on the tinted "today" row
+  const muted = dark ? 'text-white/70' : 'text-slate-600';
 
   return (
     <div className={dark ? 'text-white' : 'text-slate-800'}>
@@ -161,11 +162,11 @@ export default function OpeningHours({ dark = false }) {
               <div>
                 <span className="font-semibold">
                   {h.day}
-                  {isToday && <span className="ml-2 text-xs font-bold uppercase text-brand-red">Today</span>}
+                  {isToday && <span className={`ml-2 text-xs font-bold uppercase ${dark ? 'text-white' : 'text-brand-red-dark'}`}>Today</span>}
                 </span>
                 {h.note && <p className={`text-sm ${muted}`}>{h.note}</p>}
               </div>
-              <span className={`shrink-0 font-semibold tabular-nums ${h.closedFlag ? 'text-brand-red' : ''}`}>
+              <span className={`shrink-0 font-semibold tabular-nums ${h.closedFlag ? (dark ? 'text-white' : 'text-brand-red-dark') : ''}`}>
                 {h.closedFlag ? 'Closed' : `${formatTime(h.open)} – ${formatTime(h.close)}`}
               </span>
             </li>
