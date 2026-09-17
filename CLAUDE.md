@@ -36,6 +36,7 @@
    - Quick highlights: 7 days a week, hybrid specialists, same-day bookings
    - Opening hours widget (see below)
    - Google Reviews section (see below)
+   - "Find us" location section: address, "Get directions" + call buttons, Google Maps embed (see Map Embed section below)
    - CTA button → WhatsApp
 2. **Services**
    - List all services: Diagnostic, Engine, Gear Box, MOT Repair, Service, Brake Pads, Power Steering, AC & Heater, Clutch, ABS, Glass, Suspension, Electrical Work, Hybrid Battery
@@ -45,7 +46,7 @@
 3. **Contact**
    - Primary CTA: "Message us on WhatsApp" button (deep link, see below)
    - Phone numbers listed as tap-to-call links (mobile-first)
-   - Address + embed-ready placeholder for a map (no API key wired up yet — just a placeholder block)
+   - Address + Google Maps embed (see Map Embed section below) — always shown alongside a plain-text address and "Get directions" link, never as the only way to find the workshop
    - **No social media icons/links anywhere on the site**
 
 ## Opening Hours — Google Sheet Integration
@@ -106,6 +107,16 @@ Parsing rules:
   - "Brought in a Toyota Prius expecting to pay a lot. Instead they gave me a great deal with speedy turn around... Very happy with the top notch service."
   - "Best for all car repairs at affordable cost. Been servicing for 3 years now."
 
+## Map Embed
+
+- `src/components/MapEmbed.astro` on the Home page ("Find us" section, after reviews) and the Contact page: a keyless Google Maps iframe (`https://maps.google.com/maps?q=…&output=embed`) — no API key needed.
+- Embed URL and "Get directions" URL (uses the Place ID) live in `map` in `src/config/site.ts`.
+- Wrapped in a native `<details open>` so it can be collapsed without JS; `loading="lazy"`.
+- Accessibility: iframe has a descriptive `title`; no obsolete `frameborder`/`scrolling`/`margin*` attributes; sized with `aspect-ratio` so it reflows on mobile (no fixed 600×400).
+- No backlink/attribution to embed-generator sites (e.g. embed-googlemap.com).
+- Always paired with a plain-text address and a "Get directions" link plus a fallback link if the iframe fails — the map is never the only way to find the workshop.
+- Note: the iframe loads Google's cookies — Home and Contact are the only pages making this third-party request (besides the client-side opening-hours CSV fetch).
+
 ## Future Ideas (not in initial build)
 
 - **Vehicle reg / MOT & tax status checker** — using the free DVLA Vehicle Enquiry Service API and DVSA MOT History API. Both are free to use with no per-lookup charges, but a static GitHub Pages site can't call them directly (API key can't live client-side), so this needs a small serverless proxy (Cloudflare Worker / Netlify Function) in front of it. Park this as a v2 feature once hosting supports it.
@@ -113,8 +124,7 @@ Parsing rules:
 ## WhatsApp Contact
 
 - **Confirmed number:** 07450 277250
-- Use a `wa.me` deep link: `https://wa.me/447450277250?text=Hello%20Toyotech%2C%20I%20am%20interested%20in%20booking%20a%20service%20or%20MOT.%20Could%20you%20let%20me%20know%20your%20availability%3F`
-- Pre-filled message is a general enquiry (not MOT-only): "Hello Toyotech, I am interested in booking a service or MOT. Could you let me know your availability?" — set in `src/config/site.ts`
+- Use a `wa.me` deep link: `https://wa.me/447450277250?text=Hi%20Toyotech%2C%20I%27d%20like%20to%20book%20an%20MOT`
 - Make this the primary CTA button site-wide (header, home hero, contact page)
 - Style as a prominent green WhatsApp-branded button, distinct from the red/blue theme, so it's instantly recognisable
 

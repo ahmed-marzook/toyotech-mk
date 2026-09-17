@@ -4,10 +4,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import WhatsAppButton from '../components/WhatsAppButton.jsx';
 import OpeningHours from '../components/OpeningHours.jsx';
 import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import MapEmbed from '../components/MapEmbed.astro';
 import GoogleReviews from '../components/GoogleReviews.astro';
-import { site, address, phones } from '../config/site';
+import { site, address, phones, map } from '../config/site';
 
-const directionsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address.full)}`;
+const directionsHref = map.directionsUrl;
 ---
 
 <BaseLayout
@@ -76,10 +77,7 @@ const directionsHref = `https://www.google.com/maps/search/?api=1&query=${encode
     </div>
 
     <div class="space-y-10">
-      <!-- Map placeholder: swap for an embed iframe once a Maps key / embed URL is chosen -->
-      <div id="map" class="overflow-hidden rounded-2xl">
-        <ImagePlaceholder name="map" alt={`Map showing ${address.full}`} aspect="aspect-[4/3]" label="Map coming soon" />
-      </div>
+      <div id="map" class="scroll-mt-24"><MapEmbed /></div>
 
       <div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200">
         <OpeningHours client:load />

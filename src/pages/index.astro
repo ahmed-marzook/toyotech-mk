@@ -1,12 +1,13 @@
 ---
-import { CalendarDays, BatteryCharging, Zap, ArrowRight } from 'lucide-react';
+import { CalendarDays, BatteryCharging, Zap, ArrowRight, MapPin, Navigation, Phone } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WhatsAppButton from '../components/WhatsAppButton.jsx';
 import OpeningHours from '../components/OpeningHours.jsx';
 import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 import GoogleReviews from '../components/GoogleReviews.astro';
+import MapEmbed from '../components/MapEmbed.astro';
 import { services } from '../content/services';
-import { address, phones, url } from '../config/site';
+import { site, address, phones, map, url } from '../config/site';
 
 const highlights = [
   { icon: CalendarDays, title: 'Open 7 days a week', text: 'Weekday and weekend slots to fit around you.' },
@@ -104,6 +105,39 @@ const highlights = [
   </section>
 
   <GoogleReviews />
+
+  <!-- Location -->
+  <section class="mx-auto grid max-w-6xl items-start gap-8 px-4 py-14 lg:grid-cols-5" aria-labelledby="find-us-heading">
+    <div class="lg:col-span-2">
+      <h2 id="find-us-heading" class="text-3xl font-black text-navy">Find us</h2>
+      <address class="mt-4 flex gap-3 text-lg not-italic">
+        <MapPin className="mt-1 h-5 w-5 shrink-0 text-brand-red" />
+        <span>
+          {site.name}<br />
+          {address.line1}<br />
+          {address.line2}, {address.city}<br />
+          {address.postcode}
+        </span>
+      </address>
+      <div class="mt-6 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
+        <a
+          href={map.directionsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2 rounded-full bg-brand-blue px-5 py-3 font-bold text-white hover:bg-navy"
+        >
+          <Navigation className="h-4 w-4" /> Get directions
+        </a>
+        <a
+          href={`tel:${phones[0].tel}`}
+          class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-brand-blue px-5 py-3 font-bold text-brand-blue hover:bg-brand-blue hover:text-white"
+        >
+          <Phone className="h-4 w-4" /> Call {phones[0].display}
+        </a>
+      </div>
+    </div>
+    <MapEmbed class="lg:col-span-3" />
+  </section>
 
   <!-- CTA band -->
   <section class="bg-navy text-white">

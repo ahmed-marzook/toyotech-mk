@@ -1,0 +1,57 @@
+---
+/**
+ * MapEmbed.astro — keyless Google Maps embed for /contact/.
+ *
+ * Open by default: seeing where the workshop is matters more than the cost
+ * of the embed. That cost: the iframe contacts Google and sets Google's
+ * cookies when it loads, so /contact/ makes a third-party request.
+ * `loading="lazy"` delays it until the map is near the viewport.
+ *
+ * It's a native <details> so visitors can collapse it, even without JS.
+ * The plain-text address and "Get directions" link sit alongside it, so the
+ * map is never the only way to find the workshop.
+ *
+ * Accessibility: the iframe has a `title` (WCAG 4.1.2), none of the obsolete
+ * frameborder/scrolling/margin attributes, and it's sized with aspect-ratio
+ * so it reflows on mobile instead of a fixed 600×400 box.
+ */
+import { MapPin, ChevronDown } from 'lucide-react';
+import { address, map } from '../config/site';
+
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<details class:list={['group overflow-hidden rounded-2xl ring-1 ring-slate-200', className]} open>
+  <summary
+    class="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 bg-slate-50 px-4 py-3 [&::-webkit-details-marker]:hidden"
+  >
+    <span class="flex items-center gap-2 font-bold text-navy">
+      <MapPin className="h-5 w-5 text-brand-red" />
+      Map of the workshop
+    </span>
+    <span class="flex items-center gap-2 text-sm text-slate-500">
+      Shown by Google Maps
+      <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" />
+    </span>
+  </summary>
+
+  <div class="aspect-[4/3] w-full bg-slate-100 sm:aspect-video">
+    <iframe
+      class="h-full w-full border-0"
+      title={`Google Maps showing Toyotech MOT Centre at ${address.full}`}
+      src={map.embedUrl}
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      allowfullscreen></iframe>
+  </div>
+
+  <p class="bg-slate-50 px-4 py-3 text-sm text-slate-600">
+    If the map does not load,
+    <a href={map.directionsUrl} target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-blue underline">
+      open {address.postcode} in Google Maps<span class="sr-only"> (opens in a new tab)</span></a
+    >.
+  </p>
+</details>
