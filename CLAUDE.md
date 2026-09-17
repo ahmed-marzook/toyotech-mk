@@ -34,6 +34,7 @@
 1. **Home**
    - Hero: "MOT Centre is Open" banner style, same-day bookings CTA
    - Quick highlights: 7 days a week, hybrid specialists, same-day bookings
+   - "What we do" services grid beside the opening hours widget: 6 featured services on mobile/tablet, all services on desktop (lg+) so it fills the column next to the hours card
    - Opening hours widget (see below)
    - Google Reviews section (see below)
    - "Find us" location section: address, "Get directions" + call buttons, Google Maps embed (see Map Embed section below)
@@ -41,7 +42,7 @@
 2. **Services**
    - List all services: Diagnostic, Engine, Gear Box, MOT Repair, Service, Brake Pads, Power Steering, AC & Heater, Clutch, ABS, Glass, Suspension, Electrical Work, Hybrid Battery
    - Each service: icon + short description
-   - Placeholder image per service card
+   - No images on service cards (icon + text only, keeps the focus on the service info)
    - Feature "Genuine Parts and Warranty" and hybrid specialism callouts
 3. **Contact**
    - Primary CTA: "Message us on WhatsApp" button (deep link, see below)
@@ -200,10 +201,10 @@ Subtle, CSS-only motion — no JS animation libraries, no new npm dependencies. 
 
 - No real photos yet — use clearly marked placeholder components (e.g. grey box with icon + "Image coming soon" label) for:
   - Hero background
-  - Service card thumbnails
   - Workshop/team photos
   - Social preview (`og-image.png`) — see Social / Link Previews section above
-- Structure image references so real photos can be dropped into `src/assets/` later without code changes (use a consistent naming convention, e.g. `service-mot.jpg`, `service-brakes.jpg`)
+- **No images on service cards** — the Services page uses icon + name + description only, so attention stays on the service information. Don't add thumbnails back.
+- Structure image references so real photos can be dropped into `src/assets/` later without code changes (consistent naming: `hero.jpg`, `workshop.jpg`, `team.jpg`, `logo.png`). See `PHOTO-SHOT-LIST.txt` for what to shoot.
 
 ## Mobile-First Requirements
 

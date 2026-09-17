@@ -23,8 +23,6 @@ export type Service = {
   summary: string;
   description: string;
   icon: LucideIcon;
-  /** Image basename in src/assets/, e.g. "service-mot" → service-mot.jpg */
-  image: string;
   /** Shown in the home-page preview (the services on the shop-front sign) */
   featured?: boolean;
 };
@@ -38,7 +36,6 @@ export const services: Service[] = [
     description:
       'MOT testing for cars and light vans, plus any repairs needed to get you through. We explain advisories before any work is done.',
     icon: ClipboardCheck,
-    image: 'service-mot',
     featured: true,
   },
   {
@@ -48,7 +45,6 @@ export const services: Service[] = [
     description:
       'Interim and full servicing for all makes and models — oil, filters, fluids and a thorough multi-point inspection, using genuine parts.',
     icon: Wrench,
-    image: 'service-servicing',
     featured: true,
   },
   {
@@ -57,7 +53,6 @@ export const services: Service[] = [
     summary: 'Pads, discs and brake fluid.',
     description: 'Brake pads, discs, callipers and brake fluid changes to keep you stopping safely.',
     icon: Disc3,
-    image: 'service-brakes',
     featured: true,
   },
   {
@@ -67,7 +62,6 @@ export const services: Service[] = [
     description:
       'Engine management and warning-light diagnostics using up-to-date equipment, so we find the actual fault instead of guessing.',
     icon: Activity,
-    image: 'service-diagnostics',
     featured: true,
   },
   {
@@ -77,7 +71,6 @@ export const services: Service[] = [
     description:
       'Our speciality. Hybrid battery health checks, diagnostics and repair, plus hybrid system servicing for Toyota, Lexus and other hybrids.',
     icon: BatteryCharging,
-    image: 'service-hybrid-battery',
     featured: true,
   },
   {
@@ -86,7 +79,6 @@ export const services: Service[] = [
     summary: 'Engine repairs and faults.',
     description: 'Engine faults, misfires, leaks, timing belts and general engine repairs.',
     icon: Engine,
-    image: 'service-engine',
     featured: true,
   },
   {
@@ -95,7 +87,6 @@ export const services: Service[] = [
     summary: 'Manual and automatic gearbox work.',
     description: 'Gearbox diagnosis and repair for manual and automatic transmissions.',
     icon: Cog,
-    image: 'service-gearbox',
   },
   {
     slug: 'clutch',
@@ -103,7 +94,6 @@ export const services: Service[] = [
     summary: 'Clutch replacement and repair.',
     description: 'Slipping, juddering or heavy clutch? Clutch and flywheel replacement for all makes.',
     icon: Settings2,
-    image: 'service-clutch',
   },
   {
     slug: 'power-steering',
@@ -111,7 +101,6 @@ export const services: Service[] = [
     summary: 'Steering faults and leaks.',
     description: 'Power steering pumps, racks, electric steering faults and fluid leaks.',
     icon: CarFront,
-    image: 'service-power-steering',
   },
   {
     slug: 'ac-heater',
@@ -119,7 +108,6 @@ export const services: Service[] = [
     summary: 'Air-con regas and heater repairs.',
     description: 'Air-conditioning regas and repairs, heater matrix and blower faults.',
     icon: ThermometerSnowflake,
-    image: 'service-ac-heater',
   },
   {
     slug: 'abs',
@@ -127,7 +115,6 @@ export const services: Service[] = [
     summary: 'ABS warning lights and sensors.',
     description: 'ABS warning-light diagnosis, wheel-speed sensors and ABS module faults.',
     icon: OctagonAlert,
-    image: 'service-abs',
   },
   {
     slug: 'suspension',
@@ -135,7 +122,6 @@ export const services: Service[] = [
     summary: 'Shocks, springs and knocks.',
     description: 'Shock absorbers, springs, bushes, drop links and those knocking noises over bumps.',
     icon: ArrowUpDown,
-    image: 'service-suspension',
   },
   {
     slug: 'glass',
@@ -143,7 +129,6 @@ export const services: Service[] = [
     summary: 'Windscreen and window glass.',
     description: 'Windscreen and window glass replacement and repair.',
     icon: AppWindow,
-    image: 'service-glass',
   },
   {
     slug: 'electrical',
@@ -151,6 +136,5 @@ export const services: Service[] = [
     summary: 'Wiring, lights and electrics.',
     description: 'Wiring faults, lighting, batteries, alternators, starter motors and general auto electrics.',
     icon: Cable,
-    image: 'service-electrical',
   },
 ];

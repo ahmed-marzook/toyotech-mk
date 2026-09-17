@@ -1,0 +1,83 @@
+TOYOTECH MOT CENTRE — PHOTO SHOT LIST
+=====================================
+
+Photos for the website. Each one replaces a grey "Image coming soon" box.
+Name the file exactly as shown and save it in:  src/assets/
+The site picks it up automatically on the next build, with no code changes.
+Accepted formats: .jpg  .png  .webp  .avif
+
+
+GENERAL TIPS
+------------
+- Shoot LANDSCAPE (phone held sideways), except where noted.
+- Daylight is best. Open the bay door, and switch the workshop lights on too.
+- Tidy the area first: no clutter, rubbish or loose tools in shot.
+- Keep the main subject in the CENTRE of the frame, because the website crops
+  the edges on different screen sizes.
+- Cover or blur customer NUMBER PLATES, and don't show paperwork or screens
+  with customer details.
+- Get permission from anyone whose face is in a photo.
+- Use the phone's normal camera at full quality. The website shrinks and
+  compresses the photos itself, so don't resize them first.
+- Take 3–4 versions of each shot so there's a choice.
+
+The Services page doesn't use photos (icons only, so the focus stays on the
+service information), so no service photos are needed.
+
+
+PRIORITY 1: DO THESE FIRST
+--------------------------
+
+[ ] hero.jpg
+    Home page, the large background behind "MOT Centre Is Open".
+    Wide shot of the workshop: a car up on a ramp, bays visible, lights on.
+    It's shown darkened with text on top, so keep it simple, with no
+    important detail on the left side where the text sits.
+    Landscape. Also check the middle of the photo still works when cropped
+    to a tall phone screen.
+
+[ ] logo.png
+    Header and footer of every page.
+    NOT a photo. Ask for the logo file with a TRANSPARENT background
+    (the current one has a black background). It sits on dark navy, so the
+    swoosh and "Hybrid Autos" text must still be readable on a dark colour.
+    PNG at least 800px wide, or an SVG file if the designer has one.
+
+
+PRIORITY 2
+----------
+
+[ ] workshop.jpg     Contact page, "Our workshop"
+    The OUTSIDE of the garage from across the street, with the Toyotech
+    sign clearly readable, so customers recognise it when they arrive.
+
+[ ] team.jpg         Contact page, next to the workshop photo
+    Mumthaz and the team in front of the workshop or a car, smiling and in
+    work clothes. Landscape. Get everyone's OK first.
+
+
+OPTIONAL: LINK PREVIEW IMAGE
+----------------------------
+
+[ ] og-image.png   The picture that appears when someone shares the website
+                   link on WhatsApp or Facebook.
+    DIFFERENT FOLDER: this one goes in  public/  (not src/assets/).
+    Exactly 1200 x 630 pixels. The current one is a logo graphic, which is
+    fine to keep. If you replace it, use your best workshop or hero photo
+    with the logo on top, and keep anything important away from the edges.
+    After replacing it, don't run "npm run og-image" (that would overwrite
+    it). After deploying, paste the site link into Facebook's Sharing
+    Debugger (developers.facebook.com/tools/debug) so WhatsApp shows the
+    new image.
+
+
+QUICK CHECKLIST: FILE NAMES
+---------------------------
+src/assets/hero.jpg
+src/assets/logo.png
+src/assets/workshop.jpg
+src/assets/team.jpg
+public/og-image.png   (optional)
+
+The extension can be .jpg, .png, .webp or .avif. Only the name before the
+dot has to match.

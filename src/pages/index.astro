@@ -79,10 +79,12 @@ const highlights = [
       <p class="mt-2 text-slate-600">From MOTs to hybrid battery checks — one local garage for all of it.</p>
       <ul class="mt-6 grid gap-3 sm:grid-cols-2">
         {
-          services.filter((s) => s.featured).map((s) => {
+          // Mobile/tablet: the 6 featured services. Desktop (lg): all of them, which
+          // fills the column beside the opening-hours card.
+          services.map((s) => {
             const Icon = s.icon;
             return (
-              <li>
+              <li class:list={[!s.featured && 'hidden lg:block']}>
                 <a
                   href={url(`/services#${s.slug}`)}
                   class="card-motion flex h-full items-center gap-3 rounded-xl bg-white p-4 ring-1 ring-slate-200 hover:ring-brand-blue"
@@ -101,7 +103,9 @@ const highlights = [
         }
       </ul>
       <a href={url('/services')} class="mt-6 inline-flex items-center gap-2 font-bold text-brand-blue hover:underline">
-        All {services.length} services <ArrowRight className="h-4 w-4" />
+        <span class="lg:hidden">All {services.length} services</span>
+        <span class="hidden lg:inline">Full service details</span>
+        <ArrowRight className="h-4 w-4" />
       </a>
     </div>
 
