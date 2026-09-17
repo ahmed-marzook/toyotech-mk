@@ -1,0 +1,55 @@
+---
+/**
+ * Toyotech logo. Uses src/assets/logo.(png|webp|svg|jpg) if present;
+ * otherwise an SVG recreation: silver car swoosh, red serif "TOYOTECH"
+ * wordmark and the red/green/blue ring, with a sub-line underneath.
+ */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  class?: string;
+  subline?: string;
+}
+const { class: className = '', subline = 'MOT Centre' } = Astro.props;
+
+const logos = import.meta.glob<{ default: ImageMetadata }>('/src/assets/logo.{png,webp,svg,jpg,jpeg}');
+const logoPath = Object.keys(logos)[0];
+const logo = logoPath ? (await logos[logoPath]()).default : undefined;
+---
+
+{
+  logo ? (
+    <Image src={logo} alt="Toyotech" class:list={['h-12 w-auto', className]} />
+  ) : (
+    <span class:list={['inline-flex flex-col leading-none', className]}>
+      <svg viewBox="0 0 180 22" class="-mb-1 h-4 w-[9.5rem]" aria-hidden="true">
+        <defs>
+          <linearGradient id="logo-silver" x1="0" x2="1">
+            <stop offset="0" stop-color="#9ca3af" stop-opacity="0.3"></stop>
+            <stop offset="0.5" stop-color="#f3f4f6"></stop>
+            <stop offset="1" stop-color="#d1d5db"></stop>
+          </linearGradient>
+        </defs>
+        <path d="M4 20C40 4 110-2 176 18 120 6 60 8 4 20z" fill="url(#logo-silver)"></path>
+        <path d="M24 21C60 10 104 6 150 14 104 10 64 13 24 21z" fill="#e5e7eb" opacity="0.6"></path>
+      </svg>
+      <span class="flex items-center gap-1">
+        <span class="font-serif text-2xl font-black tracking-tight text-brand-red">TOYOTECH</span>
+        <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true">
+          <g fill="none" stroke-width="4">
+            <path d="M12 3a9 9 0 0 1 8.5 6" stroke="#1E5AA8"></path>
+            <path d="M21 12a9 9 0 0 1-9 9" stroke="#3b82f6"></path>
+            <path d="M12 21a9 9 0 0 1-8.5-6" stroke="#D5222A"></path>
+            <path d="M3 12a9 9 0 0 1 6-8.5" stroke="#6CD12A"></path>
+          </g>
+        </svg>
+      </span>
+      <span class="mt-1 flex items-center gap-1.5 text-[0.6rem] font-bold uppercase tracking-[0.2em] text-white">
+        <span class="h-px w-3 bg-brand-green"></span>
+        {subline}
+        <span class="h-px w-3 bg-brand-green"></span>
+      </span>
+    </span>
+  )
+}

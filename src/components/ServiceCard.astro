@@ -1,0 +1,26 @@
+---
+import type { Service } from '../content/services';
+import ImagePlaceholder from './ImagePlaceholder.astro';
+
+interface Props {
+  service: Service;
+}
+const { service } = Astro.props;
+const Icon = service.icon;
+---
+
+<article
+  id={service.slug}
+  class="flex scroll-mt-24 flex-col overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-slate-200"
+>
+  <ImagePlaceholder name={service.image} alt={service.name} />
+  <div class="flex flex-1 flex-col p-5">
+    <div class="mb-3 flex items-center gap-3">
+      <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue">
+        <Icon className="h-6 w-6" />
+      </span>
+      <h3 class="text-xl font-bold text-navy">{service.name}</h3>
+    </div>
+    <p class="text-slate-600">{service.description}</p>
+  </div>
+</article>

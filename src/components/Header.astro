@@ -1,0 +1,100 @@
+---
+import { Menu, X, Phone } from 'lucide-react';
+import Logo from './Logo.astro';
+import WhatsAppButton from './WhatsAppButton.jsx';
+import { nav, phones, url } from '../config/site';
+
+const strip = (p: string) => p.replace(/\/$/, '');
+const current = strip(Astro.url.pathname);
+const isActive = (path: string) => strip(url(path)) === current;
+const mainPhone = phones[0];
+---
+
+<header class="sticky top-0 z-40 bg-navy text-white shadow-md">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+    <a href={url('/')} aria-label="Toyotech MOT Centre — home">
+      <Logo />
+    </a>
+
+    <nav class="hidden items-center gap-6 md:flex" aria-label="Main">
+      {
+        nav.map((item) => (
+          <a
+            href={url(item.path)}
+            aria-current={isActive(item.path) ? 'page' : undefined}
+            class:list={[
+              'font-semibold transition-colors hover:text-white',
+              isActive(item.path)
+                ? 'text-white underline decoration-brand-red decoration-2 underline-offset-8'
+                : 'text-white/75',
+            ]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <WhatsAppButton variant="header" label="WhatsApp us" />
+    </nav>
+
+    <div class="flex items-center gap-1 md:hidden">
+      <a
+        href={`tel:${mainPhone.tel}`}
+        class="flex h-12 w-12 items-center justify-center rounded-full hover:bg-white/10"
+        aria-label={`Call ${mainPhone.display}`}
+      >
+        <Phone className="h-6 w-6" />
+      </a>
+      <button
+        type="button"
+        id="nav-toggle"
+        class="flex h-12 w-12 items-center justify-center rounded-full hover:bg-white/10"
+        aria-controls="mobile-nav"
+        aria-expanded="false"
+        aria-label="Open menu"
+      >
+        <span data-icon="open"><Menu className="h-7 w-7" /></span>
+        <span data-icon="close" hidden><X className="h-7 w-7" /></span>
+      </button>
+    </div>
+  </div>
+
+  <nav id="mobile-nav" class="border-t border-white/10 md:hidden" aria-label="Mobile" hidden>
+    <ul class="mx-auto flex max-w-6xl flex-col px-4 py-2">
+      {
+        nav.map((item) => (
+          <li>
+            <a
+              href={url(item.path)}
+              aria-current={isActive(item.path) ? 'page' : undefined}
+              class:list={[
+                'block rounded-lg px-3 py-4 text-lg font-semibold hover:bg-white/10',
+                isActive(item.path) && 'text-brand-red',
+              ]}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+      <li class="py-3">
+        <WhatsAppButton variant="large" className="w-full" />
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const menu = document.getElementById('mobile-nav');
+  toggle?.addEventListener('click', () => {
+    if (!menu) return;
+    const open = menu.hidden;
+    menu.hidden = !open;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    const openIcon = toggle.querySelector<HTMLElement>('[data-icon="open"]');
+    const closeIcon = toggle.querySelector<HTMLElement>('[data-icon="close"]');
+    if (openIcon) openIcon.hidden = open;
+    if (closeIcon) closeIcon.hidden = !open;
+  });
+</script>

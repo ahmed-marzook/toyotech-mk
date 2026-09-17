@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #0b2545;
+  --color-navy-light: #13335e;
+  --color-brand-blue: #1e5aa8;
+  --color-brand-red: #d5222a;
+  --color-brand-red-dark: #b01b22;
+  --color-brand-green: #6cd12a;
+  --color-whatsapp: #25d366;
+  --color-whatsapp-dark: #128c7e;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-white text-slate-800 antialiased;
+  }
+}

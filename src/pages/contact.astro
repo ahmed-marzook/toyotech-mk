@@ -1,0 +1,105 @@
+---
+import { MapPin, Phone, Navigation } from 'lucide-react';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WhatsAppButton from '../components/WhatsAppButton.jsx';
+import OpeningHours from '../components/OpeningHours.jsx';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import GoogleReviews from '../components/GoogleReviews.astro';
+import { site, address, phones } from '../config/site';
+
+const directionsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address.full)}`;
+---
+
+<BaseLayout
+  title="Contact"
+  description="Contact Toyotech MOT Centre, Tavistock Street, Bletchley, Milton Keynes. WhatsApp or call for same-day bookings."
+>
+  <section class="bg-navy text-white">
+    <div class="mx-auto max-w-6xl px-4 py-12">
+      <h1 class="text-4xl font-black">Contact us</h1>
+      <p class="mt-3 max-w-2xl text-lg text-white/80">
+        The quickest way to book is WhatsApp — send your reg and what you need.
+      </p>
+      <div class="mt-6">
+        <WhatsAppButton variant="large" />
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto grid max-w-6xl gap-10 px-4 py-12 lg:grid-cols-2">
+    <div class="space-y-10">
+      <div>
+        <h2 class="text-2xl font-bold text-navy">Call us</h2>
+        <p class="mt-1 text-slate-600">Ask for {site.contactName}.</p>
+        <ul class="mt-4 space-y-3">
+          {
+            phones.map((p) => (
+              <li>
+                <a
+                  href={`tel:${p.tel}`}
+                  class="flex items-center gap-4 rounded-xl p-4 ring-1 ring-slate-200 transition hover:ring-brand-blue"
+                >
+                  <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-red text-white">
+                    <Phone className="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span class="block text-xl font-bold text-navy tabular-nums">{p.display}</span>
+                    <span class="block text-sm text-slate-500">{p.label}</span>
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold text-navy">Visit us</h2>
+        <address class="mt-4 flex gap-3 not-italic text-lg">
+          <MapPin className="mt-1 h-5 w-5 shrink-0 text-brand-red" />
+          <span>
+            {site.name}<br />
+            {address.line1}<br />
+            {address.line2}, {address.city}<br />
+            {address.postcode}
+          </span>
+        </address>
+        <a
+          href={directionsHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-4 inline-flex items-center gap-2 rounded-full bg-brand-blue px-5 py-3 font-bold text-white hover:bg-navy"
+        >
+          <Navigation className="h-4 w-4" /> Get directions
+        </a>
+      </div>
+    </div>
+
+    <div class="space-y-10">
+      <!-- Map placeholder: swap for an embed iframe once a Maps key / embed URL is chosen -->
+      <div id="map" class="overflow-hidden rounded-2xl">
+        <ImagePlaceholder name="map" alt={`Map showing ${address.full}`} aspect="aspect-[4/3]" label="Map coming soon" />
+      </div>
+
+      <div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200">
+        <OpeningHours client:load />
+      </div>
+    </div>
+  </section>
+
+  <GoogleReviews />
+
+  <section>
+    <div class="mx-auto max-w-6xl px-4 py-12">
+      <h2 class="mb-6 text-2xl font-bold text-navy">Our workshop</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="overflow-hidden rounded-2xl">
+          <ImagePlaceholder name="workshop" alt="Toyotech workshop" label="Workshop photo coming soon" />
+        </div>
+        <div class="overflow-hidden rounded-2xl">
+          <ImagePlaceholder name="team" alt="The Toyotech team" label="Team photo coming soon" />
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

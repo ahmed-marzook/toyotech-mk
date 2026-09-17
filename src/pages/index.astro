@@ -1,0 +1,116 @@
+---
+import { CalendarDays, BatteryCharging, Zap, ArrowRight } from 'lucide-react';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WhatsAppButton from '../components/WhatsAppButton.jsx';
+import OpeningHours from '../components/OpeningHours.jsx';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import GoogleReviews from '../components/GoogleReviews.astro';
+import { services } from '../content/services';
+import { address, phones, url } from '../config/site';
+
+const highlights = [
+  { icon: CalendarDays, title: 'Open 7 days a week', text: 'Weekday and weekend slots to fit around you.' },
+  { icon: BatteryCharging, title: 'Hybrid specialists', text: 'Hybrid know-how, plus MOTs and servicing for all cars.' },
+  { icon: Zap, title: 'Same-day bookings', text: 'Message us in the morning, sorted the same day.' },
+];
+---
+
+<BaseLayout>
+  <!-- Hero -->
+  <section class="relative isolate overflow-hidden bg-navy text-white">
+    <div class="absolute inset-0 -z-10 opacity-30">
+      <ImagePlaceholder name="hero" alt="Toyotech workshop" aspect="" dark label="Hero photo coming soon" />
+    </div>
+    <div class="absolute inset-0 -z-10 bg-linear-to-b from-navy/60 via-navy/80 to-navy"></div>
+
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:py-20">
+      <h1 class="text-5xl font-black uppercase leading-[0.95] sm:text-7xl">
+        <span
+          class="inline-block -skew-x-6 bg-linear-to-r from-brand-green to-green-500 px-3 py-1 text-3xl sm:text-5xl"
+          ><span class="inline-block skew-x-6">MOT Centre</span></span
+        ><br />
+        <span class="mt-2 inline-block">Is <span class="text-brand-green">Open</span></span>
+      </h1>
+      <p class="mt-5 max-w-xl text-lg text-white/85">
+        Hybrid specialists in Bletchley, Milton Keynes — expert care for all makes and models. Open 7 days a week
+        with same-day bookings.
+      </p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <WhatsAppButton variant="large" label="Book on WhatsApp" />
+        <a
+          href={`tel:${phones[0].tel}`}
+          class="inline-flex items-center justify-center rounded-full border-2 border-white/40 px-6 py-4 text-lg font-bold hover:bg-white/10"
+        >
+          Call {phones[0].display}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Highlights -->
+  <section class="border-y-2 border-brand-green bg-navy-light text-white">
+    <ul class="mx-auto grid max-w-6xl gap-px sm:grid-cols-3">
+      {
+        highlights.map(({ icon: Icon, title, text }) => (
+          <li class="flex items-start gap-4 px-4 py-6">
+            <Icon className="h-9 w-9 shrink-0 text-brand-green" />
+            <div>
+              <h2 class="text-lg font-bold">{title}</h2>
+              <p class="text-sm text-white/80">{text}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <!-- Services preview + hours -->
+  <section class="mx-auto grid max-w-6xl gap-10 px-4 py-14 lg:grid-cols-5">
+    <div class="lg:col-span-3">
+      <h2 class="text-3xl font-black text-navy">What we do</h2>
+      <p class="mt-2 text-slate-600">From MOTs to hybrid battery checks — one local garage for all of it.</p>
+      <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+        {
+          services.filter((s) => s.featured).map((s) => {
+            const Icon = s.icon;
+            return (
+              <li>
+                <a
+                  href={url(`/services#${s.slug}`)}
+                  class="flex h-full items-center gap-3 rounded-xl p-4 ring-1 ring-slate-200 transition hover:ring-brand-blue"
+                >
+                  <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-blue/10 text-brand-blue">
+                    <Icon className="h-6 w-6" />
+                  </span>
+                  <span>
+                    <span class="block font-bold text-navy">{s.name}</span>
+                    <span class="block text-sm text-slate-500">{s.summary}</span>
+                  </span>
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+      <a href={url('/services')} class="mt-6 inline-flex items-center gap-2 font-bold text-brand-blue hover:underline">
+        All {services.length} services <ArrowRight className="h-4 w-4" />
+      </a>
+    </div>
+
+    <div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200 lg:col-span-2">
+      <OpeningHours client:load />
+      <p class="mt-4 text-sm text-slate-600">{address.full}</p>
+    </div>
+  </section>
+
+  <GoogleReviews />
+
+  <!-- CTA band -->
+  <section class="bg-navy text-white">
+    <div class="mx-auto flex max-w-6xl flex-col items-center gap-5 px-4 py-12 text-center">
+      <h2 class="text-3xl font-black">Need an MOT today?</h2>
+      <p class="max-w-lg text-white/80">Send us your reg and what you need — we’ll reply with a time and a price.</p>
+      <WhatsAppButton variant="large" />
+    </div>
+  </section>
+</BaseLayout>

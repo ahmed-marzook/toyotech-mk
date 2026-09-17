@@ -1,0 +1,54 @@
+---
+/**
+ * Renders a real photo from src/assets/ when one exists with the given name
+ * (e.g. name="service-mot" → src/assets/service-mot.jpg|jpeg|png|webp|avif),
+ * otherwise a clearly marked placeholder. Drop photos in — no code changes.
+ */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { ImageIcon } from 'lucide-react';
+
+interface Props {
+  name: string;
+  alt: string;
+  class?: string;
+  /** Tailwind aspect-ratio class, e.g. "aspect-video" */
+  aspect?: string;
+  label?: string;
+  dark?: boolean;
+}
+
+const {
+  name,
+  alt,
+  class: className = '',
+  aspect = 'aspect-video',
+  label = 'Image coming soon',
+  dark = false,
+} = Astro.props;
+
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{jpg,jpeg,png,webp,avif}');
+const match = Object.keys(images).find((path) => path.split('/').pop()?.replace(/\.\w+$/, '') === name);
+const src = match ? (await images[match]()).default : undefined;
+---
+
+{
+  src ? (
+    <Image src={src} alt={alt} class:list={['h-full w-full object-cover', aspect, className]} />
+  ) : (
+    <div
+      role="img"
+      aria-label={`${alt} (placeholder)`}
+      data-image-name={name}
+      class:list={[
+        'flex h-full w-full flex-col items-center justify-center gap-2 border-2 border-dashed',
+        dark ? 'border-white/20 bg-white/5 text-white/40' : 'border-slate-300 bg-slate-100 text-slate-400',
+        aspect,
+        className,
+      ]}
+    >
+      <ImageIcon className="h-10 w-10" />
+      <span class="text-xs font-semibold uppercase tracking-wider">{label}</span>
+    </div>
+  )
+}

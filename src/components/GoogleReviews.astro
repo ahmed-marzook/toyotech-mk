@@ -1,0 +1,65 @@
+---
+import { Star, Quote, ExternalLink } from 'lucide-react';
+import { googleReviews } from '../content/reviews';
+
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+const { rating, count, listingUrl, reviews, businessName } = googleReviews;
+
+// Fill level (0–1) for each of the five stars, e.g. 4.8 → [1, 1, 1, 1, 0.8]
+const stars = Array.from({ length: 5 }, (_, i) => Math.max(0, Math.min(1, rating - i)));
+---
+
+<section class:list={['bg-slate-50', className]} aria-labelledby="reviews-heading">
+  <div class="mx-auto max-w-6xl px-4 py-14">
+    <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <h2 id="reviews-heading" class="text-3xl font-black text-navy">What our customers say</h2>
+        <div class="mt-3 flex items-center gap-3">
+          <span class="text-4xl font-black text-navy">{rating.toFixed(1)}</span>
+          <span>
+            <span class="flex" role="img" aria-label={`Rated ${rating} out of 5`}>
+              {
+                stars.map((fill) => (
+                  <span class="relative h-6 w-6">
+                    <Star className="absolute inset-0 h-6 w-6 text-slate-300" fill="currentColor" strokeWidth={0} />
+                    <span class="absolute inset-0 overflow-hidden" style={`width:${fill * 100}%`}>
+                      <Star className="h-6 w-6 text-amber-400" fill="currentColor" strokeWidth={0} />
+                    </span>
+                  </span>
+                ))
+              }
+            </span>
+            <span class="block text-sm text-slate-500">Based on {count} Google reviews</span>
+          </span>
+        </div>
+      </div>
+      <a
+        href={listingUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-brand-blue px-5 py-3 font-bold text-brand-blue transition-colors hover:bg-brand-blue hover:text-white"
+      >
+        Read more reviews on Google <ExternalLink className="h-4 w-4" />
+      </a>
+    </div>
+
+    <ul class="mt-8 grid gap-4 md:grid-cols-3">
+      {
+        reviews.map((review) => (
+          <li class="flex flex-col rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+            <Quote className="h-7 w-7 text-brand-red" />
+            <blockquote class="mt-3 flex-1 text-slate-700">
+              <p>“{review.quote}”</p>
+            </blockquote>
+            <p class="mt-4 text-sm font-semibold text-slate-500">
+              {review.author ?? 'Google review'} · {businessName}
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
