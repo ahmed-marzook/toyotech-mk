@@ -68,13 +68,13 @@ export type HoursRow = {
 
 /** Shown if the Google Sheet can't be fetched or parsed. */
 export const fallbackHours: HoursRow[] = [
-  { day: 'Monday', open: '08:30', close: '17:30', closedFlag: false, note: 'Drop-off & collection' },
-  { day: 'Tuesday', open: '08:30', close: '17:30', closedFlag: false, note: 'Drop-off & collection' },
-  { day: 'Wednesday', open: '08:30', close: '17:30', closedFlag: false, note: 'Drop-off & collection' },
-  { day: 'Thursday', open: '08:30', close: '17:30', closedFlag: false, note: 'Drop-off & collection' },
-  { day: 'Friday', open: '08:30', close: '17:30', closedFlag: false, note: 'Drop-off & collection' },
-  { day: 'Saturday', open: '09:00', close: '16:00', closedFlag: false, note: 'Same-day bookings available' },
-  { day: 'Sunday', open: '10:00', close: '14:00', closedFlag: false, note: 'Reduced hours - call ahead' },
+  { day: 'Monday', open: '09:00', close: '18:00', closedFlag: false, note: 'Same-day bookings available' },
+  { day: 'Tuesday', open: '09:00', close: '18:00', closedFlag: false, note: 'Same-day bookings available' },
+  { day: 'Wednesday', open: '09:00', close: '18:00', closedFlag: false, note: 'Same-day bookings available' },
+  { day: 'Thursday', open: '09:00', close: '18:00', closedFlag: false, note: 'Same-day bookings available' },
+  { day: 'Friday', open: '09:00', close: '18:00', closedFlag: false, note: 'Same-day bookings available' },
+  { day: 'Saturday', open: '09:00', close: '18:00', closedFlag: false, note: 'Same-day bookings available' },
+  { day: 'Sunday', open: '09:00', close: '18:00', closedFlag: false, note: 'Same-day bookings available' },
 ];
 
 export const nav = [
