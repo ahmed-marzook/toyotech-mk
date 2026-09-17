@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import SEO from '../components/SEO.astro';
 import FloatingWhatsApp from '../components/FloatingWhatsApp.astro';
 import RevealOnScroll from '../components/RevealOnScroll.astro';
+import Analytics from '../components/Analytics.astro';
 import { url } from '../config/site';
 
 interface Props {
@@ -42,5 +43,6 @@ const { title, description, image, imageAlt } = Astro.props;
     <Footer />
     <FloatingWhatsApp />
     <RevealOnScroll />
+    <Analytics />
   </body>
 </html>

@@ -55,6 +55,14 @@ export const OPENING_HOURS_CSV_URL =
   import.meta.env.PUBLIC_OPENING_HOURS_CSV_URL ??
   'https://docs.google.com/spreadsheets/d/e/2PACX-1vT9lL74saLCqZkn15-TFJzETCA0cuXHXASujcjRnQ9HbZFtc7kczFlnCKY9GUBjpVVEX-D4vgqAN3O1/pub?output=csv';
 
+/**
+ * Cloudflare Web Analytics beacon token. Public by design — it ships in the
+ * page HTML — so it lives here rather than in a secret. Cookieless, so no
+ * consent banner is needed. Empty string disables the beacon entirely.
+ */
+export const ANALYTICS_TOKEN =
+  import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN ?? 'd944ebac24cb40cf919eace884fb00a7';
+
 /** Timezone used for "today" and "Open now" calculations. */
 export const TIMEZONE = 'Europe/London';
 

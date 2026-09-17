@@ -1,0 +1,23 @@
+---
+/**
+ * Cloudflare Web Analytics beacon — cookieless, so no consent banner needed.
+ *
+ * Only rendered in production builds: local `npm run dev` page views would
+ * otherwise pollute the dashboard. `is:inline` keeps Astro from bundling the
+ * external script, so the tag ships exactly as Cloudflare issues it.
+ */
+import { ANALYTICS_TOKEN } from '../config/site';
+
+const enabled = import.meta.env.PROD && Boolean(ANALYTICS_TOKEN);
+---
+
+{
+  enabled && (
+    <script
+      is:inline
+      type="module"
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon={JSON.stringify({ token: ANALYTICS_TOKEN })}
+    />
+  )
+}
