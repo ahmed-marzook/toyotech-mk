@@ -1,0 +1,2 @@
+# CNAME must stay LF-only — a trailing CR breaks the GitHub Pages custom domain.
+/public/CNAME text eol=lf

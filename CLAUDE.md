@@ -133,13 +133,13 @@ Currently the site's WhatsApp/social link preview shows text only, no image — 
 />
 <meta
   property="og:image"
-  content="https://ahmed-marzook.github.io/toyotech-mot-centre/og-image.png"
+  content="https://toyotech.co.uk/og-image.png"
 />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta
   property="og:url"
-  content="https://ahmed-marzook.github.io/toyotech-mot-centre/"
+  content="https://toyotech.co.uk/"
 />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary_large_image" />
