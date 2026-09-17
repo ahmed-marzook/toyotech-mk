@@ -23,7 +23,7 @@ const mainPhone = phones[0];
             href={url(item.path)}
             aria-current={isActive(item.path) ? 'page' : undefined}
             class:list={[
-              'inline-flex min-h-11 items-center font-semibold transition-colors hover:text-white',
+              'inline-flex min-h-11 items-center font-semibold hover:text-white motion-safe:transition-colors motion-safe:duration-(--duration-fast) motion-safe:ease-(--ease-motion)',
               isActive(item.path)
                 ? 'text-white underline decoration-brand-red decoration-2 underline-offset-8'
                 : 'text-white/75',
@@ -39,7 +39,7 @@ const mainPhone = phones[0];
     <div class="flex items-center gap-1 md:hidden">
       <a
         href={`tel:${mainPhone.tel}`}
-        class="flex h-12 w-12 items-center justify-center rounded-full hover:bg-white/10"
+        class="btn-motion flex h-12 w-12 items-center justify-center rounded-full hover:bg-white/10 active:bg-white/20"
         aria-label={`Call ${mainPhone.display}`}
       >
         <Phone className="h-6 w-6" />
@@ -47,7 +47,7 @@ const mainPhone = phones[0];
       <button
         type="button"
         id="nav-toggle"
-        class="flex h-12 w-12 items-center justify-center rounded-full hover:bg-white/10"
+        class="btn-motion flex h-12 w-12 items-center justify-center rounded-full hover:bg-white/10 active:bg-white/20"
         aria-controls="mobile-nav"
         aria-expanded="false"
         aria-label="Menu"
@@ -67,7 +67,7 @@ const mainPhone = phones[0];
               href={url(item.path)}
               aria-current={isActive(item.path) ? 'page' : undefined}
               class:list={[
-                'block rounded-lg border-l-4 px-3 py-4 text-lg font-semibold hover:bg-white/10',
+                'block rounded-lg border-l-4 px-3 py-4 text-lg font-semibold hover:bg-white/10 active:bg-white/20 motion-safe:transition-colors motion-safe:duration-(--duration-fast) motion-safe:ease-(--ease-motion)',
                 // Red text on navy is only 3:1 at this size (fails AA), so mark the current page with a red bar
                 isActive(item.path) ? 'border-brand-red bg-white/10 text-white' : 'border-transparent',
               ]}

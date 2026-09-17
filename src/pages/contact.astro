@@ -38,7 +38,7 @@ const directionsHref = map.directionsUrl;
               <li>
                 <a
                   href={`tel:${p.tel}`}
-                  class="flex items-center gap-4 rounded-xl p-4 ring-1 ring-slate-200 transition hover:ring-brand-blue"
+                  class="card-motion flex items-center gap-4 rounded-xl bg-white p-4 ring-1 ring-slate-200 hover:ring-brand-blue"
                 >
                   <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-red text-white">
                     <Phone className="h-5 w-5" />
@@ -69,7 +69,7 @@ const directionsHref = map.directionsUrl;
           href={directionsHref}
           target="_blank"
           rel="noopener noreferrer"
-          class="mt-4 inline-flex items-center gap-2 rounded-full bg-brand-blue px-5 py-3 font-bold text-white hover:bg-navy"
+          class="btn-motion mt-4 inline-flex items-center gap-2 rounded-full bg-brand-blue px-5 py-3 font-bold text-white hover:bg-navy hover:shadow-md"
         >
           <Navigation className="h-4 w-4" /> Get directions<span class="sr-only"> (opens in a new tab)</span>
         </a>

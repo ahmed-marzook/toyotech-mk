@@ -31,7 +31,7 @@ export default function WhatsAppButton({ variant = 'large', label = 'Message us 
       target="_blank"
       rel="noopener noreferrer"
       aria-label={iconOnly ? `${label} (opens WhatsApp)` : undefined}
-      className={`inline-flex items-center gap-2 bg-whatsapp font-bold text-navy transition-colors hover:bg-whatsapp-hover ${variants[variant] ?? variants.large} ${className}`}
+      className={`inline-flex items-center gap-2 btn-motion bg-whatsapp font-bold text-navy hover:bg-whatsapp-hover hover:shadow-lg ${variants[variant] ?? variants.large} ${className}`}
     >
       <WhatsAppIcon className={iconOnly ? 'h-8 w-8' : variant === 'header' ? 'h-4 w-4' : 'h-6 w-6'} />
       {!iconOnly && (

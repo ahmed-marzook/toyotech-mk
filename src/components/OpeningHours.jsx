@@ -137,7 +137,7 @@ export default function OpeningHours({ dark = false }) {
         <h2 className={`text-2xl font-bold ${dark ? 'text-white' : 'text-navy'}`}>Opening hours</h2>
         {now && (
           <span
-            className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm font-bold ${
+            className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm font-bold motion-safe:animate-fade-in ${
               isOpen ? 'bg-green-100 text-green-800' : 'bg-red-100 text-brand-red-dark'
             }`}
             aria-live="polite"
@@ -154,15 +154,17 @@ export default function OpeningHours({ dark = false }) {
           return (
             <li
               key={h.day}
-              className={`flex items-start justify-between gap-4 px-3 py-3 ${
-                isToday ? (dark ? 'rounded-lg bg-white/10' : 'rounded-lg bg-brand-blue/10') : ''
+              // The highlight is applied after hydration (the server doesn't know
+              // "today"), so fade the background in rather than snapping
+              className={`flex items-start justify-between gap-4 rounded-lg px-3 py-3 motion-safe:transition-colors motion-safe:duration-500 motion-safe:ease-(--ease-motion) ${
+                isToday ? (dark ? 'bg-white/10' : 'bg-brand-blue/10') : ''
               }`}
               aria-current={isToday ? 'date' : undefined}
             >
               <div>
                 <span className="font-semibold">
                   {h.day}
-                  {isToday && <span className={`ml-2 text-xs font-bold uppercase ${dark ? 'text-white' : 'text-brand-red-dark'}`}>Today</span>}
+                  {isToday && <span className={`ml-2 text-xs font-bold uppercase motion-safe:animate-fade-in ${dark ? 'text-white' : 'text-brand-red-dark'}`}>Today</span>}
                 </span>
                 {h.note && <p className={`text-sm ${muted}`}>{h.note}</p>}
               </div>

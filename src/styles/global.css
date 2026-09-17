@@ -11,17 +11,51 @@
   --color-whatsapp-hover: #20c05c; /* navy text on this is 6.42:1 */
   --color-whatsapp-dark: #128c7e;
   --color-focus: #ffbf47;
+
+  /* Motion tokens — one timing for every hover/tap interaction */
+  --ease-motion: cubic-bezier(0, 0, 0.2, 1); /* ease-out */
+  --duration-fast: 180ms;
+  --duration-reveal: 450ms;
+
+  /*
+   * Animation utilities. Always use them with the `motion-safe:` variant
+   * (= prefers-reduced-motion: no-preference), e.g. motion-safe:animate-fade-in.
+   */
+  /* 3 pulses (~4.2s) then stop — under 5s, so no pause control needed (WCAG 2.2.2) */
+  --animate-cta-pulse: cta-pulse 1.4s ease-in-out 0.8s 3;
+  --animate-cta-ring: cta-ring 1.4s ease-out 0.8s 3;
+  --animate-fade-in: fade-in 300ms ease-out;
+
+  @keyframes cta-pulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.06);
+    }
+  }
+  @keyframes cta-ring {
+    0% {
+      transform: scale(1);
+      opacity: 0.45;
+    }
+    100% {
+      transform: scale(1.6);
+      opacity: 0;
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-  }
   body {
     @apply bg-white text-slate-800 antialiased;
   }
@@ -35,5 +69,103 @@
     outline: 3px solid var(--color-navy);
     outline-offset: 0;
     box-shadow: 0 0 0 6px var(--color-focus);
+  }
+}
+
+/*
+ * ─── Animations ──────────────────────────────────────────────────────────
+ * Rules:
+ *  - Everything that moves lives inside prefers-reduced-motion: no-preference.
+ *    With reduced motion, states change instantly and nothing is hidden.
+ *  - Only transform and opacity are animated (compositor-only, cheap on phones).
+ *  - Content is visible by default; animation is an enhancement, never a gate.
+ */
+
+@layer components {
+  /* Buttons: hover lift + tap press. Colour/shadow changes apply either way. */
+  .btn-motion {
+    transition: none;
+  }
+  /* Cards (service cards, phone cards, service links) */
+  .card-motion {
+    transition: none;
+  }
+  @media (hover: hover) {
+    .card-motion:hover {
+      box-shadow:
+        0 10px 25px -5px rgb(11 37 69 / 0.15),
+        0 4px 10px -6px rgb(11 37 69 / 0.1);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .btn-motion,
+  .card-motion {
+    transition-property: transform, box-shadow, background-color, color, border-color;
+    transition-duration: var(--duration-fast);
+    transition-timing-function: var(--ease-motion);
+  }
+  /* hover: hover — stops the scale sticking after a tap on touch screens */
+  @media (hover: hover) {
+    .btn-motion:hover {
+      transform: scale(1.04);
+    }
+    .card-motion:hover {
+      transform: translateY(-2px) scale(1.02);
+    }
+  }
+  .btn-motion:active {
+    transform: scale(0.97);
+  }
+  .card-motion:active {
+    transform: scale(0.99);
+  }
+
+  /*
+   * Scroll reveal. `.js-reveal` is only added to <html> by RevealOnScroll.astro
+   * once IntersectionObserver is available and elements already on screen
+   * have been marked revealed — so without JS, nothing is ever hidden.
+   */
+  .js-reveal [data-reveal] {
+    transition:
+      opacity var(--duration-reveal) var(--ease-motion),
+      transform var(--duration-reveal) var(--ease-motion);
+  }
+  .js-reveal [data-reveal]:not(.is-revealed) {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  /*
+   * <details> open/close (MapEmbed). ::details-content + interpolate-size are
+   * newer CSS; browsers without them ignore these rules and open instantly.
+   */
+  .details-motion {
+    interpolate-size: allow-keywords;
+  }
+  .details-motion::details-content {
+    height: 0;
+    opacity: 0;
+    overflow: clip;
+    transition:
+      height 250ms var(--ease-motion),
+      opacity 250ms var(--ease-motion),
+      content-visibility 250ms allow-discrete;
+  }
+  .details-motion[open]::details-content {
+    height: auto;
+    opacity: 1;
+  }
+}
+
+@media print {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

@@ -24,9 +24,9 @@ interface Props {
 const { class: className = '' } = Astro.props;
 ---
 
-<details class:list={['group overflow-hidden rounded-2xl ring-1 ring-slate-200', className]} open>
+<details class:list={['details-motion group overflow-hidden rounded-2xl ring-1 ring-slate-200', className]} open>
   <summary
-    class="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 bg-slate-50 px-4 py-3 [&::-webkit-details-marker]:hidden"
+    class="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 bg-slate-50 px-4 py-3 hover:bg-slate-100 motion-safe:transition-colors motion-safe:duration-(--duration-fast) motion-safe:ease-(--ease-motion) [&::-webkit-details-marker]:hidden"
   >
     <span class="flex items-center gap-2 font-bold text-navy">
       <MapPin className="h-5 w-5 text-brand-red" />
@@ -34,7 +34,7 @@ const { class: className = '' } = Astro.props;
     </span>
     <span class="flex items-center gap-2 text-sm text-slate-500">
       Shown by Google Maps
-      <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" />
+      <ChevronDown className="h-4 w-4 group-open:rotate-180 motion-safe:transition-transform motion-safe:duration-(--duration-fast) motion-safe:ease-(--ease-motion)" />
     </span>
   </summary>
 

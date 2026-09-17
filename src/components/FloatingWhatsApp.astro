@@ -13,14 +13,25 @@ import WhatsAppButton from './WhatsAppButton.jsx';
   <button
     type="button"
     id="floating-whatsapp-dismiss"
-    class="-mr-3 -mt-3 flex h-11 w-11 items-center justify-center rounded-full"
+    class="btn-motion relative z-10 -mt-3 -mr-3 flex h-11 w-11 items-center justify-center rounded-full"
     aria-label="Hide the floating WhatsApp button"
   >
     <span class="flex h-6 w-6 items-center justify-center rounded-full bg-navy text-white shadow ring-2 ring-white">
       <X className="h-3.5 w-3.5" strokeWidth={3} />
     </span>
   </button>
-  <WhatsAppButton variant="floating" label="Message us on WhatsApp" />
+  <!--
+    Attention pulse: a gentle scale on the button plus a soft expanding ring.
+    Runs 3 times (~4s) after a short delay, then stops; motion-safe only, and
+    the button is fully usable throughout.
+  -->
+  <span class="relative flex">
+    <span
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 rounded-full bg-whatsapp opacity-0 motion-safe:animate-cta-ring"
+    ></span>
+    <WhatsAppButton variant="floating" label="Message us on WhatsApp" className="relative motion-safe:animate-cta-pulse" />
+  </span>
 </div>
 
 <script>

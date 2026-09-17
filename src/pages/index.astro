@@ -46,7 +46,7 @@ const highlights = [
         <WhatsAppButton variant="large" label="Book on WhatsApp" />
         <a
           href={`tel:${phones[0].tel}`}
-          class="inline-flex min-h-14 items-center justify-center rounded-full border-2 border-white/40 px-6 py-4 text-lg font-bold hover:bg-white/10"
+          class="btn-motion inline-flex min-h-14 items-center justify-center rounded-full border-2 border-white/40 px-6 py-4 text-lg font-bold hover:bg-white/10 active:bg-white/15"
         >
           Call {phones[0].display}
         </a>
@@ -85,7 +85,7 @@ const highlights = [
               <li>
                 <a
                   href={url(`/services#${s.slug}`)}
-                  class="flex h-full items-center gap-3 rounded-xl p-4 ring-1 ring-slate-200 transition hover:ring-brand-blue"
+                  class="card-motion flex h-full items-center gap-3 rounded-xl bg-white p-4 ring-1 ring-slate-200 hover:ring-brand-blue"
                 >
                   <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-blue/10 text-brand-blue">
                     <Icon className="h-6 w-6" />
@@ -131,13 +131,13 @@ const highlights = [
           href={map.directionsUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center justify-center gap-2 rounded-full bg-brand-blue px-5 py-3 font-bold text-white hover:bg-navy"
+          class="btn-motion inline-flex items-center justify-center gap-2 rounded-full bg-brand-blue px-5 py-3 font-bold text-white hover:bg-navy hover:shadow-md"
         >
           <Navigation className="h-4 w-4" /> Get directions<span class="sr-only"> (opens in a new tab)</span>
         </a>
         <a
           href={`tel:${phones[0].tel}`}
-          class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-brand-blue px-5 py-3 font-bold text-brand-blue hover:bg-brand-blue hover:text-white"
+          class="btn-motion inline-flex items-center justify-center gap-2 rounded-full border-2 border-brand-blue px-5 py-3 font-bold text-brand-blue hover:bg-brand-blue hover:text-white hover:shadow-md"
         >
           <Phone className="h-4 w-4" /> Call {phones[0].display}
         </a>

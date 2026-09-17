@@ -161,6 +161,19 @@ Currently the site's WhatsApp/social link preview shows text only, no image — 
 - Sticky/floating WhatsApp button must not permanently obscure content or trap keyboard focus; ensure it's reachable and dismissible/collapsible
 - Run an automated pass (Lighthouse or axe DevTools) before launch, then a manual keyboard-only and screen-reader (VoiceOver/NVDA) pass on the Home, Services and Contact pages
 
+## Animations
+
+Subtle, CSS-only motion — no JS animation libraries, no new npm dependencies. Keyframes, tokens and rules live in `src/styles/global.css`.
+
+- **`prefers-reduced-motion` is mandatory (WCAG 2.3.3):** every animation/transition that moves sits inside `@media (prefers-reduced-motion: no-preference)` or uses Tailwind's `motion-safe:` variant. With reduced motion, states change instantly and nothing is hidden. Smooth scrolling is gated the same way.
+- **Progressive enhancement — content is never gated behind animation:** everything is visible in the HTML by default. Service info, phone numbers and the WhatsApp button work immediately with JS disabled or before JS runs.
+- **Scroll reveal** (fade + 1rem slide-up): service cards (Services) and Google review cards (Home and Contact). Mark elements with `data-reveal`; `src/components/RevealOnScroll.astro` (tiny vanilla IntersectionObserver snippet, in `BaseLayout`) reveals anything already on screen, then adds `html.js-reveal` — only then are off-screen elements hidden until they scroll in. Put `data-reveal` on a wrapper, not on an element that also has a hover transform.
+- **Hover/tap:** `.btn-motion` (buttons: scale 1.04 hover, 0.97 press) and `.card-motion` (cards: lift + scale 1.02, shadow). One timing everywhere: `--duration-fast` 180ms, `--ease-motion` ease-out. Hover transforms only apply under `(hover: hover)` so they don't stick after a tap on touch screens. Don't add Tailwind `transition`/`transition-colors` alongside these classes — it overrides the transition list.
+- **Floating WhatsApp button (mobile):** gentle scale pulse (1 → 1.06) + soft expanding ring, 3 cycles (~4s) after a 0.8s delay, then stops — under 5s, so no pause control is needed (WCAG 2.2.2). The button also has a dismiss control.
+- **MapEmbed `<details>`:** `.details-motion` animates height/opacity via `::details-content` + `interpolate-size`; browsers without support just open instantly.
+- **Opening hours:** the "today" row background fades in (it's applied after hydration), and the "Today" label and "Open now/Closed" badge use `motion-safe:animate-fade-in`.
+- **Performance:** only `transform` and `opacity` are animated (compositor-only, cheap on low-end phones). Verified at 390px with 4× CPU throttling: no layout shift (CLS 0), no non-composited animations, Lighthouse mobile 100 across the board.
+
 ## SEO
 
 - **Per-page `<title>` and meta description** — distinct for Home, Services, Contact (feeds directly into the Open Graph tags above; don't reuse one generic description everywhere)
