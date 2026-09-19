@@ -1,11 +1,13 @@
 ---
-import { CalendarDays, BatteryCharging, Zap, ArrowRight, MapPin, Navigation, Navigation2, Phone } from 'lucide-react';
+import { CalendarDays, BatteryCharging, Zap, ArrowRight, MapPin, Phone } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WhatsAppButton from '../components/WhatsAppButton.jsx';
 import OpeningHours from '../components/OpeningHours.jsx';
 import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 import GoogleReviews from '../components/GoogleReviews.astro';
 import MapEmbed from '../components/MapEmbed.astro';
+import WazeIcon from '../components/icons/WazeIcon.astro';
+import GoogleMapsIcon from '../components/icons/GoogleMapsIcon.astro';
 import LocalBusinessSchema from '../components/LocalBusinessSchema.astro';
 import { services } from '../content/services';
 import { site, address, phones, map, url } from '../config/site';
@@ -135,17 +137,17 @@ const highlights = [
           href={map.directionsUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="btn-motion inline-flex items-center justify-center gap-2 rounded-full bg-brand-blue px-5 py-3 font-bold text-white hover:bg-navy hover:shadow-md"
+          class="btn-motion inline-flex items-center justify-center gap-2 rounded-full bg-gmaps px-5 py-3 font-bold text-white hover:bg-gmaps-hover hover:shadow-md"
         >
-          <Navigation className="h-4 w-4" /> Get directions<span class="sr-only"> (opens in a new tab)</span>
+          <GoogleMapsIcon class="h-4 w-4" /> Get directions<span class="sr-only"> (opens in a new tab)</span>
         </a>
         <a
           href={map.wazeUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="btn-motion inline-flex items-center justify-center gap-2 rounded-full border-2 border-brand-blue px-5 py-3 font-bold text-brand-blue hover:bg-brand-blue hover:text-white hover:shadow-md"
+          class="btn-motion inline-flex items-center justify-center gap-2 rounded-full bg-waze px-5 py-3 font-bold text-navy hover:bg-waze-hover hover:shadow-md"
         >
-          <Navigation2 className="h-4 w-4" /> Waze<span class="sr-only"> (opens in a new tab)</span>
+          <WazeIcon class="h-4 w-4" /> Waze<span class="sr-only"> (opens in a new tab)</span>
         </a>
         <a
           href={`tel:${phones[0].tel}`}

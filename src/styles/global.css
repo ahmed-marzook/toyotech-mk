@@ -10,6 +10,10 @@
   --color-whatsapp: #25d366;
   --color-whatsapp-hover: #20c05c; /* navy text on this is 6.42:1 */
   --color-whatsapp-dark: #128c7e;
+  --color-waze: #33ccff; /* Waze brand blue; navy text on this is 8.22:1 */
+  --color-waze-hover: #1ab8ea;
+  --color-gmaps: #1765cc; /* Google blue, darkened from #4285f4 (only 3.56:1) so white text clears AA at 5.57:1 */
+  --color-gmaps-hover: #12529e;
   --color-focus: #ffbf47;
 
   /* Motion tokens — one timing for every hover/tap interaction */
