@@ -1,45 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WhatsAppButton from '../components/WhatsAppButton.jsx';
-import BreadcrumbSchema from '../components/BreadcrumbSchema.astro';
-import FAQSchema from '../components/FAQSchema.astro';
 import { CircleCheck, TriangleAlert } from 'lucide-react';
 import { motCheckGroups, notCovered } from '../content/mot-checks';
 import { url } from '../config/site';
 
 const totalChecks = motCheckGroups.reduce((n, group) => n + group.items.length, 0);
-
-const faqs = [
-  {
-    question: 'How often does my car need an MOT?',
-    answer:
-      "Once your car is three years old, it needs an MOT test every year to stay legally on the road — the test checks it still meets the legal safety and emissions standard on the day.",
-  },
-  {
-    question: 'Can I drive with an expired MOT?',
-    answer:
-      'No — driving without a valid MOT is illegal, with one exception: you can drive to a pre-booked MOT test or to a garage for repairs needed to pass one.',
-  },
-  {
-    question: 'How long does an MOT take?',
-    answer:
-      'The test itself usually takes under an hour. We offer same-day bookings in Bletchley, so most customers drop off in the morning and collect the same day.',
-  },
-  {
-    question: "What happens if my car fails its MOT?",
-    answer:
-      "We'll show you what failed and explain the options before any work starts. If you'd like us to fix it, we can carry out the repairs and retest, often the same day.",
-  },
-];
 ---
 
 <BaseLayout
   title="What's Checked at an MOT? Every Part Tested | Toyotech, Bletchley"
   description="A plain-English guide to every part checked at a car MOT — brakes, tyres, steering, lights, emissions and more — plus what an MOT doesn't cover. Book your MOT in Bletchley, Milton Keynes."
 >
-  <BreadcrumbSchema slot="head" items={[{ name: 'MOT Checks', path: '/mot-checks' }]} />
-  <FAQSchema slot="head" items={faqs} />
-
   <section class="bg-navy text-white">
     <div class="mx-auto max-w-6xl px-4 py-12">
       <h1 class="text-4xl font-black">What's checked at an MOT?</h1>
@@ -149,22 +121,6 @@ const faqs = [
           ))
         }
       </ul>
-    </div>
-  </section>
-
-  <section class="bg-white" aria-labelledby="faq-heading">
-    <div class="mx-auto max-w-3xl px-4 py-12">
-      <h2 id="faq-heading" class="text-3xl font-black text-navy">MOT questions we get asked a lot</h2>
-      <dl class="mt-6 flex flex-col gap-6">
-        {
-          faqs.map((faq) => (
-            <div data-reveal>
-              <dt class="text-lg font-bold text-navy">{faq.question}</dt>
-              <dd class="mt-1 text-slate-600">{faq.answer}</dd>
-            </div>
-          ))
-        }
-      </dl>
     </div>
   </section>
 

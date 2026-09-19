@@ -8,7 +8,6 @@ import MapEmbed from '../components/MapEmbed.astro';
 import GoogleReviews from '../components/GoogleReviews.astro';
 import WazeIcon from '../components/icons/WazeIcon.astro';
 import GoogleMapsIcon from '../components/icons/GoogleMapsIcon.astro';
-import BreadcrumbSchema from '../components/BreadcrumbSchema.astro';
 import { site, address, phones, map } from '../config/site';
 
 const directionsHref = map.directionsUrl;
@@ -18,8 +17,6 @@ const directionsHref = map.directionsUrl;
   title="Contact & Directions | Toyotech MOT Centre, Bletchley"
   description="Contact Toyotech MOT Centre, Tavistock Street, Bletchley, Milton Keynes. WhatsApp or call for same-day bookings."
 >
-  <BreadcrumbSchema slot="head" items={[{ name: 'Contact', path: '/contact' }]} />
-
   <section class="bg-navy text-white">
     <div class="mx-auto max-w-6xl px-4 py-12">
       <h1 class="text-4xl font-black">Contact Toyotech in Bletchley</h1>
