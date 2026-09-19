@@ -22,15 +22,45 @@ export const address = {
   },
 };
 
+/**
+ * Trading disclosure required by the Companies Act 2006 (trading
+ * disclosures regulations) and the Provision of Services Regulations 2009
+ * now that the business trades as a limited company. Source: Companies
+ * House, https://find-and-update.company-information.service.gov.uk/company/16013011
+ */
+export const legal = {
+  companyName: 'Toyotech Hybrid Autos Limited',
+  companyNumber: '16013011',
+  jurisdiction: 'England and Wales',
+  registeredOffice: 'Unit 3, 80-86 Tavistock Street, Bletchley, Milton Keynes, MK2 2PB',
+};
+
 /** Google Business listing (Toyotech Hybrid Autos) */
 const googlePlaceId = 'ChIJdd_Of5tVdkgROhBlr-LHD4U';
 const mapQuery = 'Toyotech Hybrid Autos, 80-86 Tavistock Street, Bletchley, Milton Keynes MK2 2PB';
 
+/**
+ * MK2 2PB postcode centroid (Ordnance Survey-derived, via doogal.co.uk) —
+ * close enough for a workshop pin; not rooftop-precise.
+ */
+const lat = 51.99988;
+const lng = -0.72453;
+
 export const map = {
-  /** Keyless Google Maps embed — no API key needed */
-  embedUrl: `https://maps.google.com/maps?hl=en&q=${encodeURIComponent(mapQuery)}&z=16&output=embed`,
-  /** Opens the listing in Google Maps (app on mobile) */
+  lat,
+  lng,
+  zoom: 16,
+  /** OpenFreeMap "positron" vector style — free, keyless, no tracking/cookies */
+  styleUrl: 'https://tiles.openfreemap.org/styles/positron',
+  /**
+   * Normal outbound links, not embeds — clicking one navigates to Google's
+   * or Waze's own site/app (covered by their privacy policies), it doesn't
+   * load their content or set their cookies on this site the way an iframe
+   * embed would.
+   */
   directionsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}&query_place_id=${googlePlaceId}`,
+  /** Opens turn-by-turn navigation in the Waze app (falls back to waze.com on desktop) */
+  wazeUrl: `https://waze.com/ul?ll=${lat},${lng}&navigate=yes&zoom=17`,
 };
 
 export type Phone = { label: string; display: string; tel: string };

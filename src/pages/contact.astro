@@ -1,5 +1,5 @@
 ---
-import { MapPin, Phone, Navigation } from 'lucide-react';
+import { MapPin, Phone, Navigation, Navigation2 } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WhatsAppButton from '../components/WhatsAppButton.jsx';
 import OpeningHours from '../components/OpeningHours.jsx';
@@ -65,14 +65,24 @@ const directionsHref = map.directionsUrl;
             {address.postcode}
           </span>
         </address>
-        <a
-          href={directionsHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn-motion mt-4 inline-flex items-center gap-2 rounded-full bg-brand-blue px-5 py-3 font-bold text-white hover:bg-navy hover:shadow-md"
-        >
-          <Navigation className="h-4 w-4" /> Get directions<span class="sr-only"> (opens in a new tab)</span>
-        </a>
+        <div class="mt-4 flex flex-wrap gap-3">
+          <a
+            href={directionsHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-motion inline-flex items-center gap-2 rounded-full bg-brand-blue px-5 py-3 font-bold text-white hover:bg-navy hover:shadow-md"
+          >
+            <Navigation className="h-4 w-4" /> Get directions<span class="sr-only"> (opens in a new tab)</span>
+          </a>
+          <a
+            href={map.wazeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-motion inline-flex items-center gap-2 rounded-full border-2 border-brand-blue px-5 py-3 font-bold text-brand-blue hover:bg-brand-blue hover:text-white hover:shadow-md"
+          >
+            <Navigation2 className="h-4 w-4" /> Waze<span class="sr-only"> (opens in a new tab)</span>
+          </a>
+        </div>
       </div>
     </div>
 
