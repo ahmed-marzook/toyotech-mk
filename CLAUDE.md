@@ -12,6 +12,28 @@
 - **Tagline:** "Expert Care for All Makes and Models" / "We Offer Genuine Parts and Warranty"
 - **Google rating:** 4.8★ (10 reviews) — see Google Reviews section below
 
+## Questions worth asking Mumthaz before/while building
+
+- Does he have a Facebook/Instagram page he's deliberately keeping off the site, or should we plan to add social links later?
+- Any brand guidelines beyond the logo — a preferred font, or is that open to us?
+- Should the Services page show prices, or just "call/WhatsApp for a quote"?
+- Does he want a booking form (name, car reg, issue) that pre-fills the WhatsApp message, or just a plain "message us" button?
+- Any accreditations/certifications to display (MOT testing station number, manufacturer approvals, warranty scheme logos)?
+- Who owns/manages the domain — does he already have one, or does it need registering?
+- Does he want the site in English only, or should other languages be considered given the local customer base?
+- Any specific photos he can get taken soon (workshop, team, before/after) so the placeholder images aren't up for long?
+- Should the Google Reviews block auto-update or is a manually curated set fine to start?
+- Who updates the opening-hours Google Sheet going forward — just him, or should we build him a simple guide/video for editing it?
+- Does he want a simple analytics setup (e.g. Plausible or GA) to see how many visitors tap the WhatsApp button?
+- Any competitor sites he likes the look/feel of, to use as a style reference?
+- Is the company registered with the ICO (Information Commissioner's Office) for data protection, and if so what's the registration reference? The privacy policy currently has no registration number on file.
+- Is the company VAT-registered, and if so what's the VAT number? Not needed on the site today (no prices shown anywhere), but worth having on record before pricing copy is added.
+- Does he want an MOT price (or "from £X") shown anywhere on the site? If so, it must not exceed DVSA's statutory maximum fee for the vehicle class, and needs to be VAT-inclusive — his current actual fee needs confirming either way.
+- Does he want the site to state "DVSA-approved MOT test centre"? No such claim is made today; if he wants it, the VTS (Vehicle Testing Station) number should back it up.
+- Is he comfortable with the site publicly showing the full legal entity name, company number and registered office in the footer (now live, sourced from the public Companies House record), or does he want that presented differently?
+- Roughly how long are customer/vehicle records and enquiry messages actually kept in practice? The privacy policy's retention wording is currently generic ("as long as reasonably needed") — his real process would let it be specific.
+- Is there a dedicated email address he'd like set up for privacy/data-request enquiries, or is he happy for those to go through the same phone/WhatsApp numbers as everything else? No email exists anywhere on the site today.
+
 ## Tech Stack
 
 - **Framework:** Astro (static site, GitHub Pages output)
