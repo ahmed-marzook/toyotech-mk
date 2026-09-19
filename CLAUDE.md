@@ -5,7 +5,7 @@
 - **Name:** Toyotech MOT Centre / Toyotech Hybrid Autos
 - **Legal entity:** Toyotech Hybrid Autos Limited, company no. 16013011, registered in England and Wales, incorporated 11 October 2024, SIC 45200 (Maintenance and repair of motor vehicles). Registered office: Unit 3, 80-86 Tavistock Street, Bletchley, Milton Keynes, MK2 2PB. Source: [Companies House](https://find-and-update.company-information.service.gov.uk/company/16013011). Lives in `legal` in `src/config/site.ts`, disclosed in the Footer and the Privacy Policy's "Who we are" section (Companies Act 2006 trading disclosures + Provision of Services Regulations 2009).
 - **Specialty:** Hybrid vehicle servicing, plus general MOTs and servicing for all cars
-- **Address:** No. 80-86, Tavistock Street, Bletchley, Milton Keynes, MK22PB
+- **Address:** No. 80-86, Tavistock Street, Bletchley, Milton Keynes, MK2 2PB
 - **Contact:** Mumthaz — 07450 277250 / 01908 639629 (other numbers seen on signage: 07450 011199, 07450 281120 4)
 - **Hours:** Open 7 days a week, same-day bookings available
 - **Services offered** (from workshop signage): Diagnostic, Engine, Gear Box, MOT Repair, Service, Brake Pads, Power Steering, AC & Heater, Clutch, ABS, Glass, Suspension, Electrical Work, Hybrid Battery
@@ -219,6 +219,25 @@ Subtle, CSS-only motion — no JS animation libraries, no new npm dependencies. 
 - **Canonical URLs** — `<link rel="canonical">` per page to avoid duplicate-content issues if the site is ever reachable via both a GitHub Pages subpath and a future custom domain
 - **Fast builds, small payloads** — Astro's static output already helps Core Web Vitals; keep images optimised (`astro:assets` for automatic resizing/format conversion) once real photos are added
 - **Google Business Profile** — since reviews/ratings are already pulled from the confirmed listing, make sure the site's NAP (name, address, phone) matches the Google Business Profile exactly — mismatches hurt local ranking
+- **`FAQPage` JSON-LD** — added on `/mot-checks/` and `/hybrid-battery/`, backed by a visible FAQ section on each page (Google requires the schema to mirror on-page content). `src/components/FAQSchema.astro` takes the same `{question, answer}[]` array the page renders.
+- **`BreadcrumbList` JSON-LD** — added on every page except Home (`src/components/BreadcrumbSchema.astro`), so search results can show the page's path instead of the raw URL.
+- **`sameAs` on the `AutoRepair` schema** — links the Home page's JSON-LD to the Google Business Profile listing (`googleReviews.listingUrl` from `src/content/reviews.ts`), separate from the deliberate no-`aggregateRating` decision above — this just helps Google connect the site to the existing Business Profile entity, it doesn't self-publish a rating.
+
+### Google Business Profile — improvements needed (not something Claude can do — needs Mumthaz's login)
+
+On-site technical SEO is in good shape; the Business Profile itself is the bigger lever for the local map-pack ranking ("mechanic Milton Keynes" etc.) and none of it can be done from this repo. Worth working through with Mumthaz:
+
+- **NAP mismatch to resolve:** the Business Profile listing (see Google Reviews section below) shows the locality as "Fenny Stratford, Bletchley", but the site and the Companies House registration both just say "Bletchley". Confirm which is correct and make all three match exactly — inconsistent citations hurt local ranking more than any single wording choice.
+- **Categories** — confirm the primary category (e.g. "Auto repair shop" / "MOT testing station") and add every relevant secondary category; this is what determines which searches the listing can appear in at all.
+- **Services list** — GBP has its own "Services" section, separate from photos/posts. Add each service from the Services page (Diagnostic, Engine, Gear Box, MOT Repair, Service, Brake Pads, Power Steering, AC & Heater, Clutch, ABS, Glass, Suspension, Electrical Work, Hybrid Battery) using the same wording as the site, so the two stay consistent.
+- **Business description** — fill in the ~750-character description field with the same "hybrid specialists... genuine parts and warranty" language used on the site.
+- **Q&A section** — seed it with a few of the same questions now answered on `/mot-checks/` and `/hybrid-battery/` (e.g. "How often does my car need an MOT?", "Do you work on my hybrid model?") so the two sources reinforce each other.
+- **Photos** — upload real photos regularly once available (see `PHOTO-SHOT-LIST.txt`); listings with recent, frequent photo uploads get materially more clicks than static ones.
+- **Posts/updates** — even a monthly GBP post (offer, reminder, seasonal tip) signals an actively maintained profile, which Google weighs.
+- **Review replies** — reply to all 10 existing reviews and every new one; response rate and recency are both ranking and trust signals.
+- **Website + booking link** — set the GBP "Website" field to the live custom domain, and the "Appointment/booking" link to the WhatsApp deep link (`wa.me/447450277250`) so Maps searches can message directly.
+- **Opening hours** — keep GBP's hours in sync with the Google Sheet the site reads from; a mismatch between what GBP shows and what the site shows is a common source of "closed when Google said open" complaints, and search engines cross-check the two.
+- **Secondary citations** — claim/verify listings on Bing Places, Yell, Checkatrade and AutoTrader Garages with identical NAP, once the primary GBP details above are locked in.
 
 ## Future Ideas (not in initial build)
 

@@ -13,6 +13,7 @@
  */
 import { site, address, phones, map, fallbackHours, OPENING_HOURS_CSV_URL, type HoursRow } from '../config/site';
 import { services } from '../content/services';
+import { googleReviews } from '../content/reviews';
 import { parseHours } from './OpeningHours.jsx';
 
 let hours: HoursRow[] = fallbackHours;
@@ -51,6 +52,9 @@ const schema = {
     longitude: -0.724739,
   },
   hasMap: map.directionsUrl,
+  // Ties this site to the Google Business Profile entity (helps Google connect
+  // the two, distinct from the aggregateRating we deliberately don't self-publish above).
+  sameAs: [googleReviews.listingUrl],
   areaServed: ['Bletchley', 'Fenny Stratford', 'Milton Keynes'],
   openingHoursSpecification: hours
     .filter((h) => !h.closedFlag)
