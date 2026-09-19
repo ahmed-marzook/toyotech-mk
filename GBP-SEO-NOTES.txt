@@ -1,0 +1,61 @@
+Google Business Profile & local SEO — action notes
+====================================================
+
+On-site technical SEO (titles/descriptions, sitemap, robots.txt, canonical
+URLs, structured data) is in good shape. This file covers what's left, most
+of which needs Mumthaz's own Google account login and can't be done from
+this repo/codebase.
+
+NAP mismatch to resolve first
+------------------------------
+The Google Business Profile listing shows the address locality as
+"Fenny Stratford, Bletchley", but the site (src/config/site.ts) and the
+Companies House registration both just say "Bletchley". Confirm with
+Mumthaz which is correct and make all three match exactly — inconsistent
+address wording across citations hurts local ranking more than any single
+choice of wording.
+
+Google Business Profile checklist
+----------------------------------
+- Categories: confirm the primary category (e.g. "Auto repair shop" /
+  "MOT testing station") and add every relevant secondary category — this
+  is what determines which searches the listing can appear in at all.
+- Services list: GBP has its own "Services" section, separate from posts/
+  photos. Add each service from the Services page (Diagnostic, Engine,
+  Gear Box, MOT Repair, Service, Brake Pads, Power Steering, AC & Heater,
+  Clutch, ABS, Glass, Suspension, Electrical Work, Hybrid Battery) using
+  the same wording as the site.
+- Business description: fill in the ~750-character description field
+  using the same "hybrid specialists... genuine parts and warranty"
+  language already used on the site.
+- Q&A section: seed it with a few of the same questions now answered on
+  /mot-checks/ and /hybrid-battery/ (e.g. "How often does my car need an
+  MOT?", "Do you work on my hybrid model?") so the two sources reinforce
+  each other.
+- Photos: upload real photos regularly once available (see
+  PHOTO-SHOT-LIST.txt) — listings with recent, frequent photo uploads get
+  materially more clicks than static ones.
+- Posts/updates: even a monthly GBP post (offer, reminder, seasonal tip)
+  signals an actively maintained profile, which Google weighs.
+- Review replies: reply to all 10 existing reviews and every new one —
+  response rate and recency are both ranking and trust signals.
+- Website + booking link: set the GBP "Website" field to the live custom
+  domain, and the "Appointment/booking" link to the WhatsApp deep link
+  (wa.me/447450277250) so Maps searches can message directly.
+- Opening hours: keep GBP's hours in sync with the Google Sheet the site
+  reads from — a mismatch between what GBP shows and what the site shows
+  is a common source of "closed when Google said open" complaints.
+- Secondary citations: claim/verify listings on Bing Places, Yell,
+  Checkatrade and AutoTrader Garages with identical NAP, once the primary
+  GBP details above are locked in.
+
+Site-side structured data added alongside these notes
+-------------------------------------------------------
+- BreadcrumbList JSON-LD on every page except Home
+  (src/components/BreadcrumbSchema.astro).
+- FAQPage JSON-LD on /mot-checks/ and /hybrid-battery/, backed by a real,
+  visible FAQ section on each page (src/components/FAQSchema.astro).
+- sameAs on the Home page's AutoRepair schema, linking to the Google
+  Business Profile listing (src/content/reviews.ts's listingUrl) — ties
+  the site to the existing Business Profile entity without self-publishing
+  a rating (the existing decision to skip aggregateRating stands).

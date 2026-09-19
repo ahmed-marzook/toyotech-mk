@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import WhatsAppButton from '../components/WhatsAppButton.jsx';
+import BreadcrumbSchema from '../components/BreadcrumbSchema.astro';
 import { BatteryCharging, ShieldCheck } from 'lucide-react';
 import { services } from '../content/services';
 
@@ -23,6 +24,8 @@ const callouts = [
   title="MOT, Servicing & Hybrid Repairs in Bletchley | Toyotech MOT Centre"
   description="MOTs, servicing, brakes, diagnostics, clutch, suspension, AC and hybrid battery repairs for all makes at Toyotech MOT Centre, Bletchley, Milton Keynes. Genuine parts and warranty."
 >
+  <BreadcrumbSchema slot="head" items={[{ name: 'Services', path: '/services' }]} />
+
   <section class="bg-navy text-white">
     <div class="mx-auto max-w-6xl px-4 py-12">
       <h1 class="text-4xl font-black">Our services in Bletchley, Milton Keynes</h1>

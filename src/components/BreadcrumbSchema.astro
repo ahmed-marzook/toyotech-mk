@@ -1,0 +1,34 @@
+---
+/**
+ * JSON-LD BreadcrumbList — lets Google show the page's path (e.g.
+ * "Toyotech MOT Centre > Services") in search results instead of the raw URL.
+ * Home is always the first crumb; pass the rest via `items`.
+ */
+import { url } from '../config/site';
+
+interface Crumb {
+  name: string;
+  /** Site-relative path, e.g. "/services" */
+  path: string;
+}
+
+interface Props {
+  items: Crumb[];
+}
+
+const { items } = Astro.props;
+const crumbs: Crumb[] = [{ name: 'Home', path: '/' }, ...items];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: crumbs.map((crumb, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: crumb.name,
+    item: new URL(url(crumb.path), Astro.site).href,
+  })),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
