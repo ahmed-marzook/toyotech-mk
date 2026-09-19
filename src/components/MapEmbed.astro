@@ -11,14 +11,15 @@
  * "get me there" job is fully covered by the Google Maps / Waze buttons
  * below, which are plain outbound links, not embeds.
  *
- * NOTE (unresolved): the source screenshot is a Google Maps capture.
- * Google's Maps Platform terms generally restrict caching/redistributing
- * their map imagery outside their own approved display methods (the live
- * iframe or JS API) — self-hosting a screenshot like this sits in a legal
- * grey area. Low real-world enforcement risk for a small local business,
- * but not fully clean. Swapping in an OpenStreetMap-sourced screenshot
- * instead (ODbL/CC BY-SA, screenshotting explicitly permitted) would close
- * that gap — flagged for a decision, not yet resolved.
+ * The screenshot is sourced from OpenStreetMap, not Google Maps — an
+ * earlier draft used a Google Maps capture, but Google's Maps Platform
+ * terms generally restrict caching/redistributing their map imagery outside
+ * their own approved display methods (the live iframe or JS API), which a
+ * self-hosted screenshot isn't. OSM's data licence (ODbL, cartography under
+ * CC BY-SA) explicitly permits this, with attribution (below the image).
+ * The pin is custom-drawn (same shape as the lucide MapPin icon used
+ * elsewhere on the site, in brand red) over the exact coordinates OSM's own
+ * marker pointed to, replacing OSM's default marker.
  *
  * It's a native <details> so visitors can collapse it, even without JS.
  * The Google Maps / Waze buttons are plain <a> links, so the map is never
@@ -53,12 +54,17 @@ const { class: className = '' } = Astro.props;
       src={workshopMap}
       alt={`Map showing Toyotech MOT Centre at ${address.full}`}
       class="h-full w-full object-cover"
-      widths={[400, 800, 1162]}
+      widths={[400, 800, 1127]}
       sizes="(min-width: 1024px) 600px, 100vw"
     />
-    <span class="absolute right-2 bottom-2 rounded bg-white/80 px-1.5 py-0.5 text-[0.6rem] text-slate-600">
-      Map data © Google
-    </span>
+    <a
+      href="https://www.openstreetmap.org/copyright"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="absolute right-2 bottom-2 rounded bg-white/80 px-1.5 py-0.5 text-[0.6rem] text-slate-600 underline hover:bg-white"
+    >
+      © OpenStreetMap contributors
+    </a>
   </div>
 
   <div class="flex flex-wrap gap-3 bg-slate-50 px-4 py-3">
