@@ -24,6 +24,14 @@
  * It's a native <details> so visitors can collapse it, even without JS.
  * The Google Maps / Waze buttons are plain <a> links, so the map is never
  * the only way to find the workshop.
+ *
+ * Google Maps button uses the full-colour icon on a neutral white/bordered
+ * background rather than a flat "Google blue" pill: red+green (Waze's blue
+ * neighbour and Toyotech's own red/green) is a poor pairing for red-green
+ * colour blindness, and a flat blue read as generic rather than
+ * recognisably "Google Maps" — the colourful pin/terrain icon is the
+ * actual recognisable signature. Waze keeps its blue pill since Waze blue
+ * isn't a colour already used elsewhere on this site.
  */
 import { Image } from 'astro:assets';
 import { MapPin, ChevronDown } from 'lucide-react';
@@ -72,9 +80,9 @@ const { class: className = '' } = Astro.props;
       href={map.directionsUrl}
       target="_blank"
       rel="noopener noreferrer"
-      class="btn-motion inline-flex items-center gap-2 rounded-full bg-gmaps px-4 py-2 text-sm font-bold text-white hover:bg-gmaps-hover hover:shadow-md"
+      class="btn-motion inline-flex items-center gap-2 rounded-full border-2 border-slate-200 bg-white px-4 py-2 text-sm font-bold text-navy hover:border-slate-300 hover:shadow-md"
     >
-      <GoogleMapsIcon class="h-4 w-4" /> Google Maps<span class="sr-only"> (opens in a new tab)</span>
+      <GoogleMapsIcon class="h-5 w-5" /> Google Maps<span class="sr-only"> (opens in a new tab)</span>
     </a>
     <a
       href={map.wazeUrl}
