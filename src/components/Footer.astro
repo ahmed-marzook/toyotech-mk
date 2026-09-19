@@ -63,6 +63,7 @@ const year = new Date().getFullYear();
     </div>
   </div>
   <div class="border-t border-white/10 py-4 text-center text-xs text-white/60">
-    &copy; {year} {site.name} · {site.altName}
+    &copy; {year} {site.name} · {site.altName} ·
+    <a href={url('/privacy')} class="underline hover:text-white/80">Privacy Policy</a>
   </div>
 </footer>

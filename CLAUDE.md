@@ -118,13 +118,15 @@ Parsing rules:
 
 ## Map Embed
 
-- `src/components/MapEmbed.astro` on the Home page ("Find us" section, after reviews) and the Contact page: a keyless Google Maps iframe (`https://maps.google.com/maps?q=…&output=embed`) — no API key needed.
-- Embed URL and "Get directions" URL (uses the Place ID) live in `map` in `src/config/site.ts`.
-- Wrapped in a native `<details open>` so it can be collapsed without JS; `loading="lazy"`.
-- Accessibility: iframe has a descriptive `title`; no obsolete `frameborder`/`scrolling`/`margin*` attributes; sized with `aspect-ratio` so it reflows on mobile (no fixed 600×400).
-- No backlink/attribution to embed-generator sites (e.g. embed-googlemap.com).
-- Always paired with a plain-text address and a "Get directions" link plus a fallback link if the iframe fails — the map is never the only way to find the workshop.
-- Note: the iframe loads Google's cookies — Home and Contact are the only pages making this third-party request (besides the client-side opening-hours CSV fetch).
+- `src/components/MapEmbed.astro` on the Home page ("Find us" section, after reviews) and the Contact page: a cookie-free vector map — [OpenFreeMap](https://openfreemap.org) tiles (`styleUrl` in `map`, `src/config/site.ts`), rendered client-side with `maplibre-gl` (MapLibre GL JS). No API key, no account, no tracking, no cookies.
+  - Switched away from the earlier Google Maps iframe: that embed contacted Google and set Google's cookies (NID, etc.) on every page load before any consent, which is a GDPR/PECR issue for an always-open, always-loaded element. Swapping the map data source removes that instead of gating it behind a consent banner.
+  - Coordinates (`map.lat`/`map.lng`), zoom and the tile `styleUrl` live in `map` in `src/config/site.ts`; the marker centre is the MK2 2PB postcode centroid (Ordnance Survey-derived), not a rooftop-precise pin.
+  - "Get directions" (`map.directionsUrl`) still points at Google Maps by URL — that's a plain outbound `<a>` the visitor has to click, not an embed, so it doesn't load Google content or set Google cookies on this site; it's disclosed in the privacy policy as an outbound link instead.
+- Wrapped in a native `<details open>` so it can be collapsed without JS.
+- Accessibility: the MapLibre canvas gets a descriptive `aria-label` (WCAG 4.1.2) once the map loads; default keyboard nav (arrows pan, +/− zoom) works once focused; `cooperativeGestures: true` stops the map trapping page-scroll on trackpad/touch; sized with `aspect-ratio` so it reflows on mobile (no fixed 600×400).
+- Attribution: MapLibre's default `attributionControl` (compact) stays on — required by OpenStreetMap's ODbL licence for the underlying map data.
+- Progressive enhancement: a `<noscript>` message inside the map container, plus a try/catch in the init script that swaps in a plain-text fallback if MapLibre throws — paired in both cases with the plain-text address and "Get directions" link below, so the map is never the only way to find the workshop.
+- Note: OpenFreeMap tile requests and the client-side opening-hours CSV fetch (to Google Sheets) are the only third-party requests Home and Contact make; neither sets a cookie.
 
 ## Social / Link Previews (Open Graph)
 

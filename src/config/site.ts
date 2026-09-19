@@ -27,9 +27,20 @@ const googlePlaceId = 'ChIJdd_Of5tVdkgROhBlr-LHD4U';
 const mapQuery = 'Toyotech Hybrid Autos, 80-86 Tavistock Street, Bletchley, Milton Keynes MK2 2PB';
 
 export const map = {
-  /** Keyless Google Maps embed — no API key needed */
-  embedUrl: `https://maps.google.com/maps?hl=en&q=${encodeURIComponent(mapQuery)}&z=16&output=embed`,
-  /** Opens the listing in Google Maps (app on mobile) */
+  /**
+   * MK2 2PB postcode centroid (Ordnance Survey-derived, via doogal.co.uk) —
+   * close enough for a workshop pin; not rooftop-precise.
+   */
+  lat: 51.99988,
+  lng: -0.72453,
+  zoom: 16,
+  /** OpenFreeMap "positron" vector style — free, keyless, no tracking/cookies */
+  styleUrl: 'https://tiles.openfreemap.org/styles/positron',
+  /**
+   * A normal outbound link, not an embed — clicking it navigates to Google's
+   * own site (covered by Google's privacy policy), it doesn't load Google
+   * content or set Google cookies on this site the way an iframe embed would.
+   */
   directionsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}&query_place_id=${googlePlaceId}`,
 };
 

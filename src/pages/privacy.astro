@@ -1,0 +1,196 @@
+---
+/**
+ * Privacy policy — required once the site processes any personal data
+ * (UK GDPR + Data Protection Act 2018), which it does via WhatsApp/phone
+ * enquiries and the third-party requests listed below.
+ *
+ * Kept to what's actually verifiable from this codebase — no claims about
+ * ICO registration, a VAT number, or a dedicated privacy contact, since
+ * none of those are confirmed. Before this goes live, Mumthaz should:
+ *   1. Confirm whether Toyotech is registered with the ICO (data protection
+ *      fee) and, if so, add the registration reference below.
+ *   2. Decide on a contact route for privacy/data requests specifically —
+ *      currently this points people at the phone/WhatsApp numbers already
+ *      in src/config/site.ts, since no email address is configured anywhere
+ *      on the site.
+ *   3. Confirm how long customer/vehicle records are actually kept (the
+ *      retention section below uses a deliberately generic answer).
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site, address, phones, url } from '../config/site';
+
+const lastUpdated = 'September 2026';
+---
+
+<BaseLayout
+  title="Privacy Policy | Toyotech MOT Centre"
+  description="How Toyotech MOT Centre in Bletchley, Milton Keynes handles personal data collected through this website, WhatsApp and phone enquiries."
+>
+  <section class="bg-navy text-white">
+    <div class="mx-auto max-w-6xl px-4 py-12">
+      <h1 class="text-4xl font-black">Privacy Policy</h1>
+      <p class="mt-3 max-w-2xl text-lg text-white/80">
+        This page explains what personal data {site.name} collects through this website and when you contact us,
+        why, and what your rights are. Last updated {lastUpdated}.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-white">
+    <div class="mx-auto max-w-3xl px-4 py-10">
+      <h2 class="text-2xl font-black text-navy">Who we are</h2>
+      <p class="mt-3 text-slate-700">
+        {site.name} ({site.altName}) is the data controller for the personal data described on this page. We're
+        based at {address.full}. You can reach us by phone or WhatsApp — see the numbers at the bottom of this
+        page or on our <a class="font-semibold text-brand-blue underline underline-offset-4" href={url('/contact')}
+          >Contact page</a
+        >.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-slate-50">
+    <div class="mx-auto max-w-3xl px-4 py-10">
+      <h2 class="text-2xl font-black text-navy">The personal data we collect</h2>
+      <p class="mt-3 text-slate-700">This website is a static, no-login brochure site. We don't run a booking
+        form, a user account system, or a payment system — so almost everything below only happens if you choose
+        to contact us.</p>
+
+      <h3 class="mt-6 text-lg font-bold text-navy">When you message or call us</h3>
+      <p class="mt-2 text-slate-700">
+        If you message us on WhatsApp or call one of our numbers, we see your phone number, your name if you give
+        it, and whatever you tell us about your vehicle or booking. We use this to reply to you, arrange your MOT
+        or repair, and keep basic records of the work.
+      </p>
+
+      <h3 class="mt-6 text-lg font-bold text-navy">Automatically, from visiting this website</h3>
+      <ul class="mt-2 flex flex-col gap-2 text-slate-700">
+        <li>
+          <strong class="text-navy">Site analytics.</strong> We use Cloudflare Web Analytics, which is cookieless —
+          it doesn't use any tracking script or device identifier and doesn't build a profile of you. It gives us
+          aggregate figures like page views, not who you are.
+        </li>
+        <li>
+          <strong class="text-navy">Opening hours.</strong> Your browser fetches our current opening hours from a
+          Google Sheet published by us. This is a request from your browser to Google's servers, so Google
+          receives your IP address as part of that request, the same as loading any web page.
+        </li>
+        <li>
+          <strong class="text-navy">Map.</strong> The map on our Home and Contact pages uses OpenFreeMap, a free,
+          open map data service — it doesn't use cookies or tracking, though the map tile requests do go to
+          OpenFreeMap's servers, the same as any image loaded from another website.
+        </li>
+      </ul>
+
+      <h3 class="mt-6 text-lg font-bold text-navy">If you click through to another site</h3>
+      <p class="mt-2 text-slate-700">
+        The WhatsApp button, the "Get directions" link and our Google reviews link all take you to a different
+        website when you click them — WhatsApp/Meta or Google. Once you're there, it's covered by their privacy
+        policy, not ours, and it's your choice whether to click through.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-white">
+    <div class="mx-auto max-w-3xl px-4 py-10">
+      <h2 class="text-2xl font-black text-navy">Cookies</h2>
+      <p class="mt-3 text-slate-700">
+        This website does not set any cookies of its own, and none of the third-party services it uses (Cloudflare
+        Analytics, the opening-hours sheet, or the map) set cookies on your browser either. If that ever changes —
+        for example if we add a live chat widget or a different analytics tool — we'll update this page and add a
+        cookie banner if one becomes necessary.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-slate-50">
+    <div class="mx-auto max-w-3xl px-4 py-10">
+      <h2 class="text-2xl font-black text-navy">Why we're allowed to use it</h2>
+      <p class="mt-3 text-slate-700">
+        When you contact us about a booking or repair, we use your details because you've asked us to take a
+        specific action — arranging a service — which is our <em>legitimate interest</em> in running the
+        business and, once you book, is necessary to carry out that job. For the cookieless analytics described
+        above, our legitimate interest is understanding how the website is used, weighed against the minimal,
+        non-identifying nature of that data.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-white">
+    <div class="mx-auto max-w-3xl px-4 py-10">
+      <h2 class="text-2xl font-black text-navy">Who we share it with</h2>
+      <p class="mt-3 text-slate-700">We don't sell or rent your personal data. It's only shared where the service
+        itself requires it:</p>
+      <ul class="mt-3 flex flex-col gap-2 text-slate-700">
+        <li><strong class="text-navy">Meta / WhatsApp</strong> — carries the messages if you contact us that way.</li>
+        <li><strong class="text-navy">Cloudflare</strong> — provides the cookieless analytics beacon.</li>
+        <li><strong class="text-navy">Google</strong> — hosts the published spreadsheet our opening hours are read from, and the Google Business listing our reviews link out to.</li>
+        <li><strong class="text-navy">OpenFreeMap</strong> — serves the map tiles shown on this site.</li>
+      </ul>
+      <p class="mt-3 text-slate-700">
+        We don't use any other analytics, advertising or marketing platforms, and we don't share your details with
+        anyone for their own marketing purposes.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-slate-50">
+    <div class="mx-auto max-w-3xl px-4 py-10">
+      <h2 class="text-2xl font-black text-navy">How long we keep it</h2>
+      <p class="mt-3 text-slate-700">
+        We keep enquiry and booking messages for as long as we reasonably need them to deal with your enquiry and
+        any follow-up (such as a warranty query). Records connected to work we've invoiced are kept for as long as
+        UK tax law requires business records to be retained. We don't keep personal data longer than we need it
+        for these purposes.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-white">
+    <div class="mx-auto max-w-3xl px-4 py-10">
+      <h2 class="text-2xl font-black text-navy">Your rights</h2>
+      <p class="mt-3 text-slate-700">Under UK GDPR, you can ask us to:</p>
+      <ul class="mt-3 grid gap-2 text-slate-700 sm:grid-cols-2">
+        <li>See the personal data we hold about you</li>
+        <li>Correct anything that's inaccurate</li>
+        <li>Delete your data, where we don't need to keep it</li>
+        <li>Restrict or object to how we use it</li>
+        <li>Get a copy in a portable format</li>
+      </ul>
+      <p class="mt-3 text-slate-700">
+        To ask us about any of this, contact us using the numbers below. If you're not satisfied with our
+        response, you have the right to complain to the Information Commissioner's Office (ICO) at
+        <a class="font-semibold text-brand-blue underline underline-offset-4" href="https://ico.org.uk/make-a-complaint/" rel="nofollow"
+          >ico.org.uk</a
+        >.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-slate-50">
+    <div class="mx-auto max-w-3xl px-4 py-10">
+      <h2 class="text-2xl font-black text-navy">Changes to this policy</h2>
+      <p class="mt-3 text-slate-700">
+        If we change what data we collect or how we use it, we'll update this page and change the date at the
+        top.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-white">
+    <div class="mx-auto max-w-3xl px-4 py-10">
+      <h2 class="text-2xl font-black text-navy">Contact us about this policy</h2>
+      <p class="mt-3 text-slate-700">{address.full}</p>
+      <ul class="mt-3 flex flex-col gap-1 text-slate-700">
+        {
+          phones.map((p) => (
+            <li>
+              <a href={`tel:${p.tel}`} class="font-semibold text-brand-blue underline underline-offset-4">{p.display}</a>
+              <span class="text-slate-500"> — {p.label}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
