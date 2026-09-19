@@ -1,7 +1,7 @@
 ---
 import { MapPin, Phone, Clock } from 'lucide-react';
 import Logo from './Logo.astro';
-import { site, address, phones, nav, url } from '../config/site';
+import { site, address, phones, nav, legal, url } from '../config/site';
 
 const year = new Date().getFullYear();
 ---
@@ -62,8 +62,14 @@ const year = new Date().getFullYear();
       </nav>
     </div>
   </div>
-  <div class="border-t border-white/10 py-4 text-center text-xs text-white/60">
-    &copy; {year} {site.name} · {site.altName} ·
-    <a href={url('/privacy')} class="underline hover:text-white/80">Privacy Policy</a>
+  <div class="border-t border-white/10 px-4 py-4 text-center text-xs text-white/60">
+    <p>
+      &copy; {year} {site.name} · {site.altName} ·
+      <a href={url('/privacy')} class="underline hover:text-white/80">Privacy Policy</a>
+    </p>
+    <p class="mt-1">
+      {legal.companyName} is registered in {legal.jurisdiction}, company no. {legal.companyNumber}. Registered
+      office: {legal.registeredOffice}.
+    </p>
   </div>
 </footer>

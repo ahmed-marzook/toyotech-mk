@@ -3,6 +3,7 @@
 ## Business Overview
 
 - **Name:** Toyotech MOT Centre / Toyotech Hybrid Autos
+- **Legal entity:** Toyotech Hybrid Autos Limited, company no. 16013011, registered in England and Wales, incorporated 11 October 2024, SIC 45200 (Maintenance and repair of motor vehicles). Registered office: Unit 3, 80-86 Tavistock Street, Bletchley, Milton Keynes, MK2 2PB. Source: [Companies House](https://find-and-update.company-information.service.gov.uk/company/16013011). Lives in `legal` in `src/config/site.ts`, disclosed in the Footer and the Privacy Policy's "Who we are" section (Companies Act 2006 trading disclosures + Provision of Services Regulations 2009).
 - **Specialty:** Hybrid vehicle servicing, plus general MOTs and servicing for all cars
 - **Address:** No. 80-86, Tavistock Street, Bletchley, Milton Keynes, MK22PB
 - **Contact:** Mumthaz — 07450 277250 / 01908 639629 (other numbers seen on signage: 07450 011199, 07450 281120 4)
