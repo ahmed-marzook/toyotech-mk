@@ -10,6 +10,8 @@
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WhatsAppButton from '../components/WhatsAppButton.jsx';
+import BreadcrumbSchema from '../components/BreadcrumbSchema.astro';
+import FAQSchema from '../components/FAQSchema.astro';
 import { Activity, BatteryCharging, Gauge, ShieldCheck, TriangleAlert, Wrench } from 'lucide-react';
 import { url } from '../config/site';
 
@@ -69,12 +71,38 @@ const models = [
   'Lexus CT 200h, IS 300h, NX and RX',
   'Honda Insight, Jazz and Civic IMA',
 ];
+
+const faqs = [
+  {
+    question: 'How long do hybrid batteries last?',
+    answer:
+      "There's no fixed lifespan — well-maintained packs commonly outlast the rest of the car, but performance fades gradually as cells age. That's why symptoms like reduced fuel economy or the engine running more often usually show up long before a total failure.",
+  },
+  {
+    question: 'Can a hybrid battery be repaired instead of replaced?',
+    answer:
+      "Often, yes. A failing pack usually comes down to a small number of weak modules or a cooling fault, and fixing that costs far less than replacing the whole pack. We'll diagnose it properly rather than assuming it needs a full replacement.",
+  },
+  {
+    question: 'Do you work on my hybrid model?',
+    answer:
+      "Toyota and Lexus hybrids are our speciality, and we cover Honda hybrids too. If your model isn't listed above, ask — the answer is usually yes.",
+  },
+  {
+    question: 'How much does a hybrid battery repair or replacement cost?',
+    answer:
+      'It depends on the vehicle and whether the pack needs repairing or replacing. Message us your registration and what the car is doing on WhatsApp and we will give you a quote.',
+  },
+];
 ---
 
 <BaseLayout
   title="Hybrid Battery Repair & Replacement in Milton Keynes | Toyotech"
   description="Hybrid battery health checks, diagnostics, repair and replacement in Bletchley, Milton Keynes. Toyota Prius, Auris, Yaris, Lexus and Honda hybrid specialists. Genuine parts and warranty."
 >
+  <BreadcrumbSchema slot="head" items={[{ name: 'Hybrid Battery', path: '/hybrid-battery' }]} />
+  <FAQSchema slot="head" items={faqs} />
+
   <section class="bg-navy text-white">
     <div class="mx-auto max-w-6xl px-4 py-12">
       <p class="font-bold tracking-wide text-brand-green uppercase">Our speciality</p>
@@ -166,6 +194,22 @@ const models = [
           found and explain the options before anything is replaced.
         </p>
       </div>
+    </div>
+  </section>
+
+  <section class="bg-white" aria-labelledby="faq-heading">
+    <div class="mx-auto max-w-3xl px-4 py-12">
+      <h2 id="faq-heading" class="text-3xl font-black text-navy">Hybrid battery questions we get asked a lot</h2>
+      <dl class="mt-6 flex flex-col gap-6">
+        {
+          faqs.map((faq) => (
+            <div data-reveal>
+              <dt class="text-lg font-bold text-navy">{faq.question}</dt>
+              <dd class="mt-1 text-slate-600">{faq.answer}</dd>
+            </div>
+          ))
+        }
+      </dl>
     </div>
   </section>
 
