@@ -1,0 +1,192 @@
+AI search (GEO) — actions that can't be done from the codebase
+===============================================================
+
+These notes sit alongside GBP-SEO-NOTES.txt. They cover what makes
+Gemini, ChatGPT, Perplexity, Claude and Apple Intelligence recommend
+Toyotech for prompts like "hybrid garage near me in Milton Keynes" or
+"where can I get my Prius battery checked in Bletchley".
+
+The website side is in the code: /llms.txt, AI crawlers allowed in
+robots.txt, a richer AutoRepair schema, a Service schema on
+/hybrid-battery/, and service areas. Everything below needs
+Mumthaz's accounts, answers or paperwork.
+
+How the assistants get their facts
+-----------------------------------
+- Gemini / Google AI Overviews: the Google Business Profile, plus the site.
+- ChatGPT search and Microsoft Copilot: mostly Bing's index, so Bing
+  Places matters much more than it used to.
+- Apple Intelligence / Siri / Apple Maps: Apple Business Connect.
+- Perplexity and Claude: their own crawlers plus the web generally.
+  Consistent directory citations and descriptive reviews do most of
+  the work.
+Each one cross-checks name, address and phone (NAP) across sources.
+Consistency matters more than quantity.
+
+1. Questions for Mumthaz (these unblock site changes)
+------------------------------------------------------
+Answers to these can go straight onto the site and into the schema.
+None of it is on the site yet, because we don't publish unconfirmed
+claims.
+[ ] DVSA MOT testing station number, and which classes are tested
+    (Class 4 = cars and vans up to 3,000kg; Class 7 = goods vehicles
+    3,000–3,500kg). If Class 7 is tested, a /class-7-mot/ page and a
+    schema entry are worth adding.
+[ ] Technician qualifications: IMI Level 2/3/4 Electric/Hybrid Vehicle,
+    IMI Accreditation, any manufacturer training (e.g. Toyota hybrid).
+    These are strong specialist signals and go in the page text and
+    the schema's hasCredential.
+[ ] Trade memberships: RMI / Independent Garage Association, Motor
+    Ombudsman (Motor Industry Code of Practice for Service and Repair),
+    Trust My Garage, Good Garage Scheme, Bosch Car Service, etc.
+[ ] Diagnostic equipment used, by brand and model (e.g. Snap-on, Bosch
+    KTS, Autel, Launch, Toyota Techstream, a hybrid battery
+    tester/balancer). Naming real tools on /hybrid-battery/ is concrete
+    proof of specialism, but only if it's true.
+[ ] Hybrid battery approach: module repair, reconditioning,
+    refurbished packs, new genuine packs? Warranty length on each?
+[ ] Confirm the hybrid model list on /hybrid-battery/ and the service
+    areas list (src/config/site.ts → serviceAreas).
+[ ] "Fenny Stratford, Bletchley" vs "Bletchley": pick one address
+    wording (see GBP-SEO-NOTES.txt) and use it everywhere below.
+[ ] Opening hours: the site's fallback says 09:00–18:00, 7 days.
+    Confirm this matches the Google Sheet and GBP.
+[ ] Anything else AI assistants get asked about: courtesy car,
+    collection/delivery, card payments, parking, EV servicing,
+    price for a standard MOT/service. Anything confirmed becomes FAQ
+    content.
+
+2. Google Business Profile, entity-level detail
+------------------------------------------------
+(Adds to the GBP checklist in GBP-SEO-NOTES.txt.)
+[ ] Primary category: "Auto repair shop" (or whichever is closest).
+    Secondary categories: choose from what GBP's category search
+    offers in the UK, e.g. "MOT testing station" / "Vehicle inspection
+    service", "Brake shop", "Auto electrical service", "Auto air
+    conditioning service", "Car battery store" or "Hybrid/electric
+    vehicle repair" if listed, "Oil change service", "Transmission
+    shop", "Auto glass shop", "Car service station". Only add ones
+    that are really offered.
+[ ] Services tab: use explicit, searchable names rather than generic
+    ones, e.g. "Class 4 MOT", "MOT repairs", "Hybrid battery health
+    check", "Hybrid battery repair", "Hybrid battery replacement",
+    "Hybrid inverter coolant service", "Hybrid system diagnostics",
+    "Engine diagnostics", "Interim service", "Full service", "Brake
+    pads and discs", "Air-con regas", "Clutch replacement".
+    Add a one-line description to each, and a price or "from" price
+    where one exists. Add "Class 7 MOT" only if confirmed (section 1).
+[ ] Service area: list the same places as the site. Currently
+    Bletchley, Fenny Stratford, Water Eaton, Central Milton Keynes,
+    Wolverton, Stony Stratford, Newport Pagnell, Milton Keynes. Add
+    more if customers regularly come from further away (e.g. Leighton
+    Buzzard, Buckingham).
+[ ] Attributes: set everything that applies (e.g. "Onsite services",
+    payment types, wheelchair accessible, "Identifies as ...").
+[ ] Products tab (optional): add "Hybrid battery health check" as a
+    product card with a photo and price. These show up in AI answers.
+
+3. Reviews that tell an AI what you're good at
+-----------------------------------------------
+AI models read the text of reviews, not just the stars. "Great garage"
+helps the rating. "Fixed the hybrid battery on my 2012 Prius and it
+passed its MOT" tells the model what Toyotech is good at.
+
+Google's rules (breaking them can get reviews removed or the profile
+suspended):
+- Don't offer anything in exchange for a review (discount, freebie).
+- Don't only ask happy customers ("review gating"). Ask everyone.
+- Don't write the review for them or give them text to copy.
+  Suggesting what they could mention is fine.
+- Staff, family and friends shouldn't review.
+
+Suggested WhatsApp follow-up, sent after every job:
+
+  Hi [name], thanks for bringing your [car] in today. If you have a
+  minute, a Google review really helps a small local garage like
+  ours: [review link]
+  If you can, it helps other drivers to mention your car and what we
+  did (for example the MOT, a service or hybrid battery work).
+  Thanks, Mumthaz – Toyotech
+
+[ ] Get the direct "write a review" link from GBP (Home → "Ask for
+    reviews") and save it as a WhatsApp quick reply.
+[ ] Print a small QR card with the review link for the counter and
+    for handing over with keys.
+[ ] Reply to every review, and name the service in the reply where
+    it fits naturally ("Glad the Auris hybrid battery repair sorted
+    it"). Replies are read too.
+[ ] Once new reviews come in, swap the site's curated quotes
+    (src/content/reviews.ts) for ones that mention specific cars and
+    jobs, and update the rating/count there.
+
+4. Citations: corroborate the entity everywhere
+------------------------------------------------
+Use exactly the same name, address, phone and website on every one.
+Once a listing is live, send the URL over: it goes into the schema's
+sameAs list (src/components/LocalBusinessSchema.astro), which links
+the entity together.
+Priority (these feed AI assistants directly):
+[ ] Bing Places for Business (bingplaces.com). You can import from
+    GBP in a few clicks. Feeds ChatGPT search and Copilot.
+[ ] Apple Business Connect (businessconnect.apple.com). Claim the
+    Apple Maps place card; feeds Siri, Apple Maps and Apple
+    Intelligence.
+[ ] DVSA MOT station record: check that the registered address and
+    trading name match GBP exactly. The "find an MOT centre" service
+    uses this.
+Automotive directories:
+[ ] WhoCanFixMyCar
+[ ] BookMyGarage
+[ ] Motor Ombudsman garage finder (needs accreditation, see section 1)
+[ ] Good Garage Scheme / Trust My Garage (needs membership)
+[ ] AutoTrader garage listings (if offered in the area)
+[ ] Autoonline / Servicing Stop / ClickMechanic partner listing (optional)
+General:
+[ ] Yell, Thomson Local, Scoot, Cylex, FreeIndex, Checkatrade,
+    Nextdoor business page
+[ ] Facebook Business page / Instagram: an entity citation only (the
+    site itself deliberately has no social links; these would only
+    appear in sameAs if Mumthaz wants them)
+[ ] Keep a simple spreadsheet of every listing, its login and the
+    exact NAP used, so changes (e.g. hours) get updated everywhere.
+
+5. Getting mentioned elsewhere
+-------------------------------
+AI models trust businesses that other sites talk about.
+[ ] Local press / MK Citizen / MK community Facebook groups: a short
+    piece on hybrid battery repair as a cheaper alternative to
+    replacement is a real local-interest story.
+[ ] Toyota/Lexus/Prius owners' forums and Facebook groups (e.g. Prius
+    Owners UK). Being recommended by name in those threads is exactly
+    what Perplexity and ChatGPT pick up.
+[ ] Local business directories: Milton Keynes Council business
+    directory, MK Chamber of Commerce, Bletchley business groups.
+
+6. Future site pages (once section 1 is answered)
+---------------------------------------------------
+These are already possible in code, but each needs real, confirmed
+content to be worth publishing. A thin page hurts more than it helps.
+- /hybrid-servicing/: hybrid system servicing (inverter coolant,
+  battery cooling fan/filter, brake care on hybrids), with the
+  equipment used.
+- /class-7-mot/: only if Class 7 is tested.
+- /mot/ (MOT booking page, distinct from the /mot-checks/ guide):
+  price, classes, retest policy, what happens if it fails.
+- Model pages, e.g. /toyota-prius-hybrid-battery/, once there are
+  enough real jobs/reviews to say something specific.
+- Qualifications/"About us" section with technician training and
+  memberships, marked up with hasCredential / memberOf.
+
+7. Checking it's working
+-------------------------
+- Every couple of months, ask ChatGPT (search on), Gemini,
+  Perplexity and Siri: "best hybrid garage in Milton Keynes", "where
+  can I get my Prius battery checked in Bletchley", "MOT centre open
+  Sunday Bletchley". Note whether Toyotech appears and what it says.
+  Fix any wrong facts at the source they came from.
+- Bing Webmaster Tools + Google Search Console: verify the domain and
+  submit the sitemap (https://toyotech.co.uk/sitemap-index.xml). Bing
+  Webmaster Tools also reports on Copilot/AI referrals.
+- Check the schema with Google's Rich Results Test and
+  validator.schema.org after each deploy that touches it.
+- https://toyotech.co.uk/llms.txt should be readable and correct.
