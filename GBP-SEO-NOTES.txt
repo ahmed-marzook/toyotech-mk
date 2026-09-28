@@ -13,7 +13,7 @@ The Google Business Profile listing shows the address locality as
 Companies House registration both just say "Bletchley". Confirm with
 Mumthaz which is correct and make all three match exactly — inconsistent
 address wording across citations hurts local ranking more than any single
-choice of wording.
+choice of wording. Record the answer in ANSWERS.txt (Q04).
 
 Google Business Profile checklist
 ----------------------------------

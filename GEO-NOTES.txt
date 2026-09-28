@@ -25,85 +25,9 @@ Consistency matters more than quantity.
 
 1. Questions for Mumthaz
 -------------------------
-1a. Facts and claims (these unblock site changes)
-Answers to these can go straight onto the site and into the schema.
-None of it is on the site yet, because we don't publish unconfirmed
-claims.
-[ ] DVSA MOT testing station number, and which classes are tested
-    (Class 4 = cars and vans up to 3,000kg; Class 7 = goods vehicles
-    3,000–3,500kg). If Class 7 is tested, a /class-7-mot/ page and a
-    schema entry are worth adding.
-[ ] Technician qualifications: IMI Level 2/3/4 Electric/Hybrid Vehicle,
-    IMI Accreditation, any manufacturer training (e.g. Toyota hybrid).
-    These are strong specialist signals and go in the page text and
-    the schema's hasCredential.
-[ ] Trade memberships: RMI / Independent Garage Association, Motor
-    Ombudsman (Motor Industry Code of Practice for Service and Repair),
-    Trust My Garage, Good Garage Scheme, Bosch Car Service, etc.
-[ ] Manufacturer approvals and warranty schemes (e.g. a warranty
-    provider backing the "genuine parts and warranty" promise). Can
-    their logos be displayed, and are there usage rules for them?
-[ ] Diagnostic equipment used, by brand and model (e.g. Snap-on, Bosch
-    KTS, Autel, Launch, Toyota Techstream, a hybrid battery
-    tester/balancer). Naming real tools on /hybrid-battery/ is concrete
-    proof of specialism, but only if it's true.
-[ ] Hybrid battery approach: module repair, reconditioning,
-    refurbished packs, new genuine packs? Warranty length on each?
-[ ] Confirm the hybrid model list on /hybrid-battery/ and the service
-    areas list (src/config/site.ts → serviceAreas).
-[ ] "Fenny Stratford, Bletchley" vs "Bletchley": pick one address
-    wording (see GBP-SEO-NOTES.txt) and use it everywhere below.
-[ ] Opening hours: the site's fallback says 09:00–18:00, 7 days.
-    Confirm this matches the Google Sheet and GBP.
-[ ] Anything else AI assistants get asked about: courtesy car,
-    collection/delivery, card payments, parking, EV servicing,
-    price for a standard MOT/service. Anything confirmed becomes FAQ
-    content.
-
-1b. Site and business decisions
-(Some of these are already decided in the current build. They're
-noted so Mumthaz can confirm or change them.)
-[ ] Social media: is there a Facebook/Instagram page being kept off
-    the site on purpose, or should social links be planned for later?
-    Currently the site has no social links by design (CLAUDE.md).
-    Either way, a verified page can still go in the schema's sameAs
-    as an entity citation (section 4).
-[ ] Brand guidelines beyond the logo: a preferred font or colours,
-    or is that open? The current build uses the red/navy palette
-    taken from the signage.
-[ ] Prices on the Services page: show prices or "from" prices, or
-    just "call/WhatsApp for a quote"? Published prices also help AI
-    answers ("how much is an MOT in Bletchley") and the GBP Services
-    tab.
-[ ] Booking: a short form (name, car reg, issue) that pre-fills the
-    WhatsApp message, or keep the plain "message us" button? Either
-    is possible on a static site, and a form still needs no server.
-[ ] Accreditations to display: MOT testing station number,
-    manufacturer approvals, warranty scheme logos (see 1a).
-[ ] Domain: the site is set up for toyotech.co.uk (public/CNAME).
-    Who owns and manages it: which registrar, whose account, and when
-    does it renew? Make sure Mumthaz (or the business) holds the
-    login, not only whoever registered it.
-[ ] Languages: English only, or are other languages worth
-    considering for the local customer base? If so, which?
-[ ] Photos: can workshop, team, and before/after job photos be taken
-    soon, so the placeholders aren't up for long? PHOTO-SHOT-LIST.txt
-    has the list. The same photos should go on GBP.
-[ ] Google Reviews block: is a hand-picked set updated manually fine
-    for now (current approach, src/content/reviews.ts), or should it
-    auto-update? Auto-updating needs a Google Places API key and a
-    scheduled rebuild.
-[ ] Opening-hours Google Sheet: who updates it going forward? Would
-    a short written guide or screen-recorded video on editing it be
-    useful?
-[ ] Analytics: cookieless Cloudflare Web Analytics is already
-    installed, and counts visits and pages. Does Mumthaz want to see
-    those numbers, and would it be useful to also count taps on the
-    WhatsApp and call buttons (needs a small addition, e.g. Plausible
-    or GA custom events)? GA would need a cookie consent banner;
-    Cloudflare and Plausible don't.
-[ ] Style reference: any competitor or other garage sites whose look
-    and feel Mumthaz likes?
+All open questions (facts, credentials, decisions, logins) now live in
+ANSWERS.txt on this branch, with a space to write each answer. Record
+answers there so a Claude Code agent can pick them up and apply them.
 
 2. Google Business Profile, entity-level detail
 ------------------------------------------------
@@ -123,7 +47,7 @@ noted so Mumthaz can confirm or change them.)
     "Engine diagnostics", "Interim service", "Full service", "Brake
     pads and discs", "Air-con regas", "Clutch replacement".
     Add a one-line description to each, and a price or "from" price
-    where one exists. Add "Class 7 MOT" only if confirmed (section 1).
+    where one exists. Add "Class 7 MOT" only if confirmed (ANSWERS.txt Q06).
 [ ] Service area: list the same places as the site. Currently
     Bletchley, Fenny Stratford, Water Eaton, Central Milton Keynes,
     Wolverton, Stony Stratford, Newport Pagnell, Milton Keynes. Add
@@ -186,7 +110,7 @@ Priority (these feed AI assistants directly):
 Automotive directories:
 [ ] WhoCanFixMyCar
 [ ] BookMyGarage
-[ ] Motor Ombudsman garage finder (needs accreditation, see section 1)
+[ ] Motor Ombudsman garage finder (needs accreditation, ANSWERS.txt Q08)
 [ ] Good Garage Scheme / Trust My Garage (needs membership)
 [ ] AutoTrader garage listings (if offered in the area)
 [ ] Autoonline / Servicing Stop / ClickMechanic partner listing (optional)
@@ -211,7 +135,7 @@ AI models trust businesses that other sites talk about.
 [ ] Local business directories: Milton Keynes Council business
     directory, MK Chamber of Commerce, Bletchley business groups.
 
-6. Future site pages (once section 1 is answered)
+6. Future site pages (once ANSWERS.txt is filled in)
 ---------------------------------------------------
 These are already possible in code, but each needs real, confirmed
 content to be worth publishing. A thin page hurts more than it helps.

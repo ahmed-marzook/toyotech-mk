@@ -1,0 +1,326 @@
+Toyotech: open questions and answers
+====================================
+
+ONE place to record answers from Mumthaz. Fill in the ANSWER: line under
+each question (as many lines as you need, indented under ANSWER:). Leave
+it blank if still unknown. Write "N/A" or "No" rather than deleting a
+question.
+
+The questions come from GEO-NOTES.txt, GBP-SEO-NOTES.txt and
+MEETING-PLAN.txt. MEETING-PLAN.txt is the running order for the meeting;
+this file is where the final answers go.
+
+Example of a filled-in answer:
+
+  Q01  Fourth phone number
+       ...
+       ANSWER: 07502 811204 is correct, it's Mumthaz's second mobile.
+       STATUS: open
+
+
+----------------------------------------------------------------------
+FOR THE CLAUDE CODE AGENT (how to pick these up)
+----------------------------------------------------------------------
+1. This file lives only on the claude/local-seo-gbp-improvements branch.
+   Never merge it, or any other notes file, into main.
+2. Work through every question whose ANSWER: is filled in and whose
+   STATUS: is "open".
+3. Make the site changes on a branch cut from main (not this branch),
+   using the "Affects:" line as the starting point. Follow CLAUDE.md.
+   Only publish what the answer actually says: don't embellish claims.
+4. If an answer is unclear or contradicts something else, don't guess.
+   Change STATUS to "needs clarification: <what's unclear>" and tell
+   the user.
+5. Answers that need no code change (e.g. who owns a login): record
+   them and set STATUS to "noted".
+6. After applying, set STATUS to "applied: <PR link or commit>" here,
+   and update CLAUDE.md where it records the fact (e.g. phone numbers,
+   hours, address).
+7. Commit the updated ANSWERS.txt to this branch, then summarise to the
+   user what changed and which questions are still open.
+
+
+======================================================================
+A. MUST-HAVES
+======================================================================
+
+Q01  Fourth phone number
+     The site shows 07502 811204, but the project notes (CLAUDE.md)
+     say 07450 281120 4 from the signage. Which is correct?
+     Affects: src/config/site.ts (phones), CLAUDE.md
+     ANSWER:
+     STATUS: open
+
+Q02  Phone numbers: which are live, and what is each one for?
+       07450 277250  (site label: Mobile / WhatsApp)
+       01908 639629  (Landline)
+       07450 011199  (Mobile)
+       07502 811204  (Mobile)
+     Which should be the main number for calls? Should any be removed?
+     Affects: src/config/site.ts (phones order and labels), schema
+     telephone, llms.txt, GBP
+     ANSWER:
+     STATUS: open
+
+Q03  Opening hours, day by day
+     Site backup hours say 09:00-18:00, 7 days. Is that right? Do the
+     Google Sheet and the Google listing match?
+     Affects: src/config/site.ts (fallbackHours), the Google Sheet, GBP
+     ANSWER:
+       Monday:
+       Tuesday:
+       Wednesday:
+       Thursday:
+       Friday:
+       Saturday:
+       Sunday:
+       Bank holidays:
+     STATUS: open
+
+Q04  Address wording
+     "Bletchley" (site, Companies House) or "Fenny Stratford, Bletchley"
+     (Google listing)? Must be identical everywhere.
+     Affects: src/config/site.ts (address), LocalBusinessSchema, GBP and
+     every directory listing
+     ANSWER:
+     STATUS: open
+
+Q05  DVSA MOT testing station number
+     Affects: could be shown on the site and in the schema as an
+     identifier; used to check the DVSA record matches GBP
+     ANSWER:
+     STATUS: open
+
+Q06  MOT classes tested
+     Class 4 = cars and vans up to 3,000kg. Class 7 = goods vehicles
+     3,000-3,500kg. Any others?
+     Affects: src/content/services.ts (MOT description), knowsAbout in
+     LocalBusinessSchema, possible /class-7-mot/ page
+     ANSWER:
+     STATUS: open
+
+
+======================================================================
+B. FACTS AND CREDENTIALS (nothing goes on the site until confirmed)
+======================================================================
+
+Q07  Technician qualifications
+     e.g. IMI Level 2/3/4 Electric/Hybrid Vehicle, IMI Accreditation,
+     Toyota or other manufacturer training. Names and levels.
+     Affects: Hybrid Battery page, Services page, schema hasCredential
+     ANSWER:
+     STATUS: open
+
+Q08  Trade memberships
+     RMI / Independent Garage Association, Motor Ombudsman, Trust My
+     Garage, Good Garage Scheme, Bosch Car Service, other?
+     Affects: site text and logos, schema memberOf, directory listings
+     ANSWER:
+     STATUS: open
+
+Q09  Manufacturer approvals or warranty schemes
+     Any? Can their logos be shown on the site (any usage rules)?
+     Affects: site footer or a trust strip, schema
+     ANSWER:
+     STATUS: open
+
+Q10  Warranty terms
+     The site says "genuine parts and warranty". What is the warranty
+     on parts and on labour? How long?
+     Affects: Services page callout, Hybrid Battery page, FAQs
+     ANSWER:
+     STATUS: open
+
+Q11  Diagnostic equipment, by brand and model
+     e.g. Snap-on, Bosch KTS, Autel, Launch, Toyota Techstream, hybrid
+     battery tester or balancer.
+     Affects: Hybrid Battery page, Services page (Diagnostics)
+     ANSWER:
+     STATUS: open
+
+Q12  Hybrid battery approach
+     Module repair? Reconditioning? Refurbished packs? New genuine packs?
+     Warranty on each?
+     Affects: src/pages/hybrid-battery.astro (steps and FAQs)
+     ANSWER:
+     STATUS: open
+
+Q13  Hybrid models worked on
+     Current list: Toyota Prius, Prius+ and Prius Plug-in; Toyota Auris,
+     Yaris, C-HR, Corolla and RAV4 hybrids; Lexus CT 200h, IS 300h, NX
+     and RX; Honda Insight, Jazz and Civic IMA. Add or remove?
+     Affects: src/content/hybrid-models.ts
+     ANSWER:
+     STATUS: open
+
+Q14  Service areas (where customers come from)
+     Current list: Bletchley, Fenny Stratford, Water Eaton, Central
+     Milton Keynes, Wolverton, Stony Stratford, Newport Pagnell, Milton
+     Keynes. Add or remove?
+     Affects: src/config/site.ts (serviceAreas), GBP service area
+     ANSWER:
+     STATUS: open
+
+Q15  Services list
+     Anything wrong, missing, or not offered in the 14 services on the
+     Services page? Any to feature first on the homepage?
+     Affects: src/content/services.ts
+     ANSWER:
+     STATUS: open
+
+Q16  Prices
+     Price of a standard MOT, interim service, full service, hybrid
+     battery health check. Show prices on the site, "from" prices, or
+     "message for a quote"?
+     Affects: Services page, schema offers, GBP Services tab
+     ANSWER:
+     STATUS: open
+
+Q17  Extras
+     Courtesy car? Collection and delivery? Card payments? Parking?
+     EV (fully electric) servicing? Wait while you wait?
+     Affects: FAQs, schema, GBP attributes
+     ANSWER:
+     STATUS: open
+
+Q18  Common customer questions
+     What do customers ask most often on the phone or WhatsApp?
+     Affects: new FAQ entries (and FAQPage schema)
+     ANSWER:
+     STATUS: open
+
+Q19  Homepage claims still true every week?
+     "Open 7 days a week" and "Same-day bookings".
+     Affects: src/pages/index.astro (highlights, intro), site.description
+     ANSWER:
+     STATUS: open
+
+
+======================================================================
+C. SITE AND BUSINESS DECISIONS
+======================================================================
+
+Q20  Business goals
+     What should the site do for the business? Which jobs to get more
+     of? Any work not wanted? Capacity for more bookings right now?
+     Affects: homepage order, featured services, copy emphasis
+     ANSWER:
+     STATUS: open
+
+Q21  Social media
+     Is there a Facebook or Instagram page? Add links later, or keep
+     off the site? (Currently no social links, by design.)
+     Affects: CLAUDE.md rule, footer, schema sameAs
+     ANSWER:
+     STATUS: open
+
+Q22  Brand guidelines and logo
+     Preferred font or colours beyond the signage red and navy? Is
+     there a logo file with a transparent background?
+     Affects: src/styles/global.css, src/assets/logo.png
+     ANSWER:
+     STATUS: open
+
+Q23  Contact name and WhatsApp message
+     Is "Ask for Mumthaz" OK? Is the pre-filled WhatsApp message OK?
+     ("Hello Toyotech, I am interested in booking a service or MOT.
+     Could you let me know your availability?")
+     Affects: src/config/site.ts (contactName, whatsappMessage)
+     ANSWER:
+     STATUS: open
+
+Q24  Booking form
+     A short form (name, car reg, issue) that pre-fills the WhatsApp
+     message, or keep the plain WhatsApp button?
+     Affects: new component on Contact / Home
+     ANSWER:
+     STATUS: open
+
+Q25  Google reviews block
+     Fine to update by hand (current), or should it auto-update? (Needs
+     a Google Places API key and scheduled rebuilds.)
+     Affects: src/content/reviews.ts or a new build-time fetch
+     ANSWER:
+     STATUS: open
+
+Q26  Opening-hours Google Sheet
+     Who will update it? Would a short written guide or video help?
+     Affects: possibly a HOURS-SHEET-GUIDE on this branch
+     ANSWER:
+     STATUS: open
+
+Q27  Visitor stats
+     Want to see the Cloudflare visitor numbers? Also count taps on the
+     WhatsApp and call buttons? (Google Analytics would need a cookie
+     banner; Cloudflare and Plausible don't.)
+     Affects: src/components/Analytics.astro, privacy policy
+     ANSWER:
+     STATUS: open
+
+Q28  Languages
+     English only, or other languages for the local customer base?
+     Which?
+     Affects: site structure (i18n)
+     ANSWER:
+     STATUS: open
+
+Q29  Style references
+     Any garage or competitor sites whose look Mumthaz likes? (URLs)
+     Affects: design direction
+     ANSWER:
+     STATUS: open
+
+
+======================================================================
+D. LOGINS AND LISTINGS
+======================================================================
+
+Q30  Domain toyotech.co.uk
+     Registrar? Whose account? Renewal date?
+     Affects: nothing in code (record only)
+     ANSWER:
+     STATUS: open
+
+Q31  Google Business Profile access
+     Who is the owner? Who are managers? Can you be added as a manager?
+     Affects: nothing in code (record only)
+     ANSWER:
+     STATUS: open
+
+Q32  Opening-hours Google Sheet account
+     Whose Google account owns the Sheet?
+     Affects: nothing in code (record only)
+     ANSWER:
+     STATUS: open
+
+Q33  Business email address
+     Any business email to use on listings (and possibly the site)?
+     Affects: src/config/site.ts, schema email, directory listings
+     ANSWER:
+     STATUS: open
+
+Q34  Existing directory listings
+     Listed anywhere already? (Bing Places, Apple Business Connect,
+     Yell, WhoCanFixMyCar, BookMyGarage, Checkatrade, etc.) Paste URLs.
+     Affects: schema sameAs in src/components/LocalBusinessSchema.astro
+     ANSWER:
+     STATUS: open
+
+Q35  Google Business Profile categories
+     What primary and secondary categories are set today?
+     Affects: GBP only (see GEO-NOTES.txt section 2)
+     ANSWER:
+     STATUS: open
+
+
+======================================================================
+E. PHOTOS
+======================================================================
+
+Q36  Photos
+     Is the team happy to be photographed? Any before/after job photos
+     already on Mumthaz's phone? When can the shot list be done?
+     Affects: src/assets/hero.jpg, workshop.jpg, team.jpg (see
+     PHOTO-SHOT-LIST.txt and photo-examples/)
+     ANSWER:
+     STATUS: open

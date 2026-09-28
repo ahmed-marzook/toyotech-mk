@@ -6,8 +6,10 @@ confirm the facts that are still unconfirmed, agree decisions, and sort
 out logins and photos. Tick boxes as you go and write answers on the
 lines underneath each section.
 
-Full background for each question: GEO-NOTES.txt and GBP-SEO-NOTES.txt
-(this branch).
+Record the final answers in ANSWERS.txt (this branch). Every question
+has an ID (Q01, Q02 ...) and an ANSWER: line, so a Claude Code agent
+can pick them up and update the site. Background: GEO-NOTES.txt and
+GBP-SEO-NOTES.txt.
 
 
 DON'T LEAVE WITHOUT
@@ -299,5 +301,6 @@ Follow-up date: ______________
 
 AFTER THE MEETING
 -----------------
-Paste your answers back to Claude. That's enough to update the site
-config, the structured data, llms.txt and the notes in one go.
+Copy your notes into ANSWERS.txt (fill in each ANSWER: line), commit
+it to this branch, then ask Claude Code: "Apply the answers in
+ANSWERS.txt on the claude/local-seo-gbp-improvements branch."
