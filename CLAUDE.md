@@ -207,7 +207,7 @@ The goal: be the garage that ChatGPT, Gemini, Perplexity, Claude and Apple Intel
 - **One business entity**: the full `AutoRepair` block on Home (`LocalBusinessSchema.astro`) uses `@id` `…/#business`. Other pages point back to it through `businessRef()` in `src/lib/business-schema.ts`, e.g. the `Service` block on `/hybrid-battery/` (`ServiceSchema.astro`). The Home block also carries `legalName`, the Companies House `identifier`, `foundingDate`, every phone number as a `contactPoint`, `areaServed`, and `knowsAbout` with the hybrid models.
 - **Service areas**: `serviceAreas` in `site.ts` feeds the schema, llms.txt and the visible "Areas we cover" line on Contact. Keep it in step with the GBP service-area list.
 - **Build-time hours**: `src/lib/build-hours.ts`. The JSON-LD and llms.txt read hours at build time, because crawlers don't run the client-side widget.
-- **Not faked**: certifications (IMI, RMI, Motor Ombudsman), diagnostic equipment brands and Class 7 MOT stay off the site until Mumthaz confirms them. See `GEO-NOTES.txt` on the `claude/local-seo-gbp-improvements` branch for the off-site actions.
+- **Not faked**: certifications (IMI, RMI, Motor Ombudsman), diagnostic equipment brands and Class 7 MOT stay off the site until Mumthaz confirms them. Owner questions and off-site actions (`GEO-NOTES.txt`, `GBP-SEO-NOTES.txt`) live only on the `claude/local-seo-gbp-improvements` branch. Keep notes files off `main`.
 
 ## Future Ideas (not in initial build)
 
