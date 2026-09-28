@@ -33,7 +33,7 @@
 ## Pages
 
 1. **Home**
-   - Hero: "MOT Centre is Open" banner style, same-day bookings CTA
+   - Hero: a plain introduction (eyebrow, "Your local garage for MOTs, servicing and hybrid repairs in Milton Keynes" h1, short intro paragraph), WhatsApp + call CTAs. Replaced the earlier "MOT Centre is Open" banner-style headline
    - Quick highlights: 7 days a week, hybrid specialists, same-day bookings
    - "What we do" services grid beside the opening hours widget: 6 featured services on mobile/tablet, all services on desktop (lg+) so it fills the column next to the hours card
    - Opening hours widget (see below)
