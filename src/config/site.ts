@@ -33,7 +33,27 @@ export const legal = {
   companyNumber: '16013011',
   jurisdiction: 'England and Wales',
   registeredOffice: 'Unit 3, 80-86 Tavistock Street, Bletchley, Milton Keynes, MK2 2PB',
+  /** ISO date of incorporation (Companies House) — schema.org foundingDate */
+  incorporated: '2024-10-11',
 };
+
+/**
+ * Areas the workshop serves, used for schema.org `areaServed`, llms.txt and
+ * the Contact page's "Areas we cover" line. AI assistants match a prompt like
+ * "hybrid garage near Newport Pagnell" against these, so list real nearby
+ * places customers come from. Confirm with Mumthaz and keep in step with the
+ * Google Business Profile's service-area list.
+ */
+export const serviceAreas = [
+  'Bletchley',
+  'Fenny Stratford',
+  'Water Eaton',
+  'Central Milton Keynes',
+  'Wolverton',
+  'Stony Stratford',
+  'Newport Pagnell',
+  'Milton Keynes',
+];
 
 /** Google Business listing (Toyotech Hybrid Autos) */
 const googlePlaceId = 'ChIJdd_Of5tVdkgROhBlr-LHD4U';

@@ -2,49 +2,54 @@
 /**
  * JSON-LD structured data (schema.org AutoRepair, a LocalBusiness subtype)
  * for the Home page, so Google can show the map pin, hours and contact
- * details in search results.
+ * details in search results, and so AI assistants (Gemini, ChatGPT,
+ * Perplexity, Apple Intelligence) can pull the business out as a clean entity.
  *
- * Opening hours are read from the published Google Sheet at build time,
- * falling back to `fallbackHours` if the fetch fails. The on-page widget still
- * refetches client-side; this block refreshes on each deploy.
+ * Opening hours are read from the published Google Sheet at build time. The
+ * on-page widget still refetches client-side; this block refreshes on each deploy.
  *
  * No aggregateRating: Google ignores "self-serving" review markup a business
  * puts on its own site, and the rating already lives on the Business Profile.
  */
-import { site, address, phones, map, fallbackHours, OPENING_HOURS_CSV_URL, type HoursRow } from '../config/site';
+import { site, phones, map, legal } from '../config/site';
 import { services } from '../content/services';
 import { googleReviews } from '../content/reviews';
-import { parseHours } from './OpeningHours.jsx';
+import { hybridModels } from '../content/hybrid-models';
+import { getBuildHours } from '../lib/build-hours';
+import { siteOrigin, businessId, postalAddress, areaServed } from '../lib/business-schema';
 
-let hours: HoursRow[] = fallbackHours;
-try {
-  const res = await fetch(OPENING_HOURS_CSV_URL);
-  if (res.ok) hours = parseHours(await res.text());
-} catch {
-  // keep fallback hours
-}
-
-const origin = new URL(import.meta.env.BASE_URL, Astro.site).href;
+const hours = await getBuildHours();
+const origin = siteOrigin(Astro.site);
 
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'AutoRepair',
-  '@id': `${origin}#business`,
+  '@id': businessId(origin),
   name: site.name,
   alternateName: site.altName,
+  legalName: legal.companyName,
+  // Companies House registration — a hard identifier that lets crawlers
+  // corroborate the entity against the public register.
+  identifier: {
+    '@type': 'PropertyValue',
+    propertyID: 'Companies House company number',
+    value: legal.companyNumber,
+  },
+  foundingDate: legal.incorporated,
   description: site.description,
+  slogan: 'Expert care for all makes and models. Genuine parts and warranty.',
   url: origin,
   image: new URL('og-image.png', origin).href,
   logo: new URL('favicon.svg', origin).href,
   telephone: phones[0].tel,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '80-86 Tavistock Street',
-    addressLocality: 'Bletchley',
-    addressRegion: 'Milton Keynes',
-    postalCode: address.postcode,
-    addressCountry: 'GB',
-  },
+  contactPoint: phones.map((p) => ({
+    '@type': 'ContactPoint',
+    telephone: p.tel,
+    contactType: 'customer service',
+    areaServed: 'GB',
+    availableLanguage: 'en-GB',
+  })),
+  address: postalAddress,
   // Postcode centroid for MK2 2PB (postcodes.io) — replace with the exact pin from the Business Profile if needed
   geo: {
     '@type': 'GeoCoordinates',
@@ -54,8 +59,9 @@ const schema = {
   hasMap: map.directionsUrl,
   // Ties this site to the Google Business Profile entity (helps Google connect
   // the two, distinct from the aggregateRating we deliberately don't self-publish above).
-  sameAs: [googleReviews.listingUrl],
-  areaServed: ['Bletchley', 'Fenny Stratford', 'Milton Keynes'],
+  // Add other verified citations (Bing Places, Apple Business Connect, Yell, ...) here as they go live.
+  sameAs: [googleReviews.listingUrl, `https://find-and-update.company-information.service.gov.uk/company/${legal.companyNumber}`],
+  areaServed,
   openingHoursSpecification: hours
     .filter((h) => !h.closedFlag)
     .map((h) => ({
@@ -64,13 +70,25 @@ const schema = {
       opens: h.open,
       closes: h.close,
     })),
-  knowsAbout: services.map((s) => s.name),
+  knowsAbout: [
+    ...services.map((s) => s.name),
+    'Class 4 MOT (cars and light vans)',
+    'Hybrid vehicle servicing',
+    'Hybrid battery health checks',
+    'Hybrid inverter coolant service',
+    ...hybridModels,
+  ],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'Services',
     itemListElement: services.map((s) => ({
       '@type': 'Offer',
-      itemOffered: { '@type': 'Service', name: s.name, description: s.description },
+      itemOffered: {
+        '@type': 'Service',
+        name: s.name,
+        description: s.description,
+        url: new URL(s.slug === 'hybrid-battery' ? 'hybrid-battery/' : 'services/', origin).href,
+      },
     })),
   },
 };

@@ -198,6 +198,17 @@ Subtle, CSS-only motion — no JS animation libraries, no new npm dependencies. 
 - **Fast builds, small payloads** — Astro's static output already helps Core Web Vitals; keep images optimised (`astro:assets` for automatic resizing/format conversion) once real photos are added
 - **Google Business Profile** — since reviews/ratings are already pulled from the confirmed listing, make sure the site's NAP (name, address, phone) matches the Google Business Profile exactly — mismatches hurt local ranking
 
+## AI Search (GEO)
+
+The goal: be the garage that ChatGPT, Gemini, Perplexity, Claude and Apple Intelligence pick for local hybrid, MOT and repair prompts. What's in the code:
+
+- **`/llms.txt`** (`src/pages/llms.txt.ts`): a plain-Markdown business summary for AI crawlers (llmstxt.org convention). It's built from `site.ts` and `src/content/*`, so it can't drift from the pages. Don't put claims in it that aren't already on the site.
+- **`robots.txt`**: allows everything, and names the AI search/answer crawlers explicitly (GPTBot, OAI-SearchBot, PerplexityBot, ClaudeBot, Google-Extended, Applebot-Extended, Bingbot, ...).
+- **One business entity**: the full `AutoRepair` block on Home (`LocalBusinessSchema.astro`) uses `@id` `…/#business`. Other pages point back to it through `businessRef()` in `src/lib/business-schema.ts`, e.g. the `Service` block on `/hybrid-battery/` (`ServiceSchema.astro`). The Home block also carries `legalName`, the Companies House `identifier`, `foundingDate`, every phone number as a `contactPoint`, `areaServed`, and `knowsAbout` with the hybrid models.
+- **Service areas**: `serviceAreas` in `site.ts` feeds the schema, llms.txt and the visible "Areas we cover" line on Contact. Keep it in step with the GBP service-area list.
+- **Build-time hours**: `src/lib/build-hours.ts`. The JSON-LD and llms.txt read hours at build time, because crawlers don't run the client-side widget.
+- **Not faked**: certifications (IMI, RMI, Motor Ombudsman), diagnostic equipment brands and Class 7 MOT stay off the site until Mumthaz confirms them. Owner questions and off-site actions (`GEO-NOTES.txt`, `GBP-SEO-NOTES.txt`) live only on the `claude/local-seo-gbp-improvements` branch. Keep notes files off `main`.
+
 ## Future Ideas (not in initial build)
 
 - **Vehicle reg / MOT & tax status checker** — using the free DVLA Vehicle Enquiry Service API and DVSA MOT History API. Both are free to use with no per-lookup charges, but a static GitHub Pages site can't call them directly (API key can't live client-side), so this needs a small serverless proxy (Cloudflare Worker / Netlify Function) in front of it. Park this as a v2 feature once hosting supports it.
