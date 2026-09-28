@@ -1,0 +1,303 @@
+Toyotech: face-to-face meeting plan with Mumthaz
+=================================================
+
+Aim: find out what Mumthaz wants, walk through the live site together,
+confirm the facts that are still unconfirmed, agree decisions, and sort
+out logins and photos. Tick boxes as you go and write answers on the
+lines underneath each section.
+
+Full background for each question: GEO-NOTES.txt and GBP-SEO-NOTES.txt
+(this branch).
+
+
+DON'T LEAVE WITHOUT
+-------------------
+[ ] The 4th phone number. The site shows 07502 811204, but the project
+    notes say 07450 281120 4. One of them is wrong.
+[ ] Real opening hours. The site's backup hours say 09:00-18:00,
+    7 days. Check against the Google Sheet and the Google listing.
+[ ] Address wording: "Bletchley" or "Fenny Stratford, Bletchley"?
+    It must match the Google listing everywhere.
+[ ] MOT testing station number and which MOT classes are tested.
+[ ] Who owns the logins: domain, Google Business Profile, hours Sheet.
+
+
+AGENDA (about 1h35)
+-------------------
+  Prep     Before you go
+  5 min    1. Intro and goals
+  15 min   2. What Mumthaz wants
+  25 min   3. Walk through the live site
+  10 min   4. Facts and credentials
+  10 min   5. Site decisions
+  15 min   6. Google listing and AI search
+  5 min    7. Logins and ownership
+  5 min    8. Photos
+  5 min    9. Wrap-up
+
+
+BEFORE YOU GO
+-------------
+[ ] Live site open on phone and laptop: https://toyotech.co.uk
+    (Home, Services, MOT Checks, Hybrid Battery, Contact, Privacy)
+[ ] Google listing open (Toyotech Hybrid Autos). Note the address,
+    hours, categories and phone it shows today.
+[ ] Opening-hours Google Sheet link ready to show.
+[ ] This file and GEO-NOTES.txt printed or open.
+[ ] Phone charged, with space for photos (you may be able to take
+    some workshop photos while you're there).
+
+
+1. INTRO AND GOALS (5 min)
+--------------------------
+[ ] Explain what's live: 6 pages, WhatsApp booking, live opening
+    hours, Google reviews, map and directions.
+[ ] Explain today's aim: confirm facts, agree decisions, sort logins,
+    plan photos.
+[ ] Agree how long you have, and whether anyone else should join
+    (e.g. whoever handles the phone or WhatsApp).
+
+Notes:
+______________________________________________________________________
+______________________________________________________________________
+
+
+2. WHAT MUMTHAZ WANTS (15 min)
+------------------------------
+Let Mumthaz talk first. This shapes every other decision.
+
+Business goals
+[ ] "What do you want the website to do for you?"
+    (More MOTs? More hybrid work? Fewer phone calls? Look more
+    professional?)
+[ ] "Which jobs do you most want more of?"
+    (The most profitable or wanted work goes to the top of the site.)
+[ ] "Is there work you don't want, or can't take on?"
+[ ] "How busy are you? Can you take more bookings right now?"
+    (Affects how hard the site pushes "same-day bookings".)
+
+Customers
+[ ] "Who are your typical customers, and how do they find you today?"
+    (Google, word of mouth, passing trade, taxi drivers, fleets?)
+[ ] "Which areas do customers come from?"
+    Site currently lists: Bletchley, Fenny Stratford, Water Eaton,
+    Central Milton Keynes, Wolverton, Stony Stratford, Newport
+    Pagnell, Milton Keynes.
+[ ] "Do many customers prefer a language other than English?"
+[ ] "What do customers ask most often on the phone or WhatsApp?"
+    (These become FAQ content.)
+
+Look and feel
+[ ] "Any garage or competitor sites whose look you like?"
+[ ] "Any brand rules beyond the logo, e.g. a font?"
+    (Site uses the red and navy from the signage.)
+[ ] "Do you have a clean logo file with a transparent background?"
+
+Notes:
+______________________________________________________________________
+______________________________________________________________________
+______________________________________________________________________
+
+
+3. WALK THROUGH THE LIVE SITE (25 min)
+--------------------------------------
+Sit side by side, ideally on Mumthaz's own phone. On every page, ask
+"Is this right?"
+
+Home
+[ ] Hero: "MOT Centre is open" and same-day bookings. Wording OK?
+[ ] Highlights: open 7 days, hybrid specialists, same-day bookings.
+    All three true every week?
+[ ] "What we do" services grid. Right services shown first?
+[ ] Opening hours widget and "Open now" badge. Matches real hours?
+[ ] Google reviews: 4.8 stars from 10 reviews, 3 quotes. More reviews
+    since? Update the count.
+[ ] "Find us" map. Tap the Google Maps and Waze buttons and check they
+    go to the workshop.
+
+Services
+[ ] Read each of the 14 service descriptions aloud. Anything wrong,
+    missing, or not offered?
+[ ] "Genuine parts and warranty": what is the warranty exactly, and
+    how long?
+[ ] Prices: show prices, "from" prices, or "message us for a quote"?
+    (Prices also help AI answers like "MOT price Bletchley".)
+
+MOT Checks
+[ ] Skim the guide. Anything to add from experience, e.g. the most
+    common fail reasons?
+
+Hybrid Battery
+[ ] Symptoms list matches what customers actually report?
+[ ] Diagnose, repair, replace wording: module repair, reconditioning,
+    refurbished packs or new packs? Warranty on each?
+[ ] Models list (Toyota Prius, Auris, Yaris, C-HR, Corolla, RAV4;
+    Lexus CT, IS, NX, RX; Honda Insight, Jazz, Civic IMA).
+    Add or remove any?
+[ ] FAQs: any common questions missing?
+
+Contact and footer
+[ ] MUST: all 4 phone numbers. Which are live, and which is for what?
+    Fix the 07502 811204 vs 07450 281120 4 mix-up.
+      07450 277250 (Mobile / WhatsApp)  ____________________
+      01908 639629 (Landline)           ____________________
+      07450 011199 (Mobile)             ____________________
+      07502 811204 (Mobile)             ____________________
+[ ] "Ask for Mumthaz" OK?
+[ ] Address wording and "Areas we cover" list match the Google listing?
+[ ] Company details in footer: Toyotech Hybrid Autos Limited,
+    company no. 16013011. Correct?
+
+WhatsApp
+[ ] Tap the WhatsApp button and send a test message together. Does it
+    arrive on the right phone?
+[ ] Pre-filled message OK? ("Hello Toyotech, I am interested in
+    booking a service or MOT. Could you let me know your
+    availability?")
+[ ] Share the site link in a WhatsApp chat. Does the preview show the
+    image and title?
+[ ] Is it a WhatsApp Business account? Set up an away message and
+    quick replies?
+
+Notes:
+______________________________________________________________________
+______________________________________________________________________
+______________________________________________________________________
+
+
+4. FACTS AND CREDENTIALS (10 min)
+---------------------------------
+These unlock site changes. Nothing unconfirmed goes on the site.
+[ ] MUST: MOT testing station number: ____________________
+[ ] MOT classes tested (Class 4 = cars and vans up to 3,000kg;
+    Class 7 = goods vehicles 3,000-3,500kg): ____________________
+[ ] Technician qualifications (IMI Level 2/3/4 Electric/Hybrid, IMI
+    Accreditation, Toyota or other manufacturer training)?
+[ ] Trade memberships (RMI / Independent Garage Association, Motor
+    Ombudsman, Trust My Garage, Good Garage Scheme)?
+[ ] Manufacturer approvals or warranty schemes? Can their logos be
+    shown on the site?
+[ ] Diagnostic equipment, by brand (e.g. Snap-on, Bosch KTS, Autel,
+    Launch, Toyota Techstream, hybrid battery tester)?
+[ ] Extras: courtesy car, collection and delivery, card payments,
+    parking, EV servicing?
+[ ] Price of a standard MOT: ________  Standard service: ________
+
+Notes:
+______________________________________________________________________
+______________________________________________________________________
+
+
+5. SITE DECISIONS (10 min)
+--------------------------
+Say what's there now, so Mumthaz can just confirm or change it.
+[ ] Social media: is there a Facebook or Instagram page? Add links
+    later, or keep them off? (No social links on the site right now,
+    by design.)
+[ ] Booking: a short form (name, reg, issue) that fills in the
+    WhatsApp message, or keep the plain WhatsApp button?
+[ ] Reviews block: OK to update by hand, or should it auto-update?
+    (Auto-update needs a Google API key and scheduled rebuilds.)
+[ ] Opening-hours Sheet: who will update it? Want a short guide or
+    video on how?
+[ ] Visitor stats: want to see them? Also count taps on the WhatsApp
+    and call buttons? (Cloudflare stats are already installed and
+    cookie-free. Google Analytics would need a cookie banner.)
+[ ] Languages: English only?
+
+Notes:
+______________________________________________________________________
+______________________________________________________________________
+
+
+6. GOOGLE LISTING AND AI SEARCH (15 min)
+----------------------------------------
+Ideally log in to the Google Business Profile together and fix things
+there and then.
+
+Google Business Profile
+[ ] Categories: primary, plus every secondary that applies (e.g. MOT
+    testing station, brake shop, auto electrical service, auto air
+    conditioning service).
+[ ] Services tab: specific names and prices (e.g. "Class 4 MOT",
+    "Hybrid battery health check", "Inverter coolant service").
+[ ] Service area: same list as the site.
+[ ] Hours, phone, website and booking link (WhatsApp) all correct.
+[ ] Business description filled in.
+
+Reviews
+[ ] Agree to ask every customer for a review, not just the happy ones.
+    Google's rules: no discounts or freebies for reviews, and don't
+    write the review for them.
+[ ] Save the follow-up message as a WhatsApp quick reply (text is in
+    GEO-NOTES.txt, section 3). It asks customers to mention their car
+    and the job.
+[ ] Get the direct review link and plan a QR card for the counter.
+[ ] Reply to all existing reviews.
+
+Other listings
+[ ] Bing Places (feeds ChatGPT search and Copilot; can import from
+    Google).
+[ ] Apple Business Connect (feeds Siri, Apple Maps, Apple
+    Intelligence).
+[ ] DVSA MOT station record matches the Google listing.
+[ ] Already listed anywhere else? (WhoCanFixMyCar, BookMyGarage, Yell,
+    Checkatrade.) Collect the links.
+
+Notes:
+______________________________________________________________________
+______________________________________________________________________
+
+
+7. LOGINS AND OWNERSHIP (5 min)
+-------------------------------
+Make sure the business owns its own accounts.
+[ ] MUST: domain toyotech.co.uk. Registrar: ______________
+    Whose account: ______________  Renewal date: ______________
+[ ] Google Business Profile: who is the owner, who are managers?
+    Offer to be added as a manager.
+[ ] Opening-hours Google Sheet: whose Google account?
+[ ] Any business email address to use on listings?
+
+Notes:
+______________________________________________________________________
+
+
+8. PHOTOS (5 min)
+-----------------
+The placeholders need replacing soon. The same photos go on Google.
+[ ] Go through PHOTO-SHOT-LIST.txt (hero, workshop, team, logo).
+[ ] Is the team happy to be photographed?
+[ ] Any before/after job photos already on Mumthaz's phone?
+[ ] Take any photos you can today.
+
+Notes:
+______________________________________________________________________
+
+
+9. WRAP-UP (5 min)
+------------------
+[ ] Read back the decisions made.
+[ ] List what Mumthaz will send you, and by when (logo file,
+    certificates, photos, prices, logins).
+[ ] Say what you'll do next, and when (site updates, listings, review
+    message).
+[ ] Agree how to stay in touch (WhatsApp?) and a follow-up date.
+
+Actions for Mumthaz                          By when
+______________________________________       __________
+______________________________________       __________
+______________________________________       __________
+
+Actions for you                              By when
+______________________________________       __________
+______________________________________       __________
+______________________________________       __________
+
+Follow-up date: ______________
+
+
+AFTER THE MEETING
+-----------------
+Paste your answers back to Claude. That's enough to update the site
+config, the structured data, llms.txt and the notes in one go.
