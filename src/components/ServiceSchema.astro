@@ -1,0 +1,36 @@
+---
+/**
+ * JSON-LD Service block for a dedicated service landing page (e.g.
+ * /hybrid-battery/). Links back to the business entity by @id, so AI
+ * assistants read "this page is Toyotech's hybrid battery service, in
+ * Milton Keynes" rather than a free-floating article.
+ */
+import { siteOrigin, businessRef, areaServed } from '../lib/business-schema';
+
+interface Props {
+  name: string;
+  serviceType: string;
+  description: string;
+  /** Extra topics the page covers, e.g. vehicle models */
+  audience?: string[];
+}
+
+const { name, serviceType, description, audience = [] } = Astro.props;
+const origin = siteOrigin(Astro.site);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name,
+  serviceType,
+  description,
+  url: new URL(Astro.url.pathname, Astro.site).href,
+  provider: businessRef(origin),
+  areaServed,
+  ...(audience.length && {
+    audience: audience.map((a) => ({ '@type': 'Audience', audienceType: `Owners of ${a}` })),
+  }),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

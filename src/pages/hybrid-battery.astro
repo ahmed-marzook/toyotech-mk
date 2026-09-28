@@ -12,8 +12,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import WhatsAppButton from '../components/WhatsAppButton.jsx';
 import BreadcrumbSchema from '../components/BreadcrumbSchema.astro';
 import FAQSchema from '../components/FAQSchema.astro';
+import ServiceSchema from '../components/ServiceSchema.astro';
 import { Activity, BatteryCharging, Gauge, ShieldCheck, TriangleAlert, Wrench } from 'lucide-react';
 import { url } from '../config/site';
+import { hybridModels } from '../content/hybrid-models';
 
 const symptoms = [
   {
@@ -65,12 +67,6 @@ const steps = [
   },
 ];
 
-const models = [
-  'Toyota Prius, Prius+ and Prius Plug-in',
-  'Toyota Auris, Yaris, C-HR, Corolla and RAV4 hybrids',
-  'Lexus CT 200h, IS 300h, NX and RX',
-  'Honda Insight, Jazz and Civic IMA',
-];
 
 const faqs = [
   {
@@ -102,6 +98,13 @@ const faqs = [
 >
   <BreadcrumbSchema slot="head" items={[{ name: 'Hybrid Battery', path: '/hybrid-battery' }]} />
   <FAQSchema slot="head" items={faqs} />
+  <ServiceSchema
+    slot="head"
+    name="Hybrid battery repair in Milton Keynes"
+    serviceType="Hybrid battery diagnostics, repair and replacement"
+    description="Hybrid battery health checks, module-level diagnostics, repair and replacement, plus hybrid system servicing, at Toyotech's Bletchley workshop. Genuine parts and warranty."
+    audience={hybridModels}
+  />
 
   <section class="bg-navy text-white">
     <div class="mx-auto max-w-6xl px-4 py-12">
@@ -177,7 +180,7 @@ const faqs = [
         </p>
         <ul class="mt-5 flex flex-col gap-3">
           {
-            models.map((model) => (
+            hybridModels.map((model) => (
               <li class="flex items-start gap-3">
                 <BatteryCharging className="mt-1 h-5 w-5 shrink-0 text-brand-green" aria-hidden="true" />
                 <span class="text-white/90">{model}</span>
