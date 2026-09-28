@@ -23,8 +23,9 @@ How the assistants get their facts
 Each one cross-checks name, address and phone (NAP) across sources.
 Consistency matters more than quantity.
 
-1. Questions for Mumthaz (these unblock site changes)
-------------------------------------------------------
+1. Questions for Mumthaz
+-------------------------
+1a. Facts and claims (these unblock site changes)
 Answers to these can go straight onto the site and into the schema.
 None of it is on the site yet, because we don't publish unconfirmed
 claims.
@@ -39,6 +40,9 @@ claims.
 [ ] Trade memberships: RMI / Independent Garage Association, Motor
     Ombudsman (Motor Industry Code of Practice for Service and Repair),
     Trust My Garage, Good Garage Scheme, Bosch Car Service, etc.
+[ ] Manufacturer approvals and warranty schemes (e.g. a warranty
+    provider backing the "genuine parts and warranty" promise). Can
+    their logos be displayed, and are there usage rules for them?
 [ ] Diagnostic equipment used, by brand and model (e.g. Snap-on, Bosch
     KTS, Autel, Launch, Toyota Techstream, a hybrid battery
     tester/balancer). Naming real tools on /hybrid-battery/ is concrete
@@ -55,6 +59,51 @@ claims.
     collection/delivery, card payments, parking, EV servicing,
     price for a standard MOT/service. Anything confirmed becomes FAQ
     content.
+
+1b. Site and business decisions
+(Some of these are already decided in the current build. They're
+noted so Mumthaz can confirm or change them.)
+[ ] Social media: is there a Facebook/Instagram page being kept off
+    the site on purpose, or should social links be planned for later?
+    Currently the site has no social links by design (CLAUDE.md).
+    Either way, a verified page can still go in the schema's sameAs
+    as an entity citation (section 4).
+[ ] Brand guidelines beyond the logo: a preferred font or colours,
+    or is that open? The current build uses the red/navy palette
+    taken from the signage.
+[ ] Prices on the Services page: show prices or "from" prices, or
+    just "call/WhatsApp for a quote"? Published prices also help AI
+    answers ("how much is an MOT in Bletchley") and the GBP Services
+    tab.
+[ ] Booking: a short form (name, car reg, issue) that pre-fills the
+    WhatsApp message, or keep the plain "message us" button? Either
+    is possible on a static site, and a form still needs no server.
+[ ] Accreditations to display: MOT testing station number,
+    manufacturer approvals, warranty scheme logos (see 1a).
+[ ] Domain: the site is set up for toyotech.co.uk (public/CNAME).
+    Who owns and manages it: which registrar, whose account, and when
+    does it renew? Make sure Mumthaz (or the business) holds the
+    login, not only whoever registered it.
+[ ] Languages: English only, or are other languages worth
+    considering for the local customer base? If so, which?
+[ ] Photos: can workshop, team, and before/after job photos be taken
+    soon, so the placeholders aren't up for long? PHOTO-SHOT-LIST.txt
+    has the list. The same photos should go on GBP.
+[ ] Google Reviews block: is a hand-picked set updated manually fine
+    for now (current approach, src/content/reviews.ts), or should it
+    auto-update? Auto-updating needs a Google Places API key and a
+    scheduled rebuild.
+[ ] Opening-hours Google Sheet: who updates it going forward? Would
+    a short written guide or screen-recorded video on editing it be
+    useful?
+[ ] Analytics: cookieless Cloudflare Web Analytics is already
+    installed, and counts visits and pages. Does Mumthaz want to see
+    those numbers, and would it be useful to also count taps on the
+    WhatsApp and call buttons (needs a small addition, e.g. Plausible
+    or GA custom events)? GA would need a cookie consent banner;
+    Cloudflare and Plausible don't.
+[ ] Style reference: any competitor or other garage sites whose look
+    and feel Mumthaz likes?
 
 2. Google Business Profile, entity-level detail
 ------------------------------------------------
