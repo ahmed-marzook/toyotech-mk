@@ -123,16 +123,27 @@ export type Phone = { label: string; display: string; tel: string };
  * number used site-wide (header, hero, schema `telephone`).
  */
 export const phones: Phone[] = [
-  { label: 'Main line · MOTs', display: '01908 639629', tel: '+441908639629' },
-  { label: 'Servicing & quotes · call or WhatsApp', display: '07450 277250', tel: '+447450277250' },
+  { label: 'Main line and MOTs', display: '01908 639629', tel: '+441908639629' },
+  { label: 'Servicing and quotes', display: '07450 277250', tel: '+447450277250' },
 ];
 
-export type WhatsAppLine = { label: string; display: string; number: string };
+export type WhatsAppLine = {
+  label: string;
+  display: string;
+  number: string;
+  /** Preset the line's own button opens (see `whatsappPresets`) */
+  enquiry: string;
+};
 
 /** Service garage line — the site-wide WhatsApp button and the no-JS fallback. */
-const serviceWhatsApp: WhatsAppLine = { label: 'Servicing & repairs', display: '07450 277250', number: '447450277250' };
+const serviceWhatsApp: WhatsAppLine = {
+  label: 'Servicing and repairs',
+  display: '07450 277250',
+  number: '447450277250',
+  enquiry: 'servicing',
+};
 /** MOT line (WhatsApp only; MOT calls go to the main line). Tyres will use it too once they launch. */
-const motWhatsApp: WhatsAppLine = { label: 'MOTs', display: '07476 094818', number: '447476094818' };
+const motWhatsApp: WhatsAppLine = { label: 'MOTs', display: '07476 094818', number: '447476094818', enquiry: 'mot' };
 
 /**
  * One kind of WhatsApp enquiry. The pre-filled message is
@@ -211,7 +222,19 @@ export const whatsappEnquiries: Enquiry[] = [
  * skipping the "what do you need?" choice: the MOT page asks for the reg
  * only; the servicing packages ask for the reg plus extra information.
  */
-export const whatsappPresets: Enquiry[] = [mot, ...['Bronze', 'Silver', 'Gold'].map(servicePackage)];
+export const whatsappPresets: Enquiry[] = [
+  mot,
+  ...['Bronze', 'Silver', 'Gold'].map(servicePackage),
+  {
+    id: 'servicing',
+    label: 'Servicing and repairs',
+    title: 'Message the service garage',
+    number: serviceWhatsApp.number,
+    intro: "Hello Toyotech, I'd like help with servicing or a repair on my car",
+    outro: 'Could you get back to me?',
+    extra: true,
+  },
+];
 
 const waLink = (number: string, text: string) => `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
 

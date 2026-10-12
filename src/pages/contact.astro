@@ -1,7 +1,7 @@
 ---
 import { MapPin, Phone } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import WhatsAppButton from '../components/WhatsAppButton.jsx';
+import WhatsAppButton, { WhatsAppIcon } from '../components/WhatsAppButton.jsx';
 import OpeningHours from '../components/OpeningHours.jsx';
 import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 import MapEmbed from '../components/MapEmbed.astro';
@@ -9,7 +9,7 @@ import GoogleReviews from '../components/GoogleReviews.astro';
 import WazeIcon from '../components/icons/WazeIcon.astro';
 import GoogleMapsIcon from '../components/icons/GoogleMapsIcon.astro';
 import BreadcrumbSchema from '../components/BreadcrumbSchema.astro';
-import { site, address, phones, whatsapp, map, serviceAreas, hoursSummary } from '../config/site';
+import { site, address, phones, whatsapp, map, serviceAreas, hoursSummary, enquiryHref } from '../config/site';
 
 const directionsHref = map.directionsUrl;
 ---
@@ -37,9 +37,6 @@ const directionsHref = map.directionsUrl;
     <div class="space-y-10">
       <div>
         <h2 class="text-2xl font-bold text-navy">Call us</h2>
-        <p class="mt-1 text-slate-600">
-          Ask for {site.contactName}. On WhatsApp: {whatsapp.lines.map((l) => `${l.display} (${l.label})`).join(', ')}.
-        </p>
         <ul class="mt-4 space-y-3">
           {
             phones.map((p) => (
@@ -55,6 +52,34 @@ const directionsHref = map.directionsUrl;
                     <span class="block text-xl font-bold text-navy tabular-nums">{p.display}</span>
                     <span class="block text-sm text-slate-500">{p.label}</span>
                   </span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold text-navy">WhatsApp us</h2>
+        <ul class="mt-4 space-y-3">
+          {
+            whatsapp.lines.map((l) => (
+              <li>
+                <a
+                  href={enquiryHref(l.enquiry)}
+                  data-whatsapp-enquiry={l.enquiry}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="card-motion flex items-center gap-4 rounded-xl bg-white p-4 ring-1 ring-slate-200 hover:ring-whatsapp-dark"
+                >
+                  <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-whatsapp text-navy">
+                    <WhatsAppIcon className="h-6 w-6" />
+                  </span>
+                  <span>
+                    <span class="block text-xl font-bold text-navy tabular-nums">{l.display}</span>
+                    <span class="block text-sm text-slate-500">{l.label}</span>
+                  </span>
+                  <span class="sr-only"> (opens WhatsApp)</span>
                 </a>
               </li>
             ))
