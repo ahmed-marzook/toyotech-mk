@@ -56,8 +56,8 @@
    - No images on service cards (icon + text only, keeps the focus on the service info)
    - Feature "Genuine Parts and Warranty" and hybrid specialism callouts
    - **Servicing packages:** Bronze (interim), Silver (full), Gold (major) cards in `src/content/service-packages.ts`, each with its own WhatsApp button. The inclusions are pre-filled EXAMPLES (typical UK interim/full/major service items) awaiting confirmation from Mumthaz. No prices.
-3. **MOT Checks** (`/mot/`; the old `/mot-checks/` URL redirects there via `redirects` in `astro.config.mjs`)
-   - "Book your MOT in Bletchley" WhatsApp CTA sits straight under the page heading (reg-only form to the MOT line)
+3. **MOT** (`/mot/`, nav label "MOT"; the old `/mot-checks/` URL redirects there via `redirects` in `astro.config.mjs`)
+   - "Book your MOT in Bletchley" WhatsApp CTA sits straight under the page heading (reg-only form to the MOT line). From lg up the CTA text sits beside the shopfront photo (two columns); stacked and centred on mobile
    - Plain-English guide to every part inspected at a car MOT, grouped into 6 areas
    - Content lives in `src/content/mot-checks.ts`, sourced from DVSA's "Car parts checked at an MOT" under the Open Government Licence v3.0 — reworded, not copied, and attributed at the foot of the page
    - Also covers what an MOT does *not* include (engine, clutch, gearbox condition, servicing) as a bridge to the Services page
@@ -236,7 +236,7 @@ The goal: be the garage that ChatGPT, Gemini, Perplexity, Claude and Apple Intel
 - The Contact page lists every number once (`phones` in `src/config/site.ts`), each with a call button, plus a WhatsApp button for the mobiles (`whatsapp` on the phone entry).
 - Every WhatsApp button is a plain `wa.me` link that works without JS. With JS, `src/components/WhatsAppEnquiry.astro` intercepts the click and opens a small form, builds the pre-filled message and opens WhatsApp on the right line. Nothing is sent to the site.
   - General buttons (`<WhatsAppButton />`, header, floating, hero): reg plate + "What do you need?" + optional "Anything else?" box (shown for every choice) (MOT → 07476 094818; Service, Repair or quote → 07450 277250; Tyres shown as "Coming soon", disabled). Choices live in `whatsappEnquiries` in `src/config/site.ts`.
-  - Preset buttons (`<WhatsAppButton enquiry="…" />`) skip the choice: `mot` (MOT Checks page) asks for the reg only and goes to 07476 094818; `service-bronze` / `service-silver` / `service-gold` (Services page packages) ask for the reg plus an optional "Anything else?" box and go to 07450 277250. `servicing` (the WhatsApp button beside 07450 277250 in the Contact page's number list) asks for the reg plus extra information. Presets live in `whatsappPresets`; without JS the button links straight to that preset's line.
+  - Preset buttons (`<WhatsAppButton enquiry="…" />`) skip the choice: `mot` (MOT page) asks for the reg only and goes to 07476 094818; `service-bronze` / `service-silver` / `service-gold` (Services page packages) ask for the reg plus an optional "Anything else?" box and go to 07450 277250. `servicing` (the WhatsApp button beside 07450 277250 in the Contact page's number list) asks for the reg plus extra information. Presets live in `whatsappPresets`; without JS the button links straight to that preset's line.
 - **Tyres:** not offered yet ("Coming soon" in the form only). Will use the MOT WhatsApp line when it launches.
 - Make this the primary CTA button site-wide (header, home hero, contact page)
 - Style as a prominent green WhatsApp-branded button, distinct from the red/blue theme, so it's instantly recognisable
