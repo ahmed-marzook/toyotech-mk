@@ -193,8 +193,10 @@ Q15  Services list
          - Repairs & Quotes: submit the vehicle's issue, ask for an
            estimate (see Q43)
          - Tyres: tyre enquiries (see Q41)
-     STATUS: open (parked until Q40 and Q41 are answered; listed in
-       CLAUDE.md Future Ideas)
+     FOLLOW-UP: Servicing packages added to the existing Services page
+       (Q40); the MOT Checks page's WhatsApp button asks for the reg
+       only and goes to 07476 094818. Tyres "Coming soon" (Q41).
+     STATUS: applied: commit 3d0a839 on claude/meeting-oct-2026-updates
 
 Q16  Prices
      Price of a standard MOT, interim service, full service, hybrid
@@ -424,15 +426,21 @@ Q40  Servicing tiers: Bronze, Silver, Gold
      What's included in each? (Listed as a follow-up in the meeting.)
      No prices (Q16).
      Affects: new Servicing page
-     ANSWER:
-     STATUS: open
+     ANSWER: Add the Bronze/Silver/Gold packages to the Services page,
+       pre-filled with EXAMPLE contents (interim / full / major
+       service), each with its own WhatsApp button: reg + extra
+       information, sent to 07450 277250.
+     STATUS: applied: commit 3d0a839 on claude/meeting-oct-2026-updates
+       (not yet pushed). Example contents still need Mumthaz to check:
+       src/content/service-packages.ts
 
 Q41  Tyres
      Which tyre services? (e.g. supply and fit, puncture repair, wheel
      balancing, alignment, TPMS, budget/mid/premium brands, run-flats.)
      Affects: new Tyres page, src/content/services.ts, schema
-     ANSWER:
-     STATUS: open
+     ANSWER: Not needed yet. Show as "Coming soon".
+     STATUS: applied: commit 3d0a839 (Tyres is a disabled "Coming soon"
+       option in the WhatsApp form). Re-open when tyres launch.
 
 Q42  Repairs & Quotes page
      What should the enquiry ask for? Proposed: reg plate plus a short
