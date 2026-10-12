@@ -243,6 +243,7 @@ The goal: be the garage that ChatGPT, Gemini, Perplexity, Claude and Apple Intel
 ## Images
 
 - **Hero photo is live:** `src/assets/hero.webp` is the MOT bay (Honda on the ramp beside the Crypton emissions tester), supplied by the client with both plates (the Honda and the VW in the background) blurred. Always check every plate in a photo, background cars included, before adding it. On desktop the hero gradient runs left to right so the photo shows on the right and the text side stays dark.
+- **Shopfront photo is live:** `src/assets/workshop.webp` is the MOT unit (Unit 6) from the yard, original unedited client photo; shown on Contact ("Our workshop", with a "look for the blue signs" caption) and under the booking button on the MOT page, both cropped 4:3. The client may swap in a Lightroom edit later with the same filename. Don't use AI "enhanced" versions: one tried earlier rewrote the sign's postcode to "MK2 SPB", scrambled the small signs and added equipment that isn't there. Pass `sizes` to `ImagePlaceholder` for in-content photos so smaller widths are generated.
 - Other photos still use clearly marked placeholder components (e.g. grey box with icon + "Image coming soon" label) for:
   - Hero background
   - Workshop/team photos
