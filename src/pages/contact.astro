@@ -9,7 +9,7 @@ import GoogleReviews from '../components/GoogleReviews.astro';
 import WazeIcon from '../components/icons/WazeIcon.astro';
 import GoogleMapsIcon from '../components/icons/GoogleMapsIcon.astro';
 import BreadcrumbSchema from '../components/BreadcrumbSchema.astro';
-import { site, address, phones, whatsapp, map, serviceAreas, hoursSummary, enquiryHref } from '../config/site';
+import { site, address, phones, map, serviceAreas, hoursSummary, enquiryHref } from '../config/site';
 
 const directionsHref = map.directionsUrl;
 ---
@@ -36,51 +36,37 @@ const directionsHref = map.directionsUrl;
   <section class="mx-auto grid max-w-6xl gap-10 px-4 py-12 lg:grid-cols-2">
     <div class="space-y-10">
       <div>
-        <h2 class="text-2xl font-bold text-navy">Call us</h2>
+        <h2 class="text-2xl font-bold text-navy">Call or WhatsApp us</h2>
         <ul class="mt-4 space-y-3">
           {
             phones.map((p) => (
-              <li>
+              <li class="flex items-center gap-3 rounded-xl bg-white p-4 ring-1 ring-slate-200">
+                <a href={`tel:${p.tel}`} class="min-w-0 flex-1 hover:underline">
+                  <span class="block text-xl font-bold text-navy tabular-nums">{p.display}</span>
+                  <span class="block text-sm text-slate-500">
+                    {p.label}
+                    {p.whatsapp ? ' · call or WhatsApp' : ''}
+                  </span>
+                </a>
                 <a
                   href={`tel:${p.tel}`}
-                  class="card-motion flex items-center gap-4 rounded-xl bg-white p-4 ring-1 ring-slate-200 hover:ring-brand-blue"
+                  class="btn-motion flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-red text-white hover:bg-brand-red-dark"
+                  aria-label={`Call ${p.display}`}
                 >
-                  <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-red text-white">
-                    <Phone className="h-5 w-5" />
-                  </span>
-                  <span>
-                    <span class="block text-xl font-bold text-navy tabular-nums">{p.display}</span>
-                    <span class="block text-sm text-slate-500">{p.label}</span>
-                  </span>
+                  <Phone className="h-5 w-5" />
                 </a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-
-      <div>
-        <h2 class="text-2xl font-bold text-navy">WhatsApp us</h2>
-        <ul class="mt-4 space-y-3">
-          {
-            whatsapp.lines.map((l) => (
-              <li>
-                <a
-                  href={enquiryHref(l.enquiry)}
-                  data-whatsapp-enquiry={l.enquiry}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="card-motion flex items-center gap-4 rounded-xl bg-white p-4 ring-1 ring-slate-200 hover:ring-whatsapp-dark"
-                >
-                  <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-whatsapp text-navy">
+                {p.whatsapp && (
+                  <a
+                    href={enquiryHref(p.whatsapp)}
+                    data-whatsapp-enquiry={p.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-motion flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-whatsapp text-navy hover:bg-whatsapp-hover"
+                    aria-label={`WhatsApp ${p.display} (opens WhatsApp)`}
+                  >
                     <WhatsAppIcon className="h-6 w-6" />
-                  </span>
-                  <span>
-                    <span class="block text-xl font-bold text-navy tabular-nums">{l.display}</span>
-                    <span class="block text-sm text-slate-500">{l.label}</span>
-                  </span>
-                  <span class="sr-only"> (opens WhatsApp)</span>
-                </a>
+                  </a>
+                )}
               </li>
             ))
           }

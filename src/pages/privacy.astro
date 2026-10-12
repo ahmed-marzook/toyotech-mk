@@ -18,7 +18,7 @@
  *      retention section below uses a deliberately generic answer).
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site, address, phones, whatsapp, legal, companies, url } from '../config/site';
+import { site, address, phones, legal, companies, url } from '../config/site';
 
 const lastUpdated = 'October 2026';
 ---
@@ -202,15 +202,7 @@ const lastUpdated = 'October 2026';
           phones.map((p) => (
             <li>
               <a href={`tel:${p.tel}`} class="font-semibold text-brand-blue underline underline-offset-4">{p.display}</a>
-              <span class="text-slate-500"> — {p.label}</span>
-            </li>
-          ))
-        }
-        {
-          whatsapp.lines.map((l) => (
-            <li>
-              WhatsApp {l.display}
-              <span class="text-slate-500"> — {l.label}</span>
+              <span class="text-slate-500"> — {p.label}{p.whatsapp ? ' (call or WhatsApp)' : ''}</span>
             </li>
           ))
         }

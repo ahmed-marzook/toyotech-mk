@@ -1,7 +1,7 @@
 ---
 import { MapPin, Phone, Clock } from 'lucide-react';
 import Logo from './Logo.astro';
-import { site, address, phones, whatsapp, nav, companies, hoursSummary, url } from '../config/site';
+import { site, address, phones, nav, companies, hoursSummary, url } from '../config/site';
 
 const year = new Date().getFullYear();
 ---
@@ -34,12 +34,12 @@ const year = new Date().getFullYear();
               <a href={`tel:${p.tel}`} class="inline-flex min-h-11 items-center gap-2 hover:text-white">
                 <Phone className="h-4 w-4 text-brand-red" />
                 {p.display}
+                {p.whatsapp && <span class="text-white/60">· WhatsApp</span>}
               </a>
             </li>
           ))
         }
       </ul>
-      <p class="mt-2 text-sm">WhatsApp: {whatsapp.lines.map((l) => `${l.display} (${l.label})`).join(', ')}</p>
     </div>
 
     <div>

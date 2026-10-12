@@ -116,15 +116,23 @@ export const map = {
   wazeUrl: `https://waze.com/ul?ll=${lat},${lng}&navigate=yes&zoom=17`,
 };
 
-export type Phone = { label: string; display: string; tel: string };
+export type Phone = {
+  label: string;
+  display: string;
+  tel: string;
+  /** Also on WhatsApp: the preset its WhatsApp button opens (see `whatsappPresets`) */
+  whatsapp?: string;
+};
 
 /**
- * Numbers are split by job (meeting 12 Oct 2026). The first is the main
- * number used site-wide (header, hero, schema `telephone`).
+ * Every number, split by job (meeting 12 Oct 2026). All can be called; the
+ * mobiles are on WhatsApp too. The first is the main number used site-wide
+ * (header, hero, schema `telephone`).
  */
 export const phones: Phone[] = [
   { label: 'Main line and MOTs', display: '01908 639629', tel: '+441908639629' },
-  { label: 'Servicing and quotes', display: '07450 277250', tel: '+447450277250' },
+  { label: 'Servicing and quotes', display: '07450 277250', tel: '+447450277250', whatsapp: 'servicing' },
+  { label: 'MOTs', display: '07476 094818', tel: '+447476094818', whatsapp: 'mot' },
 ];
 
 export type WhatsAppLine = {
@@ -142,7 +150,7 @@ const serviceWhatsApp: WhatsAppLine = {
   number: '447450277250',
   enquiry: 'servicing',
 };
-/** MOT line (WhatsApp only; MOT calls go to the main line). Tyres will use it too once they launch. */
+/** MOT line. Tyres will use it too once they launch. */
 const motWhatsApp: WhatsAppLine = { label: 'MOTs', display: '07476 094818', number: '447476094818', enquiry: 'mot' };
 
 /**

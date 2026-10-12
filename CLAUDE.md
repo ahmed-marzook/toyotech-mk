@@ -11,7 +11,7 @@
 - **Address:** No. 80-86, Tavistock Street, Bletchley, Milton Keynes, MK2 2PB. Display "Bletchley" only, never "Fenny Stratford" (decided 12 Oct 2026; the Google listing still needs updating to match).
 - **Contact (split by job, decided 12 Oct 2026):** ask for Mumthaz
   - General / main line, MOTs & tyres: phone 01908 639629
-  - MOTs & tyres WhatsApp: 07476 094818
+  - MOTs: call or WhatsApp 07476 094818 (tyres too, once they launch)
   - Servicing & quotes: phone and WhatsApp 07450 277250 (also the site-wide WhatsApp button)
   - 07450 011199 and 07502 811204 are permanently removed; don't add them back.
 - **Hours:** Workshop 09:00-18:00 Monday to Saturday. MOT testing 09:00-18:00, 7 days a week. Same-day bookings available. Don't write "open 7 days" for the workshop.
@@ -230,9 +230,10 @@ The goal: be the garage that ChatGPT, Gemini, Perplexity, Claude and Apple Intel
 ## WhatsApp Contact
 
 - **Site-wide number:** 07450 277250 (service garage). MOT & tyres WhatsApp: 07476 094818.
+- The Contact page lists every number once (`phones` in `src/config/site.ts`), each with a call button, plus a WhatsApp button for the mobiles (`whatsapp` on the phone entry).
 - Every WhatsApp button is a plain `wa.me` link that works without JS. With JS, `src/components/WhatsAppEnquiry.astro` intercepts the click and opens a small form, builds the pre-filled message and opens WhatsApp on the right line. Nothing is sent to the site.
   - General buttons (`<WhatsAppButton />`, header, floating, hero): reg plate + "What do you need?" (MOT → 07476 094818; Service, Repair or quote → 07450 277250; Tyres shown as "Coming soon", disabled). Choices live in `whatsappEnquiries` in `src/config/site.ts`.
-  - Preset buttons (`<WhatsAppButton enquiry="…" />`) skip the choice: `mot` (MOT Checks page) asks for the reg only and goes to 07476 094818; `service-bronze` / `service-silver` / `service-gold` (Services page packages) ask for the reg plus an optional "Anything else?" box and go to 07450 277250. `servicing` (the Contact page's 07450 277250 WhatsApp card) asks for the reg plus extra information. Presets live in `whatsappPresets`; without JS the button links straight to that preset's line.
+  - Preset buttons (`<WhatsAppButton enquiry="…" />`) skip the choice: `mot` (MOT Checks page) asks for the reg only and goes to 07476 094818; `service-bronze` / `service-silver` / `service-gold` (Services page packages) ask for the reg plus an optional "Anything else?" box and go to 07450 277250. `servicing` (the WhatsApp button beside 07450 277250 in the Contact page's number list) asks for the reg plus extra information. Presets live in `whatsappPresets`; without JS the button links straight to that preset's line.
 - **Tyres:** not offered yet ("Coming soon" in the form only). Will use the MOT WhatsApp line when it launches.
 - Make this the primary CTA button site-wide (header, home hero, contact page)
 - Style as a prominent green WhatsApp-branded button, distinct from the red/blue theme, so it's instantly recognisable
