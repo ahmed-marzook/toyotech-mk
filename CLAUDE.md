@@ -54,6 +54,7 @@
    - Each service: icon + short description
    - No images on service cards (icon + text only, keeps the focus on the service info)
    - Feature "Genuine Parts and Warranty" and hybrid specialism callouts
+   - **Servicing packages:** Bronze (interim), Silver (full), Gold (major) cards in `src/content/service-packages.ts`, each with its own WhatsApp button. The inclusions are pre-filled EXAMPLES (typical UK interim/full/major service items) awaiting confirmation from Mumthaz. No prices.
 3. **MOT Checks** (`/mot-checks/`)
    - Plain-English guide to every part inspected at a car MOT, grouped into 6 areas
    - Content lives in `src/content/mot-checks.ts`, sourced from DVSA's "Car parts checked at an MOT" under the Open Government Licence v3.0 — reworded, not copied, and attributed at the foot of the page
@@ -222,14 +223,17 @@ The goal: be the garage that ChatGPT, Gemini, Perplexity, Claude and Apple Intel
 
 - **MOT slot availability check / live slot booking** (meeting 12 Oct 2026, parked) — a calendar island showing open MOT slots; picking one opens a pre-filled WhatsApp ("Hi, I'd like to book an MOT for [Reg] on [Date] at 4:00 PM"). The garage confirms by WhatsApp and blocks the slot by hand on an admin dashboard. No payments. Needs somewhere to store slots.
 - **Automated MOT reminders** (meeting 12 Oct 2026) — 30 days before expiry, checked against the DVSA MOT History API, sent by SMS (about 3-4p each via Twilio or similar) and/or WhatsApp Business API templates. Needs explicit UK GDPR/PECR opt-in at job completion, clear storage terms and easy opt-out. Needs a backend.
-- **Dedicated booking/enquiry pages** (meeting 12 Oct 2026) — MOT (Class 4), Servicing (Bronze/Silver/Gold tiers, inclusions TBD), Repairs & Quotes, Tyres. Waiting on tier and tyre details.
+- **Tyres** (meeting 12 Oct 2026) — tyre enquiries are "Coming soon"; a Tyres page and form option once the tyre services are decided.
 
 - **Vehicle reg / MOT & tax status checker** — using the free DVLA Vehicle Enquiry Service API and DVSA MOT History API. Both are free to use with no per-lookup charges, but a static GitHub Pages site can't call them directly (API key can't live client-side), so this needs a small serverless proxy (Cloudflare Worker / Netlify Function) in front of it. Park this as a v2 feature once hosting supports it.
 
 ## WhatsApp Contact
 
 - **Site-wide number:** 07450 277250 (service garage). MOT & tyres WhatsApp: 07476 094818.
-- Every WhatsApp button is a plain `wa.me` link (works without JS, goes to 07450 277250). With JS, `src/components/WhatsAppEnquiry.astro` intercepts the click and opens a small form: reg plate + what they need (MOT, Service, Repair or quote, Tyres). It builds the pre-filled message and opens WhatsApp on the right line (MOT/Tyres → 07476 094818, Service/Repair → 07450 277250). Jobs and message templates live in `whatsappEnquiries` in `src/config/site.ts`. Nothing is sent to the site.
+- Every WhatsApp button is a plain `wa.me` link that works without JS. With JS, `src/components/WhatsAppEnquiry.astro` intercepts the click and opens a small form, builds the pre-filled message and opens WhatsApp on the right line. Nothing is sent to the site.
+  - General buttons (`<WhatsAppButton />`, header, floating, hero): reg plate + "What do you need?" (MOT → 07476 094818; Service, Repair or quote → 07450 277250; Tyres shown as "Coming soon", disabled). Choices live in `whatsappEnquiries` in `src/config/site.ts`.
+  - Preset buttons (`<WhatsAppButton enquiry="…" />`) skip the choice: `mot` (MOT Checks page) asks for the reg only and goes to 07476 094818; `service-bronze` / `service-silver` / `service-gold` (Services page packages) ask for the reg plus an optional "Anything else?" box and go to 07450 277250. Presets live in `whatsappPresets`; without JS the button links straight to that preset's line.
+- **Tyres:** not offered yet ("Coming soon" in the form only). Will use the MOT WhatsApp line when it launches.
 - Make this the primary CTA button site-wide (header, home hero, contact page)
 - Style as a prominent green WhatsApp-branded button, distinct from the red/blue theme, so it's instantly recognisable
 

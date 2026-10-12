@@ -1,4 +1,4 @@
-import { whatsapp } from '../config/site';
+import { enquiryHref } from '../config/site';
 
 const WhatsAppIcon = ({ className = 'h-5 w-5' }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false" className={className}>
@@ -19,18 +19,20 @@ const variants = {
  * Primary site-wide CTA. It's a plain link, so render it without a
  * `client:*` directive — no JS is shipped for it. `data-whatsapp-enquiry`
  * makes WhatsAppEnquiry.astro open the reg-plate form on click; without JS
- * the link goes straight to WhatsApp on the service garage line.
+ * the link goes straight to WhatsApp on the service garage line. Pass
+ * `enquiry` (an id from `whatsappPresets`) to open that enquiry directly,
+ * e.g. the MOT page's reg-only form, sent to the MOT line.
  *
  * Text and icon are navy, not white: white on WhatsApp green (#25D366) is
  * 1.98:1 and fails WCAG AA; navy on the same green is 7.76:1.
  * Focus styling comes from the global :focus-visible ring in global.css.
  */
-export default function WhatsAppButton({ variant = 'large', label = 'Message us on WhatsApp', className = '' }) {
+export default function WhatsAppButton({ variant = 'large', label = 'Message us on WhatsApp', enquiry = '', className = '' }) {
   const iconOnly = variant === 'floating';
   return (
     <a
-      href={whatsapp.href}
-      data-whatsapp-enquiry
+      href={enquiryHref(enquiry)}
+      data-whatsapp-enquiry={enquiry}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={iconOnly ? `${label} (opens WhatsApp)` : undefined}

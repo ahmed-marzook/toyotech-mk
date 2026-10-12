@@ -123,7 +123,7 @@ export type Phone = { label: string; display: string; tel: string };
  * number used site-wide (header, hero, schema `telephone`).
  */
 export const phones: Phone[] = [
-  { label: 'Main line · MOTs & tyres', display: '01908 639629', tel: '+441908639629' },
+  { label: 'Main line · MOTs', display: '01908 639629', tel: '+441908639629' },
   { label: 'Servicing & quotes · call or WhatsApp', display: '07450 277250', tel: '+447450277250' },
 ];
 
@@ -131,44 +131,91 @@ export type WhatsAppLine = { label: string; display: string; number: string };
 
 /** Service garage line — the site-wide WhatsApp button and the no-JS fallback. */
 const serviceWhatsApp: WhatsAppLine = { label: 'Servicing & repairs', display: '07450 277250', number: '447450277250' };
-/** MOT & tyres line (WhatsApp only; MOT calls go to the main line). */
-const motWhatsApp: WhatsAppLine = { label: 'MOTs & tyres', display: '07476 094818', number: '447476094818' };
-
-const waLink = (number: string, text: string) => `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
-
-const whatsappMessage = 'Hello Toyotech, I am interested in booking a service or MOT. Could you let me know your availability?';
+/** MOT line (WhatsApp only; MOT calls go to the main line). Tyres will use it too once they launch. */
+const motWhatsApp: WhatsAppLine = { label: 'MOTs', display: '07476 094818', number: '447476094818' };
 
 /**
- * Jobs offered by the WhatsApp enquiry form (WhatsAppEnquiry.astro). Each one
- * goes to the WhatsApp line that handles it; `{reg}` in the template is
- * replaced with the customer's reg plate.
+ * One kind of WhatsApp enquiry. The pre-filled message is
+ * `${intro}, reg AB12 CDE. ${outro}`, plus any extra information the
+ * customer typed. WhatsAppEnquiry.astro builds the same message in the
+ * browser; `enquiryHref` here is the no-JS fallback (no reg).
  */
-export const whatsappEnquiries = [
-  {
-    id: 'mot',
-    label: 'MOT',
-    number: motWhatsApp.number,
-    template: "Hello Toyotech, I'd like to book an MOT for my car, reg {reg}. Could you let me know your availability?",
-  },
+export type Enquiry = {
+  id: string;
+  /** Short name: radio label in the general form */
+  label: string;
+  /** Dialog heading when a button opens this enquiry directly */
+  title: string;
+  number: string;
+  intro: string;
+  outro: string;
+  /** Show the optional "anything else?" box */
+  extra?: boolean;
+  /** Shown in the general form but can't be picked yet */
+  comingSoon?: boolean;
+};
+
+const availability = 'Could you let me know your availability?';
+
+const mot: Enquiry = {
+  id: 'mot',
+  label: 'MOT',
+  title: 'Book an MOT',
+  number: motWhatsApp.number,
+  intro: "Hello Toyotech, I'd like to book an MOT for my car",
+  outro: availability,
+};
+
+const servicePackage = (tier: string): Enquiry => ({
+  id: `service-${tier.toLowerCase()}`,
+  label: `${tier} service`,
+  title: `Book a ${tier} service`,
+  number: serviceWhatsApp.number,
+  intro: `Hello Toyotech, I'd like to book a ${tier} service for my car`,
+  outro: availability,
+  extra: true,
+});
+
+/** Choices in the general form, opened by any WhatsApp button without its own enquiry. */
+export const whatsappEnquiries: Enquiry[] = [
+  mot,
   {
     id: 'service',
     label: 'Service',
+    title: 'Book a service',
     number: serviceWhatsApp.number,
-    template: "Hello Toyotech, I'd like to book a service for my car, reg {reg}. Could you let me know your availability?",
+    intro: "Hello Toyotech, I'd like to book a service for my car",
+    outro: availability,
   },
   {
     id: 'repair',
     label: 'Repair or quote',
+    title: 'Repair or quote',
     number: serviceWhatsApp.number,
-    template: "Hello Toyotech, I'd like a quote for a repair on my car, reg {reg}. The problem is: ",
+    intro: "Hello Toyotech, I'd like a quote for a repair on my car",
+    outro: 'The problem is: ',
   },
   {
     id: 'tyres',
     label: 'Tyres',
+    title: 'Tyres',
     number: motWhatsApp.number,
-    template: "Hello Toyotech, I'm looking for tyres for my car, reg {reg}. Could you let me know what you have?",
+    intro: "Hello Toyotech, I'm looking for tyres for my car",
+    outro: 'Could you let me know what you have?',
+    comingSoon: true,
   },
 ];
+
+/**
+ * Enquiries a button opens directly (`<WhatsAppButton enquiry="mot" />`),
+ * skipping the "what do you need?" choice: the MOT page asks for the reg
+ * only; the servicing packages ask for the reg plus extra information.
+ */
+export const whatsappPresets: Enquiry[] = [mot, ...['Bronze', 'Silver', 'Gold'].map(servicePackage)];
+
+const waLink = (number: string, text: string) => `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
+
+const whatsappMessage = 'Hello Toyotech, I am interested in booking a service or MOT. Could you let me know your availability?';
 
 export const whatsapp = {
   number: serviceWhatsApp.number,
@@ -176,6 +223,12 @@ export const whatsapp = {
   href: waLink(serviceWhatsApp.number, whatsappMessage),
   lines: [serviceWhatsApp, motWhatsApp],
 };
+
+/** Plain wa.me link for an enquiry (no reg): what the button does without JS. */
+export function enquiryHref(id?: string): string {
+  const e = whatsappPresets.find((p) => p.id === id);
+  return e ? waLink(e.number, `${e.intro}. ${e.outro}`.trim()) : whatsapp.href;
+}
 
 /** Published Google Sheet (File → Share → Publish to web → CSV). */
 export const OPENING_HOURS_CSV_URL =
