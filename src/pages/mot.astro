@@ -38,7 +38,7 @@ const faqs = [
   title="What's Checked at an MOT? Every Part Tested | Toyotech, Bletchley"
   description="A plain-English guide to every part checked at a car MOT — brakes, tyres, steering, lights, emissions and more — plus what an MOT doesn't cover. Book your MOT in Bletchley, Milton Keynes."
 >
-  <BreadcrumbSchema slot="head" items={[{ name: 'MOT Checks', path: '/mot' }]} />
+  <BreadcrumbSchema slot="head" items={[{ name: 'MOT', path: '/mot' }]} />
   <FAQSchema slot="head" items={faqs} />
 
   <section class="bg-navy text-white">
@@ -51,23 +51,26 @@ const faqs = [
     </div>
   </section>
 
-  <section class="mx-auto flex max-w-6xl flex-col items-center gap-5 px-4 py-12 text-center">
-    <h2 class="text-3xl font-black text-navy">Book your MOT in Bletchley</h2>
-    <p class="max-w-lg text-slate-600">
-      Class 4 MOTs for cars and light vans, 7 days a week, with same-day bookings. If anything fails, we'll
-      explain it and show you before any work starts.
-    </p>
-    <p class="text-sm font-semibold text-slate-600">
-      DVSA-authorised MOT testing station · Site number <span class="tabular-nums">{motStation.siteNumber}</span>
-    </p>
-    <WhatsAppButton variant="large" enquiry="mot" label="Book your MOT on WhatsApp" />
-    <div class="mt-4 w-full max-w-md overflow-hidden rounded-2xl">
+  <!-- Stacked and centred on mobile; text beside the photo from lg up. -->
+  <section class="mx-auto grid max-w-6xl items-center gap-8 px-4 py-12 lg:grid-cols-2 lg:gap-12">
+    <div class="flex flex-col items-center gap-5 text-center lg:items-start lg:text-left">
+      <h2 class="text-3xl font-black text-navy">Book your MOT in Bletchley</h2>
+      <p class="max-w-lg text-slate-600">
+        Class 4 MOTs for cars and light vans, 7 days a week, with same-day bookings. If anything fails, we'll
+        explain it and show you before any work starts.
+      </p>
+      <p class="text-sm font-semibold text-slate-600">
+        DVSA-authorised MOT testing station · Site number <span class="tabular-nums">{motStation.siteNumber}</span>
+      </p>
+      <WhatsAppButton variant="large" enquiry="mot" label="Book your MOT on WhatsApp" />
+    </div>
+    <div class="mx-auto w-full max-w-md overflow-hidden rounded-2xl lg:max-w-none">
       <ImagePlaceholder
         name="workshop"
         alt="The Toyotech MOT Centre unit at 80-86 Tavistock Street, Bletchley: an open roller-door bay under a blue sign, with a blue MOT testing station sign above the fence beside it"
         aspect="aspect-[4/3]"
         class="object-[center_35%]"
-        sizes="(min-width: 480px) 448px, 100vw"
+        sizes="(min-width: 1152px) 552px, (min-width: 1024px) 50vw, (min-width: 480px) 448px, 100vw"
         label="MOT centre photo coming soon"
       />
     </div>
