@@ -51,7 +51,7 @@ Q01  Fourth phone number
      ANSWER: Neither. Meeting 12 Oct 2026: 07502 811204 is to be
        removed permanently (see Q02). Drop "07450 281120 4" from
        CLAUDE.md as well.
-     STATUS: open
+     STATUS: applied: commit 2c1cffd on claude/meeting-oct-2026-updates (not yet pushed)
 
 Q02  Phone numbers: which are live, and what is each one for?
        07450 277250  (site label: Mobile / WhatsApp)
@@ -68,7 +68,7 @@ Q02  Phone numbers: which are live, and what is each one for?
        Servicing & quotes:      phone and WhatsApp 07450 277250
        Remove permanently:      07450 011199 and 07502 811204
        Which WhatsApp the site-wide button uses is split out as Q37.
-     STATUS: open
+     STATUS: applied: commit 2c1cffd on claude/meeting-oct-2026-updates (not yet pushed)
 
 Q03  Opening hours, day by day
      Site backup hours say 09:00-18:00, 7 days. Is that right? Do the
@@ -85,11 +85,13 @@ Q03  Opening hours, day by day
        Saturday:  workshop 09:00-18:00; MOT times?
        Sunday:    workshop closed; MOT open, times?
        Bank holidays: not discussed
-     STATUS: needs clarification: MOT testing times for each day,
-       especially Sunday (same 09:00-18:00?), and bank holidays. The
-       Google Sheet and the hours widget hold one set of hours today,
-       so showing workshop and MOT hours side by side needs extra
-       columns in the Sheet; agree that before changing the Sheet.
+     FOLLOW-UP (12 Oct 2026): MOT testing is 09:00-18:00 every day,
+       including Sunday. So: Mon-Sat 09:00-18:00 workshop and MOTs;
+       Sunday 09:00-18:00 MOTs only. Bank holidays still unknown.
+     STATUS: applied: commit 2c1cffd on claude/meeting-oct-2026-updates (not yet pushed) (site fallback hours, footer and copy).
+       The Google Sheet still needs its notes changing by hand: Mon-Sat
+       "Workshop and MOTs", Sunday "MOTs only, workshop closed", all
+       days 09:00-18:00.
 
 Q04  Address wording
      "Bletchley" (site, Companies House) or "Fenny Stratford, Bletchley"
@@ -101,7 +103,7 @@ Q04  Address wording
        Bletchley; the Google listing and CLAUDE.md's listing line still
        say Fenny Stratford and need changing. Fenny Stratford can stay
        in the service-area list (areaServed), which is not the address.
-     STATUS: open
+     STATUS: applied: commit 2c1cffd on claude/meeting-oct-2026-updates (not yet pushed) (Google listing still to update, see Q44)
 
 Q05  DVSA MOT testing station number
      Affects: could be shown on the site and in the schema as an
@@ -115,7 +117,7 @@ Q06  MOT classes tested
      Affects: src/content/services.ts (MOT description), knowsAbout in
      LocalBusinessSchema, possible /class-7-mot/ page
      ANSWER: Class 4 only (meeting 12 Oct 2026). No Class 7 page.
-     STATUS: open
+     STATUS: applied: commit 2c1cffd on claude/meeting-oct-2026-updates (not yet pushed)
 
 
 ======================================================================
@@ -191,8 +193,8 @@ Q15  Services list
          - Repairs & Quotes: submit the vehicle's issue, ask for an
            estimate (see Q43)
          - Tyres: tyre enquiries (see Q41)
-     STATUS: open (pages can be scaffolded; tier and tyre details
-       wait on Q40 and Q41)
+     STATUS: open (parked until Q40 and Q41 are answered; listed in
+       CLAUDE.md Future Ideas)
 
 Q16  Prices
      Price of a standard MOT, interim service, full service, hybrid
@@ -201,7 +203,7 @@ Q16  Prices
      Affects: Services page, schema offers, GBP Services tab
      ANSWER: No prices displayed anywhere on the site (meeting 12 Oct
        2026). No schema offers with prices.
-     STATUS: open (check the site has none; nothing to add)
+     STATUS: noted (no prices on the site)
 
 Q17  Extras
      Courtesy car? Collection and delivery? Card payments? Parking?
@@ -225,7 +227,7 @@ Q19  Homepage claims still true every week?
        index.astro (highlight, intro, description), site.description,
        Footer.astro, mot-checks.astro, hybrid-battery.astro.
        "Same-day bookings" was not discussed: keep as is.
-     STATUS: open
+     STATUS: applied: commit 2c1cffd on claude/meeting-oct-2026-updates (not yet pushed)
 
 
 ======================================================================
@@ -271,9 +273,11 @@ Q24  Booking form
        the registration plate ONLY and opens a pre-filled WhatsApp
        message for the customer to send (meeting 12 Oct 2026). No name
        or issue fields.
-     STATUS: open (which WhatsApp number it sends to follows Q37 and
-       the page it sits on: MOT/Tyres pages -> 07476 094818,
-       Servicing/Repairs pages -> 07450 277250)
+     FOLLOW-UP (12 Oct 2026): clicking any "Message us on WhatsApp"
+       button opens a simple form: reg plate plus what they want
+       (service, MOT, general repair). Added Tyres too, from the meeting.
+     STATUS: applied: commit 2c1cffd on claude/meeting-oct-2026-updates (not yet pushed). MOT and Tyres go to WhatsApp
+       07476 094818; Service and Repair to 07450 277250.
 
 Q25  Google reviews block
      Fine to update by hand (current), or should it auto-update? (Needs
@@ -381,8 +385,8 @@ Q37  Site-wide WhatsApp number
      07450 277250, switch to 07476 094818, or change per page?
      Affects: src/config/site.ts (whatsapp), FloatingWhatsApp, Header,
      index.astro hero, contact.astro
-     ANSWER:
-     STATUS: open
+     ANSWER: Use the service garage number, 07450 277250.
+     STATUS: applied: commit 2c1cffd on claude/meeting-oct-2026-updates (not yet pushed)
 
 Q38  Company numbers (two now, maybe three later)
      The meeting said there are 2 registered companies: one for the
@@ -393,12 +397,16 @@ Q38  Company numbers (two now, maybe three later)
      name goes with which company?
      Affects: src/config/site.ts (legal, turn into a list), Footer,
      privacy.astro "Who we are", LocalBusinessSchema, CLAUDE.md
-     ANSWER: (partly) 2 companies today, room for a 3rd later. Details
-       of the second company not given.
-     STATUS: needs clarification: second company's name, number and
-       registered office (check on Companies House), and which one
-       runs the website and processes enquiries (the privacy policy's
-       data controller)
+     ANSWER: Show both companies.
+       Toyotech Hybrid Autos Limited, 16013011, incorporated 11 Oct
+         2024, Unit 3, 80-86 Tavistock Street, Bletchley, Milton
+         Keynes, MK2 2PB (main workshop)
+       Toyotech MOT Centre Ltd, 17095416, incorporated 16 Mar 2026,
+         Unit 6, 80-86 Tavistock Street, Bletchley, Milton Keynes,
+         MK2 2PB (MOT testing station)
+     STATUS: applied: commit 2c1cffd on claude/meeting-oct-2026-updates (not yet pushed). Still to confirm: the privacy policy
+       names Toyotech Hybrid Autos Limited as the website's data
+       controller (as before). Check that's right.
 
 Q39  MOT availability check
      The meeting wants a "digital availability check" for MOT slots.
@@ -408,8 +416,9 @@ Q39  MOT availability check
      and it opens a pre-filled WhatsApp to the MOT number, e.g. "Hi, is
      there an MOT slot on Tue 14 Oct, morning? Reg AB12 CDE". OK?
      Affects: new component on the MOT page
-     ANSWER:
-     STATUS: open
+     ANSWER: Don't build it yet; it's a future idea. Use the reg-plate
+       WhatsApp form instead (Q24).
+     STATUS: noted (in CLAUDE.md Future Ideas)
 
 Q40  Servicing tiers: Bronze, Silver, Gold
      What's included in each? (Listed as a follow-up in the meeting.)
@@ -430,8 +439,10 @@ Q42  Repairs & Quotes page
      description of the problem, opening a pre-filled WhatsApp to
      07450 277250 where the customer can add photos. OK?
      Affects: new Repairs & Quotes page
-     ANSWER:
-     STATUS: open
+     ANSWER: Covered by the WhatsApp form (Q24): reg plate plus
+       "Repair or quote"; the message ends "The problem is: " so the
+       customer types the issue in WhatsApp.
+     STATUS: applied: commit 2c1cffd on claude/meeting-oct-2026-updates (not yet pushed)
 
 Q43  Google review QR sign
      A sign in the customer viewing area with a QR code that opens
@@ -439,8 +450,8 @@ Q43  Google review QR sign
      the Google Business Profile (Home -> "Ask for reviews" ->
      g.page/r/.../review). The agent can then make a printable A4 sign.
      Affects: printable sign (not the site)
-     ANSWER:
-     STATUS: open
+     ANSWER: Not needed. Being ordered from a separate site.
+     STATUS: noted
 
 Q44  Off-site actions agreed (record only)
      ANSWER:
