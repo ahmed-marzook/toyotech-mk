@@ -18,9 +18,9 @@
  *      retention section below uses a deliberately generic answer).
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site, address, phones, legal, url } from '../config/site';
+import { site, address, phones, whatsapp, legal, companies, url } from '../config/site';
 
-const lastUpdated = 'September 2026';
+const lastUpdated = 'October 2026';
 ---
 
 <BaseLayout
@@ -41,10 +41,21 @@ const lastUpdated = 'September 2026';
     <div class="mx-auto max-w-3xl px-4 py-10">
       <h2 class="text-2xl font-black text-navy">Who we are</h2>
       <p class="mt-3 text-slate-700">
-        {site.name} ({site.altName}) is a trading name of {legal.companyName}, a company registered in{' '}
-        {legal.jurisdiction}, company no. {legal.companyNumber}. We are the data controller for the personal data
-        described on this page. Our registered office and workshop address is {legal.registeredOffice}. You can
-        reach us by phone or WhatsApp — see the numbers at the bottom of this page or on our{' '}
+        {site.name} ({site.altName}) is run by {companies.length} companies, both registered in England and Wales:
+      </p>
+      <ul class="mt-3 list-disc space-y-1 pl-6 text-slate-700">
+        {
+          companies.map((c) => (
+            <li>
+              <strong class="text-navy">{c.companyName}</strong> ({c.role}), company no. {c.companyNumber}, registered
+              office {c.registeredOffice}.
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-3 text-slate-700">
+        {legal.companyName} runs this website and is the data controller for the personal data described on this
+        page. You can reach us by phone or WhatsApp — see the numbers at the bottom of this page or on our{' '}
         <a class="font-semibold text-brand-blue underline underline-offset-4" href={url('/contact')}>Contact page</a>.
       </p>
     </div>
@@ -54,8 +65,15 @@ const lastUpdated = 'September 2026';
     <div class="mx-auto max-w-3xl px-4 py-10">
       <h2 class="text-2xl font-black text-navy">The personal data we collect</h2>
       <p class="mt-3 text-slate-700">This website is a static, no-login brochure site. We don't run a booking
-        form, a user account system, or a payment system — so almost everything below only happens if you choose
+        system, a user account system, or a payment system — so almost everything below only happens if you choose
         to contact us.</p>
+
+      <h3 class="mt-6 text-lg font-bold text-navy">The WhatsApp message form</h3>
+      <p class="mt-2 text-slate-700">
+        When you press a WhatsApp button, a short form asks for your car's registration and what you need. Your
+        browser uses it to write a WhatsApp message for you. Nothing is sent to us or stored by this website: it
+        only reaches us if you choose to send the message in WhatsApp.
+      </p>
 
       <h3 class="mt-6 text-lg font-bold text-navy">When you message or call us</h3>
       <p class="mt-2 text-slate-700">
@@ -185,6 +203,14 @@ const lastUpdated = 'September 2026';
             <li>
               <a href={`tel:${p.tel}`} class="font-semibold text-brand-blue underline underline-offset-4">{p.display}</a>
               <span class="text-slate-500"> — {p.label}</span>
+            </li>
+          ))
+        }
+        {
+          whatsapp.lines.map((l) => (
+            <li>
+              WhatsApp {l.display}
+              <span class="text-slate-500"> — {l.label}</span>
             </li>
           ))
         }

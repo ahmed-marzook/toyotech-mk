@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { site, address, phones, whatsapp, legal, serviceAreas, url } from '../config/site';
+import { site, address, phones, whatsapp, companies, hoursSummary, serviceAreas, url } from '../config/site';
 import { services } from '../content/services';
 import { hybridModels } from '../content/hybrid-models';
 import { googleReviews } from '../content/reviews';
@@ -21,20 +21,22 @@ export const GET: APIRoute = async ({ site: origin }) => {
 
   const body = `# ${site.name} (${site.altName})
 
-> Independent garage and MOT centre in Bletchley, Milton Keynes, specialising in hybrid vehicles. MOTs, servicing, diagnostics and repairs for all makes and models, with genuine parts and warranty. Open 7 days a week, same-day bookings available.
+> Independent garage and MOT centre in Bletchley, Milton Keynes, specialising in hybrid vehicles. MOTs, servicing, diagnostics and repairs for all makes and models, with genuine parts and warranty. Class 4 MOTs 7 days a week; workshop Monday to Saturday. Same-day bookings available.
 
 ## Key facts
 
 - Business type: Car repair garage, MOT testing centre, hybrid vehicle specialist
 - Address: 80-86 Tavistock Street, Bletchley, Milton Keynes, ${address.postcode}, United Kingdom
-- Phone: ${phones.map((p) => p.display).join(', ')}
-- WhatsApp (quickest way to book): ${phones[0].display} — ${whatsapp.href}
+- Phone: ${phones.map((p) => `${p.display} (${p.label})`).join(', ')}
+- WhatsApp (quickest way to book): ${whatsapp.lines.map((l) => `${l.display} (${l.label})`).join(', ')} — ${whatsapp.href}
 - Contact: ${site.contactName}
 - Areas served: ${serviceAreas.join(', ')}
-- Legal entity: ${legal.companyName}, registered in ${legal.jurisdiction}, company no. ${legal.companyNumber}
+- Legal entities: ${companies.map((c) => `${c.companyName} (${c.role}), registered in ${c.jurisdiction}, company no. ${c.companyNumber}`).join('; ')}
 - Google rating: ${googleReviews.rating} from ${googleReviews.count} reviews (${googleReviews.listingUrl})
 
 ## Opening hours
+
+${hoursSummary.workshop}. ${hoursSummary.mot}.
 
 ${hoursLines.join('\n')}
 

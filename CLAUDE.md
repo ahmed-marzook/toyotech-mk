@@ -3,11 +3,20 @@
 ## Business Overview
 
 - **Name:** Toyotech MOT Centre / Toyotech Hybrid Autos
-- **Legal entity:** Toyotech Hybrid Autos Limited, company no. 16013011, registered in England and Wales, incorporated 11 October 2024, SIC 45200 (Maintenance and repair of motor vehicles). Registered office: Unit 3, 80-86 Tavistock Street, Bletchley, Milton Keynes, MK2 2PB. Source: [Companies House](https://find-and-update.company-information.service.gov.uk/company/16013011). Lives in `legal` in `src/config/site.ts`, disclosed in the Footer and the Privacy Policy's "Who we are" section (Companies Act 2006 trading disclosures + Provision of Services Regulations 2009).
+- **Legal entities (two, room for a third later):**
+  - Workshop: Toyotech Hybrid Autos Limited, company no. 16013011, registered in England and Wales, incorporated 11 October 2024, SIC 45200 (Maintenance and repair of motor vehicles). Registered office: Unit 3, 80-86 Tavistock Street, Bletchley, Milton Keynes, MK2 2PB. Source: [Companies House](https://find-and-update.company-information.service.gov.uk/company/16013011). Runs the website and is the data controller (`legal` in `src/config/site.ts`).
+  - MOT testing station: Toyotech MOT Centre Ltd, company no. 17095416, incorporated 16 March 2026. Registered office: Unit 6, 80-86 Tavistock Street, Bletchley, Milton Keynes, MK2 2PB. Source: [Companies House](https://find-and-update.company-information.service.gov.uk/company/17095416).
+  - Both live in `companies` in `src/config/site.ts` and are disclosed in the Footer and the Privacy Policy's "Who we are" section (Companies Act 2006 trading disclosures + Provision of Services Regulations 2009). Add a third company to that array.
 - **Specialty:** Hybrid vehicle servicing, plus general MOTs and servicing for all cars
-- **Address:** No. 80-86, Tavistock Street, Bletchley, Milton Keynes, MK22PB
-- **Contact:** Mumthaz — 07450 277250 / 01908 639629 (other numbers seen on signage: 07450 011199, 07450 281120 4)
-- **Hours:** Open 7 days a week, same-day bookings available
+- **Address:** No. 80-86, Tavistock Street, Bletchley, Milton Keynes, MK2 2PB. Display "Bletchley" only, never "Fenny Stratford" (decided 12 Oct 2026; the Google listing still needs updating to match).
+- **Contact (split by job, decided 12 Oct 2026):** ask for Mumthaz
+  - General / main line, MOTs & tyres: phone 01908 639629
+  - MOTs & tyres WhatsApp: 07476 094818
+  - Servicing & quotes: phone and WhatsApp 07450 277250 (also the site-wide WhatsApp button)
+  - 07450 011199 and 07502 811204 are permanently removed; don't add them back.
+- **Hours:** Workshop 09:00-18:00 Monday to Saturday. MOT testing 09:00-18:00, 7 days a week. Same-day bookings available. Don't write "open 7 days" for the workshop.
+- **MOT classes:** Class 4 only.
+- **Prices:** none shown anywhere on the site.
 - **Services offered** (from workshop signage): Diagnostic, Engine, Gear Box, MOT Repair, Service, Brake Pads, Power Steering, AC & Heater, Clutch, ABS, Glass, Suspension, Electrical Work, Hybrid Battery
 - **Tagline:** "Expert Care for All Makes and Models" / "We Offer Genuine Parts and Warranty"
 - **Google rating:** 4.8★ (10 reviews) — see Google Reviews section below
@@ -211,12 +220,16 @@ The goal: be the garage that ChatGPT, Gemini, Perplexity, Claude and Apple Intel
 
 ## Future Ideas (not in initial build)
 
+- **MOT slot availability check / live slot booking** (meeting 12 Oct 2026, parked) — a calendar island showing open MOT slots; picking one opens a pre-filled WhatsApp ("Hi, I'd like to book an MOT for [Reg] on [Date] at 4:00 PM"). The garage confirms by WhatsApp and blocks the slot by hand on an admin dashboard. No payments. Needs somewhere to store slots.
+- **Automated MOT reminders** (meeting 12 Oct 2026) — 30 days before expiry, checked against the DVSA MOT History API, sent by SMS (about 3-4p each via Twilio or similar) and/or WhatsApp Business API templates. Needs explicit UK GDPR/PECR opt-in at job completion, clear storage terms and easy opt-out. Needs a backend.
+- **Dedicated booking/enquiry pages** (meeting 12 Oct 2026) — MOT (Class 4), Servicing (Bronze/Silver/Gold tiers, inclusions TBD), Repairs & Quotes, Tyres. Waiting on tier and tyre details.
+
 - **Vehicle reg / MOT & tax status checker** — using the free DVLA Vehicle Enquiry Service API and DVSA MOT History API. Both are free to use with no per-lookup charges, but a static GitHub Pages site can't call them directly (API key can't live client-side), so this needs a small serverless proxy (Cloudflare Worker / Netlify Function) in front of it. Park this as a v2 feature once hosting supports it.
 
 ## WhatsApp Contact
 
-- **Confirmed number:** 07450 277250
-- Use a `wa.me` deep link: `https://wa.me/447450277250?text=Hi%20Toyotech%2C%20I%27d%20like%20to%20book%20an%20MOT`
+- **Site-wide number:** 07450 277250 (service garage). MOT & tyres WhatsApp: 07476 094818.
+- Every WhatsApp button is a plain `wa.me` link (works without JS, goes to 07450 277250). With JS, `src/components/WhatsAppEnquiry.astro` intercepts the click and opens a small form: reg plate + what they need (MOT, Service, Repair or quote, Tyres). It builds the pre-filled message and opens WhatsApp on the right line (MOT/Tyres → 07476 094818, Service/Repair → 07450 277250). Jobs and message templates live in `whatsappEnquiries` in `src/config/site.ts`. Nothing is sent to the site.
 - Make this the primary CTA button site-wide (header, home hero, contact page)
 - Style as a prominent green WhatsApp-branded button, distinct from the red/blue theme, so it's instantly recognisable
 

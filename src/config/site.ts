@@ -8,7 +8,7 @@ export const site = {
   altName: 'Toyotech Hybrid Autos',
   tagline: 'Expert care for all makes and models',
   description:
-    'Toyotech MOT Centre in Bletchley, Milton Keynes — hybrid vehicle specialists offering MOTs, servicing, brakes, repairs and diagnostics. Open 7 days, same-day bookings.',
+    'Toyotech MOT Centre in Bletchley, Milton Keynes — hybrid vehicle specialists offering MOTs, servicing, brakes, repairs and diagnostics. MOTs 7 days a week, same-day bookings.',
   contactName: 'Mumthaz',
 };
 
@@ -24,9 +24,27 @@ export const address = {
 
 /**
  * Trading disclosure required by the Companies Act 2006 (trading
- * disclosures regulations) and the Provision of Services Regulations 2009
- * now that the business trades as a limited company. Source: Companies
- * House, https://find-and-update.company-information.service.gov.uk/company/16013011
+ * disclosures regulations) and the Provision of Services Regulations 2009.
+ * There are two registered companies (one for the main workshop, one for
+ * the MOT testing station), with room for a third later: add each one to
+ * `companies` and the Footer and Privacy Policy list it automatically.
+ * Only add a company once its details are checked on Companies House.
+ */
+export type Company = {
+  companyName: string;
+  companyNumber: string;
+  jurisdiction: string;
+  registeredOffice: string;
+  /** What this company runs, e.g. "Workshop" or "MOT testing station" */
+  role?: string;
+  /** ISO date of incorporation (Companies House) */
+  incorporated?: string;
+};
+
+/**
+ * Main workshop company — the website's data controller and the legalName in
+ * the JSON-LD. Source: Companies House,
+ * https://find-and-update.company-information.service.gov.uk/company/16013011
  */
 export const legal = {
   companyName: 'Toyotech Hybrid Autos Limited',
@@ -35,7 +53,22 @@ export const legal = {
   registeredOffice: 'Unit 3, 80-86 Tavistock Street, Bletchley, Milton Keynes, MK2 2PB',
   /** ISO date of incorporation (Companies House) — schema.org foundingDate */
   incorporated: '2024-10-11',
-};
+  role: 'Workshop',
+} satisfies Company;
+
+export const companies: Company[] = [
+  legal,
+  // MOT testing station. Source: Companies House,
+  // https://find-and-update.company-information.service.gov.uk/company/17095416
+  {
+    companyName: 'Toyotech MOT Centre Ltd',
+    companyNumber: '17095416',
+    jurisdiction: 'England and Wales',
+    registeredOffice: 'Unit 6, 80-86 Tavistock Street, Bletchley, Milton Keynes, MK2 2PB',
+    incorporated: '2026-03-16',
+    role: 'MOT testing station',
+  },
+];
 
 /**
  * Areas the workshop serves, used for schema.org `areaServed`, llms.txt and
@@ -85,19 +118,63 @@ export const map = {
 
 export type Phone = { label: string; display: string; tel: string };
 
+/**
+ * Numbers are split by job (meeting 12 Oct 2026). The first is the main
+ * number used site-wide (header, hero, schema `telephone`).
+ */
 export const phones: Phone[] = [
-  { label: 'Mobile / WhatsApp', display: '07450 277250', tel: '+447450277250' },
-  { label: 'Landline', display: '01908 639629', tel: '+441908639629' },
-  { label: 'Mobile', display: '07450 011199', tel: '+447450011199' },
-  { label: 'Mobile', display: '07502 811204', tel: '+447502811204' },
+  { label: 'Main line · MOTs & tyres', display: '01908 639629', tel: '+441908639629' },
+  { label: 'Servicing & quotes · call or WhatsApp', display: '07450 277250', tel: '+447450277250' },
 ];
 
-const whatsappNumber = '447450277250';
+export type WhatsAppLine = { label: string; display: string; number: string };
+
+/** Service garage line — the site-wide WhatsApp button and the no-JS fallback. */
+const serviceWhatsApp: WhatsAppLine = { label: 'Servicing & repairs', display: '07450 277250', number: '447450277250' };
+/** MOT & tyres line (WhatsApp only; MOT calls go to the main line). */
+const motWhatsApp: WhatsAppLine = { label: 'MOTs & tyres', display: '07476 094818', number: '447476094818' };
+
+const waLink = (number: string, text: string) => `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
+
 const whatsappMessage = 'Hello Toyotech, I am interested in booking a service or MOT. Could you let me know your availability?';
 
+/**
+ * Jobs offered by the WhatsApp enquiry form (WhatsAppEnquiry.astro). Each one
+ * goes to the WhatsApp line that handles it; `{reg}` in the template is
+ * replaced with the customer's reg plate.
+ */
+export const whatsappEnquiries = [
+  {
+    id: 'mot',
+    label: 'MOT',
+    number: motWhatsApp.number,
+    template: "Hello Toyotech, I'd like to book an MOT for my car, reg {reg}. Could you let me know your availability?",
+  },
+  {
+    id: 'service',
+    label: 'Service',
+    number: serviceWhatsApp.number,
+    template: "Hello Toyotech, I'd like to book a service for my car, reg {reg}. Could you let me know your availability?",
+  },
+  {
+    id: 'repair',
+    label: 'Repair or quote',
+    number: serviceWhatsApp.number,
+    template: "Hello Toyotech, I'd like a quote for a repair on my car, reg {reg}. The problem is: ",
+  },
+  {
+    id: 'tyres',
+    label: 'Tyres',
+    number: motWhatsApp.number,
+    template: "Hello Toyotech, I'm looking for tyres for my car, reg {reg}. Could you let me know what you have?",
+  },
+];
+
 export const whatsapp = {
-  number: whatsappNumber,
-  href: `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`,
+  number: serviceWhatsApp.number,
+  display: serviceWhatsApp.display,
+  href: waLink(serviceWhatsApp.number, whatsappMessage),
+  lines: [serviceWhatsApp, motWhatsApp],
 };
 
 /** Published Google Sheet (File → Share → Publish to web → CSV). */
@@ -124,15 +201,25 @@ export type HoursRow = {
   note?: string;
 };
 
+/**
+ * Workshop: Monday to Saturday. MOT testing: 7 days. Both 09:00-18:00
+ * (meeting 12 Oct 2026). Plain-English summary for the footer and copy.
+ */
+export const hoursSummary = {
+  workshop: 'Workshop: Mon–Sat, 9am–6pm',
+  mot: 'MOTs: 7 days a week, 9am–6pm',
+};
+
 /** Shown if the Google Sheet can't be fetched or parsed. */
 export const fallbackHours: HoursRow[] = [
-  { day: 'Monday', open: '09:00', close: '18:00', closedFlag: false, note: 'Same-day bookings available' },
-  { day: 'Tuesday', open: '09:00', close: '18:00', closedFlag: false, note: 'Same-day bookings available' },
-  { day: 'Wednesday', open: '09:00', close: '18:00', closedFlag: false, note: 'Same-day bookings available' },
-  { day: 'Thursday', open: '09:00', close: '18:00', closedFlag: false, note: 'Same-day bookings available' },
-  { day: 'Friday', open: '09:00', close: '18:00', closedFlag: false, note: 'Same-day bookings available' },
-  { day: 'Saturday', open: '09:00', close: '18:00', closedFlag: false, note: 'Same-day bookings available' },
-  { day: 'Sunday', open: '09:00', close: '18:00', closedFlag: false, note: 'Same-day bookings available' },
+  ...['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map((day) => ({
+    day,
+    open: '09:00',
+    close: '18:00',
+    closedFlag: false,
+    note: 'Workshop and MOTs',
+  })),
+  { day: 'Sunday', open: '09:00', close: '18:00', closedFlag: false, note: 'MOTs only, workshop closed' },
 ];
 
 export const nav = [

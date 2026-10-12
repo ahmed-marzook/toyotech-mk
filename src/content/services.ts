@@ -34,7 +34,7 @@ export const services: Service[] = [
     name: 'MOT & MOT Repairs',
     summary: 'MOT testing with same-day slots.',
     description:
-      'MOT testing for cars and light vans, plus any repairs needed to get you through. We explain advisories before any work is done.',
+      'Class 4 MOT testing for cars and light vans, 7 days a week, plus any repairs needed to get you through. We explain advisories before any work is done.',
     icon: ClipboardCheck,
     featured: true,
   },

@@ -9,14 +9,14 @@ import GoogleReviews from '../components/GoogleReviews.astro';
 import WazeIcon from '../components/icons/WazeIcon.astro';
 import GoogleMapsIcon from '../components/icons/GoogleMapsIcon.astro';
 import BreadcrumbSchema from '../components/BreadcrumbSchema.astro';
-import { site, address, phones, map, serviceAreas } from '../config/site';
+import { site, address, phones, whatsapp, map, serviceAreas, hoursSummary } from '../config/site';
 
 const directionsHref = map.directionsUrl;
 ---
 
 <BaseLayout
   title="Contact & Directions | Toyotech MOT Centre, Bletchley"
-  description="Contact Toyotech MOT Centre, Tavistock Street, Bletchley, Milton Keynes. WhatsApp or call for same-day bookings."
+  description="Contact Toyotech MOT Centre, Tavistock Street, Bletchley, Milton Keynes. WhatsApp or call for same-day bookings. MOTs 7 days a week, workshop Monday to Saturday."
 >
   <BreadcrumbSchema slot="head" items={[{ name: 'Contact', path: '/contact' }]} />
 
@@ -26,6 +26,7 @@ const directionsHref = map.directionsUrl;
       <p class="mt-3 max-w-2xl text-lg text-white/80">
         The quickest way to book is WhatsApp — send your reg and what you need.
       </p>
+      <p class="mt-2 text-white/80">{hoursSummary.workshop} · {hoursSummary.mot}</p>
       <div class="mt-6">
         <WhatsAppButton variant="large" />
       </div>
@@ -36,7 +37,9 @@ const directionsHref = map.directionsUrl;
     <div class="space-y-10">
       <div>
         <h2 class="text-2xl font-bold text-navy">Call us</h2>
-        <p class="mt-1 text-slate-600">Ask for {site.contactName}.</p>
+        <p class="mt-1 text-slate-600">
+          Ask for {site.contactName}. On WhatsApp: {whatsapp.lines.map((l) => `${l.display} (${l.label})`).join(', ')}.
+        </p>
         <ul class="mt-4 space-y-3">
           {
             phones.map((p) => (

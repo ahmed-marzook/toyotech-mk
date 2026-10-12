@@ -1,0 +1,125 @@
+---
+/**
+ * WhatsApp quick-connect form. Every WhatsApp button (WhatsAppButton.jsx
+ * carries `data-whatsapp-enquiry`) opens this dialog instead of going
+ * straight to WhatsApp: the customer enters their reg plate and picks what
+ * they need, and we open WhatsApp with the message already written, sent to
+ * the line that handles that job (MOT & tyres or servicing & repairs).
+ *
+ * Progressive enhancement: the buttons are plain wa.me links, so with JS off
+ * (or before this script runs) they still open WhatsApp with the general
+ * message. Nothing is sent to this site; the form only builds a link.
+ */
+import { X } from 'lucide-react';
+import { whatsappEnquiries } from '../config/site';
+---
+
+<dialog
+  id="whatsapp-enquiry"
+  aria-labelledby="whatsapp-enquiry-title"
+  class="m-auto w-[calc(100%-2rem)] max-w-md rounded-2xl bg-white p-0 text-slate-800 shadow-2xl backdrop:bg-navy/70"
+>
+  <form id="whatsapp-enquiry-form" class="relative p-6" novalidate>
+    <button
+      type="button"
+      data-close
+      class="btn-motion absolute top-2 right-2 flex h-11 w-11 items-center justify-center rounded-full text-slate-500 hover:bg-slate-100 hover:text-navy"
+      aria-label="Close"
+    >
+      <X className="h-5 w-5" />
+    </button>
+
+    <h2 id="whatsapp-enquiry-title" class="pr-10 text-2xl font-black text-navy">Message us on WhatsApp</h2>
+    <p class="mt-1 text-slate-600">Tell us your reg and what you need. We'll write the message for you.</p>
+
+    <label for="whatsapp-enquiry-reg" class="mt-5 block font-bold text-navy">Car registration</label>
+    <input
+      id="whatsapp-enquiry-reg"
+      name="reg"
+      type="text"
+      required
+      autocomplete="off"
+      autocapitalize="characters"
+      spellcheck="false"
+      maxlength="10"
+      placeholder="e.g. AB12 CDE"
+      aria-describedby="whatsapp-enquiry-reg-error"
+      class="mt-2 block min-h-12 w-full rounded-lg border-2 border-slate-300 bg-yellow-50 px-4 text-xl font-bold tracking-wider text-navy uppercase placeholder:font-normal placeholder:tracking-normal placeholder:normal-case focus:border-brand-blue"
+    />
+    <p id="whatsapp-enquiry-reg-error" class="mt-1 text-sm font-semibold text-brand-red-dark" hidden>
+      Please enter your car's registration.
+    </p>
+
+    <fieldset class="mt-5">
+      <legend class="font-bold text-navy">What do you need?</legend>
+      <div class="mt-2 grid grid-cols-2 gap-2">
+        {
+          whatsappEnquiries.map((e, i) => (
+            <label class="flex min-h-12 cursor-pointer items-center gap-2 rounded-lg border-2 border-slate-200 px-3 py-2 font-semibold has-checked:border-brand-blue has-checked:bg-brand-blue/5">
+              <input type="radio" name="job" value={e.id} checked={i === 0} class="h-5 w-5 shrink-0 accent-brand-blue" />
+              {e.label}
+            </label>
+          ))
+        }
+      </div>
+    </fieldset>
+
+    <button
+      type="submit"
+      class="btn-motion mt-6 inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-whatsapp px-6 py-4 text-lg font-bold text-navy hover:bg-whatsapp-hover hover:shadow-lg"
+    >
+      Open WhatsApp<span class="sr-only"> (opens in a new tab)</span>
+    </button>
+    <p class="mt-3 text-center text-xs text-slate-500">You can check and edit the message before you send it.</p>
+  </form>
+</dialog>
+
+<script is:inline define:vars={{ jobs: whatsappEnquiries }}>
+  (() => {
+    const dialog = document.getElementById('whatsapp-enquiry');
+    const form = document.getElementById('whatsapp-enquiry-form');
+    const reg = document.getElementById('whatsapp-enquiry-reg');
+    const error = document.getElementById('whatsapp-enquiry-reg-error');
+    if (!dialog || !form || !reg || typeof dialog.showModal !== 'function') return;
+
+    // Every WhatsApp button opens the form instead of going straight to WhatsApp
+    document.addEventListener('click', (event) => {
+      const trigger = event.target instanceof Element && event.target.closest('[data-whatsapp-enquiry]');
+      if (!trigger || event.ctrlKey || event.metaKey || event.shiftKey) return;
+      event.preventDefault();
+      error.hidden = true;
+      reg.removeAttribute('aria-invalid');
+      dialog.showModal();
+      reg.focus();
+    });
+
+    reg.addEventListener('input', () => {
+      error.hidden = true;
+      reg.removeAttribute('aria-invalid');
+    });
+
+    dialog.querySelector('[data-close]')?.addEventListener('click', () => dialog.close());
+    // Click on the backdrop closes it
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const plate = reg.value.toUpperCase().replace(/[^A-Z0-9 ]/g, '').replace(/\s+/g, ' ').trim();
+      if (plate.replace(/ /g, '').length < 2) {
+        error.hidden = false;
+        reg.setAttribute('aria-invalid', 'true');
+        reg.focus();
+        return;
+      }
+      const jobId = new FormData(form).get('job');
+      const job = jobs.find((j) => j.id === jobId) ?? jobs[0];
+      const text = job.template.replace('{reg}', plate);
+      const href = `https://wa.me/${job.number}?text=${encodeURIComponent(text)}`;
+      // Opened from the submit click, so popup blockers allow it; fall back to same tab if not
+      if (!window.open(href, '_blank', 'noopener')) window.location.href = href;
+      dialog.close();
+    });
+  })();
+</script>
