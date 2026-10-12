@@ -5,7 +5,7 @@ import BreadcrumbSchema from '../components/BreadcrumbSchema.astro';
 import FAQSchema from '../components/FAQSchema.astro';
 import { CircleCheck, TriangleAlert } from 'lucide-react';
 import { motCheckGroups, notCovered } from '../content/mot-checks';
-import { url } from '../config/site';
+import { url, motStation } from '../config/site';
 
 const totalChecks = motCheckGroups.reduce((n, group) => n + group.items.length, 0);
 
@@ -55,6 +55,9 @@ const faqs = [
     <p class="max-w-lg text-slate-600">
       Class 4 MOTs for cars and light vans, 7 days a week, with same-day bookings. If anything fails, we'll
       explain it and show you before any work starts.
+    </p>
+    <p class="text-sm font-semibold text-slate-600">
+      DVSA-authorised MOT testing station · Site number <span class="tabular-nums">{motStation.siteNumber}</span>
     </p>
     <WhatsAppButton variant="large" enquiry="mot" label="Book your MOT on WhatsApp" />
   </section>

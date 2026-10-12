@@ -71,6 +71,18 @@ export const companies: Company[] = [
 ];
 
 /**
+ * DVSA MOT testing station, run by Toyotech MOT Centre Ltd. Site number from
+ * DVSA's list of active MOT testing stations (Unit 6, 80-86 Tavistock
+ * Street, Bletchley). Lets customers and crawlers check the garage against
+ * the official register.
+ */
+export const motStation = {
+  siteNumber: '5848BM',
+  operator: 'Toyotech MOT Centre Ltd',
+  classes: 'Class 4',
+};
+
+/**
  * Areas the workshop serves, used for schema.org `areaServed`, llms.txt and
  * the Contact page's "Areas we cover" line. AI assistants match a prompt like
  * "hybrid garage near Newport Pagnell" against these, so list real nearby
