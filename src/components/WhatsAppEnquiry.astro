@@ -6,6 +6,7 @@
  * written, sent to the line that handles that job.
  *
  * - `data-whatsapp-enquiry=""`: general form, reg plate + "What do you need?"
+ *   + optional "Anything else?" box
  * - `data-whatsapp-enquiry="<preset id>"`: that enquiry only, e.g. "mot"
  *   (reg plate only) or "service-gold" (reg plate + extra information)
  *
@@ -18,6 +19,8 @@ import { whatsappEnquiries, whatsappPresets } from '../config/site';
 
 const generalIntro = "Tell us your reg and what you need. We'll write the message for you.";
 const firstOpen = whatsappEnquiries.find((e) => !e.comingSoon)?.id;
+/** Cap on the "Anything else?" box, so the WhatsApp message stays short */
+const extraMax = 300;
 ---
 
 <dialog
@@ -113,10 +116,15 @@ const firstOpen = whatsappEnquiries.find((e) => !e.comingSoon)?.id;
         id="whatsapp-enquiry-extra"
         name="extra"
         rows="3"
-        maxlength="500"
+        maxlength={extraMax}
         placeholder="e.g. mileage, preferred day, warning lights, anything you've noticed"
-        class="mt-2 block w-full rounded-lg border-2 border-slate-300 px-4 py-3 text-base text-navy focus:border-brand-blue"
+        aria-describedby="whatsapp-enquiry-extra-count"
+        class="mt-2 block w-full resize-none rounded-lg border-2 border-slate-300 px-4 py-3 text-base text-navy focus:border-brand-blue"
       ></textarea>
+      <!-- Not a live region: announcing every keystroke is noisy. Read with the field via aria-describedby. -->
+      <p id="whatsapp-enquiry-extra-count" class="mt-1 text-right text-xs text-slate-500 tabular-nums">
+        <span data-count>0</span> / {extraMax} characters
+      </p>
     </div>
 
     <button
@@ -160,6 +168,7 @@ const firstOpen = whatsappEnquiries.find((e) => !e.comingSoon)?.id;
       const id = trigger.getAttribute('data-whatsapp-enquiry');
       // A different button starts afresh, so one package's notes don't carry into another
       if (id !== lastOpened) extra.value = '';
+      updateCount();
       lastOpened = id;
       preset = presets.find((p) => p.id === id) ?? null;
       title.textContent = preset ? preset.title : 'Message us on WhatsApp';
@@ -167,13 +176,20 @@ const firstOpen = whatsappEnquiries.find((e) => !e.comingSoon)?.id;
         ? `Tell us your reg${preset.extra ? ' and anything we should know' : ''}. We'll write the WhatsApp message for you.`
         : generalIntro;
       jobsField.hidden = Boolean(preset);
-      extraWrap.hidden = !preset?.extra;
+      // General form: always offer the box. Presets: only if they ask for it (the MOT page is reg-only)
+      extraWrap.hidden = preset ? !preset.extra : false;
       clearError();
       dialog.showModal();
       reg.focus();
     });
 
     reg.addEventListener('input', clearError);
+
+    const count = document.querySelector('#whatsapp-enquiry-extra-count [data-count]');
+    const updateCount = () => {
+      if (count) count.textContent = String(extra.value.length);
+    };
+    extra.addEventListener('input', updateCount);
     dialog.querySelector('[data-close]')?.addEventListener('click', () => dialog.close());
     // Click on the backdrop closes it
     dialog.addEventListener('click', (event) => {
@@ -193,13 +209,15 @@ const firstOpen = whatsappEnquiries.find((e) => !e.comingSoon)?.id;
       const job = preset ?? jobs.find((j) => j.id === jobId && !j.comingSoon) ?? jobs[0];
       // Keep in step with enquiryHref() in src/config/site.ts
       let text = `${job.intro}, reg ${plate}. ${job.outro}`;
-      const more = job.extra ? extra.value.trim() : '';
-      if (more) text += `\n\nExtra information: ${more}`;
+      const more = !extraWrap.hidden ? extra.value.trim() : '';
+      // "The problem is: " (repair) reads best with the details straight after it
+      if (more) text += job.outro.endsWith(': ') ? more : `\n\nExtra information: ${more}`;
       const href = `https://wa.me/${job.number}?text=${encodeURIComponent(text)}`;
       // Opened from the submit click, so popup blockers allow it; fall back to same tab if not
       if (!window.open(href, '_blank', 'noopener')) window.location.href = href;
       dialog.close();
       form.reset();
+      updateCount();
     });
   })();
 </script>
