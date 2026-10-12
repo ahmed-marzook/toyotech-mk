@@ -6,7 +6,7 @@
  * Every URL here is absolute (built from `site` + `base` in astro.config.mjs):
  * crawlers such as WhatsApp's don't resolve relative og:image paths.
  */
-import { site } from '../config/site';
+import { site, ogImage } from '../config/site';
 
 interface Props {
   title: string;
@@ -22,7 +22,7 @@ interface Props {
 const {
   title,
   description,
-  image = '/og-image.png',
+  image = ogImage,
   imageAlt = `${site.name} — hybrid specialists in Bletchley, Milton Keynes`,
   imageWidth = 1200,
   imageHeight = 630,

@@ -11,7 +11,7 @@
  * No aggregateRating: Google ignores "self-serving" review markup a business
  * puts on its own site, and the rating already lives on the Business Profile.
  */
-import { site, phones, map, legal, motStation } from '../config/site';
+import { site, phones, map, legal, motStation, ogImage } from '../config/site';
 import { services } from '../content/services';
 import { googleReviews } from '../content/reviews';
 import { hybridModels } from '../content/hybrid-models';
@@ -46,7 +46,7 @@ const schema = {
   description: site.description,
   slogan: 'Expert care for all makes and models. Genuine parts and warranty.',
   url: origin,
-  image: new URL('og-image.png', origin).href,
+  image: new URL(ogImage.slice(1), origin).href,
   logo: new URL('favicon.svg', origin).href,
   telephone: phones[0].tel,
   contactPoint: phones.map((p) => ({

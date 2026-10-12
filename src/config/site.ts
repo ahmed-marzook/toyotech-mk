@@ -3,6 +3,13 @@
  * WhatsApp link and the opening-hours CSV source.
  */
 
+/**
+ * Social preview image (public/og-image.png). Facebook/WhatsApp cache
+ * images by URL and "Scrape Again" doesn't refresh them, so bump `v`
+ * whenever the image changes (e.g. after `npm run og-image`).
+ */
+export const ogImage = '/og-image.png?v=2';
+
 export const site = {
   name: 'Toyotech Hybrid Autos',
   // Former website name, still used by the MOT testing station's company
