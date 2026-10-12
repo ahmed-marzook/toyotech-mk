@@ -52,11 +52,11 @@ const svg = `
   <!-- sub-line -->
   <rect x="92" y="385" width="60" height="4" fill="#6CD12A"/>
   <text x="170" y="400" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="700"
-        fill="#ffffff" letter-spacing="6">MOT CENTRE</text>
-  <rect x="515" y="385" width="60" height="4" fill="#6CD12A"/>
+        fill="#ffffff" letter-spacing="6">HYBRID AUTOS</text>
+  <rect x="560" y="385" width="60" height="4" fill="#6CD12A"/>
 
-  <text x="92" y="480" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" fill="#ffffff">Hybrid Specialists · Bletchley, Milton Keynes</text>
-  <text x="92" y="540" font-family="Arial, Helvetica, sans-serif" font-size="30" fill="#6CD12A" font-weight="700">Open 7 days · Same-day bookings</text>
+  <text x="92" y="480" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" fill="#ffffff">MOTs, Servicing &amp; Hybrid Specialists · Bletchley</text>
+  <text x="92" y="540" font-family="Arial, Helvetica, sans-serif" font-size="30" fill="#6CD12A" font-weight="700">MOTs 7 days a week · Same-day bookings</text>
 </svg>`;
 
 await sharp(Buffer.from(svg)).png().toFile(out);

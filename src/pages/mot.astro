@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import WhatsAppButton from '../components/WhatsAppButton.jsx';
 import BreadcrumbSchema from '../components/BreadcrumbSchema.astro';
 import FAQSchema from '../components/FAQSchema.astro';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 import { CircleCheck, TriangleAlert } from 'lucide-react';
 import { motCheckGroups, notCovered } from '../content/mot-checks';
 import { url, motStation } from '../config/site';
@@ -60,6 +61,16 @@ const faqs = [
       DVSA-authorised MOT testing station · Site number <span class="tabular-nums">{motStation.siteNumber}</span>
     </p>
     <WhatsAppButton variant="large" enquiry="mot" label="Book your MOT on WhatsApp" />
+    <div class="mt-4 w-full max-w-md overflow-hidden rounded-2xl">
+      <ImagePlaceholder
+        name="workshop"
+        alt="The Toyotech MOT Centre unit at 80-86 Tavistock Street, Bletchley: an open roller-door bay under a blue sign, with a blue MOT testing station sign above the fence beside it"
+        aspect="aspect-[4/3]"
+        class="object-[center_35%]"
+        sizes="(min-width: 480px) 448px, 100vw"
+        label="MOT centre photo coming soon"
+      />
+    </div>
   </section>
 
   <section class="bg-slate-50">

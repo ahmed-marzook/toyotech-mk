@@ -20,24 +20,32 @@ const highlights = [
 ---
 
 <BaseLayout
-  title="Toyotech MOT Centre | Hybrid Specialists in Milton Keynes"
-  description="Toyotech MOT Centre in Bletchley, Milton Keynes — hybrid vehicle specialists offering MOTs, servicing, brakes, repairs and diagnostics. MOTs 7 days a week, same-day bookings."
+  title="Toyotech Hybrid Autos | MOTs, Servicing & Repairs in Bletchley"
+  description="Toyotech Hybrid Autos in Bletchley, Milton Keynes — independent garage for MOTs, servicing and repairs on all makes, plus hybrid specialists. MOTs 7 days a week, same-day bookings."
 >
   <LocalBusinessSchema slot="head" />
 
   <!-- Hero -->
   <section class="relative isolate overflow-hidden bg-navy text-white">
-    <div class="absolute inset-0 -z-10 opacity-30">
-      <ImagePlaceholder name="hero" alt="" aspect="" dark label="Hero photo coming soon" />
+    <div class="absolute inset-0 -z-10 opacity-75 lg:opacity-80">
+      <ImagePlaceholder name="hero" alt="" aspect="" class="object-[70%_center]" dark label="Hero photo coming soon" />
     </div>
-    <div class="absolute inset-0 -z-10 bg-linear-to-b from-navy/60 via-navy/80 to-navy"></div>
+    <!--
+      Mobile: text covers the whole photo, so the overlay is darker behind the
+      small green eyebrow and the intro (4.5:1) and lighter behind the large h1
+      (3:1), measured against the brightest pixels. Desktop: text side stays
+      dark and the photo shows through on the right.
+    -->
+    <div
+      class="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgb(11_37_69/0.8)_0%,rgb(11_37_69/0.8)_20%,rgb(11_37_69/0.45)_36%,rgb(11_37_69/0.78)_54%,rgb(11_37_69/0.78)_82%,rgb(11_37_69/0.95)_100%)] lg:bg-linear-to-r lg:from-navy lg:via-navy/85 lg:to-navy/25"
+    ></div>
 
     <div class="mx-auto max-w-6xl px-4 py-14 sm:py-20">
-      <p class="text-sm font-bold tracking-widest text-brand-green uppercase">Toyotech Hybrid Autos · Bletchley</p>
+      <p class="text-sm font-bold tracking-widest text-brand-green uppercase">{site.strapline.join(' · ')}</p>
       <h1 class="mt-3 max-w-3xl text-4xl leading-tight font-black text-balance sm:text-5xl">
         Your local garage for MOTs, servicing and hybrid repairs in Milton Keynes
       </h1>
-      <p class="mt-5 max-w-2xl text-lg text-white/85">
+      <p class="mt-5 max-w-2xl text-lg text-white">
         Toyotech is an independent garage on Tavistock Street, Bletchley. We look after all makes and models, from
         MOTs and servicing to diagnostics and repairs, and we specialise in hybrids. Genuine parts and warranty, MOTs 7
         days a week, with same-day bookings.

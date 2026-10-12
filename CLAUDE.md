@@ -1,8 +1,8 @@
-# Toyotech MOT Centre — Website Project
+# Toyotech Hybrid Autos — Website Project
 
 ## Business Overview
 
-- **Name:** Toyotech MOT Centre / Toyotech Hybrid Autos
+- **Name:** Toyotech Hybrid Autos (renamed from "Toyotech MOT Centre" on 12 Oct 2026, the client wants a generic name covering MOTs, servicing, repairs and later tyres; it also matches the Google listing and signage). "Toyotech MOT Centre" now appears only as the MOT company's legal name (Toyotech MOT Centre Ltd) and the schema `alternateName`. Services strapline (`site.strapline`, hero eyebrow + footer): MOTs · Servicing · Repairs · Hybrid specialists; add Tyres when they launch.
 - **Legal entities (two, room for a third later):**
   - Workshop: Toyotech Hybrid Autos Limited, company no. 16013011, registered in England and Wales, incorporated 11 October 2024, SIC 45200 (Maintenance and repair of motor vehicles). Registered office: Unit 3, 80-86 Tavistock Street, Bletchley, Milton Keynes, MK2 2PB. Source: [Companies House](https://find-and-update.company-information.service.gov.uk/company/16013011). Runs the website and is the data controller (`legal` in `src/config/site.ts`).
   - MOT testing station: Toyotech MOT Centre Ltd, company no. 17095416, incorporated 16 March 2026. Registered office: Unit 6, 80-86 Tavistock Street, Bletchley, Milton Keynes, MK2 2PB. Source: [Companies House](https://find-and-update.company-information.service.gov.uk/company/17095416).
@@ -37,7 +37,7 @@
   - Blue: `#0B2545` (dark navy) / `#1E5AA8` (brand blue)
   - Red: `#D5222A` (Toyotech red)
   - White for contrast/text on dark backgrounds
-- **Logo:** Toyotech swoosh logo provided — black background, silver/grey swoosh, red "Toyotech" wordmark, blue "Hybrid Autos" subtext, red/blue/green ring icon. Place in `src/assets/logo.png`; needs a transparent-background version for use on both light and dark site backgrounds (request from client or clean up in an image editor)
+- **Logo:** Toyotech swoosh logo provided — black background, silver/grey swoosh, red "Toyotech" wordmark, blue "Hybrid Autos" subtext, red/blue/green ring icon. `src/assets/logo.png` is now the client artwork (navy background removed by colour-unmixing, cropped tight; no "Hybrid Autos" in the artwork, so `Logo.astro` adds it as a text sub-line). It's an interim raster: the client is converting it to SVG. The silver swoosh nearly disappears on white, so use it on navy only.
 - **Tone:** Trustworthy, local, fast turnaround, hybrid specialists
 
 ## Pages
@@ -149,11 +149,11 @@ Currently the site's WhatsApp/social link preview shows text only, no image — 
 ```html
 <meta
   property="og:title"
-  content="Toyotech MOT Centre | Hybrid Specialists in Milton Keynes"
+  content="Toyotech Hybrid Autos | MOTs, Servicing & Repairs in Bletchley"
 />
 <meta
   property="og:description"
-  content="Toyotech MOT Centre in Bletchley, Milton Keynes — hybrid vehicle specialists offering MOTs, servicing, brakes, repairs and diagnostics. Open 7 days, same-day bookings."
+  content="Toyotech Hybrid Autos in Bletchley, Milton Keynes — independent garage for MOTs, servicing and repairs on all makes, plus hybrid specialists. MOTs 7 days a week, same-day bookings."
 />
 <meta
   property="og:image"
@@ -242,7 +242,9 @@ The goal: be the garage that ChatGPT, Gemini, Perplexity, Claude and Apple Intel
 
 ## Images
 
-- No real photos yet — use clearly marked placeholder components (e.g. grey box with icon + "Image coming soon" label) for:
+- **Hero photo is live:** `src/assets/hero.webp` is the MOT bay (Honda on the ramp beside the Crypton emissions tester), supplied by the client with both plates (the Honda and the VW in the background) blurred. Always check every plate in a photo, background cars included, before adding it. On desktop the hero gradient runs left to right so the photo shows on the right and the text side stays dark.
+- **Shopfront photo is live:** `src/assets/workshop.webp` is the MOT unit (Unit 6) from the yard, original unedited client photo; shown on Contact ("Our workshop", with a "look for the blue signs" caption) and under the booking button on the MOT page, both cropped 4:3. The client may swap in a Lightroom edit later with the same filename. Don't use AI "enhanced" versions: one tried earlier rewrote the sign's postcode to "MK2 SPB", scrambled the small signs and added equipment that isn't there. Pass `sizes` to `ImagePlaceholder` for in-content photos so smaller widths are generated.
+- Other photos still use clearly marked placeholder components (e.g. grey box with icon + "Image coming soon" label) for:
   - Hero background
   - Workshop/team photos
   - Social preview (`og-image.png`) — see Social / Link Previews section above

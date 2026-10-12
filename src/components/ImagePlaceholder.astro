@@ -21,6 +21,8 @@ interface Props {
   aspect?: string;
   label?: string;
   dark?: boolean;
+  /** Responsive `sizes` hint; when set, smaller widths are generated too. */
+  sizes?: string;
 }
 
 const {
@@ -30,6 +32,7 @@ const {
   aspect = 'aspect-video',
   label = 'Image coming soon',
   dark = false,
+  sizes,
 } = Astro.props;
 
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{jpg,jpeg,png,webp,avif}');
@@ -39,7 +42,13 @@ const src = match ? (await images[match]()).default : undefined;
 
 {
   src ? (
-    <Image src={src} alt={alt} class:list={['h-full w-full object-cover', aspect, className]} />
+    <Image
+      src={src}
+      alt={alt}
+      widths={sizes ? [480, 800, 1200].filter((w) => w < src.width).concat(src.width) : undefined}
+      sizes={sizes}
+      class:list={['h-full w-full object-cover', aspect, className]}
+    />
   ) : (
     <div
       aria-hidden="true"

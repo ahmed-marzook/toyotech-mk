@@ -4,11 +4,16 @@
  */
 
 export const site = {
-  name: 'Toyotech MOT Centre',
-  altName: 'Toyotech Hybrid Autos',
+  name: 'Toyotech Hybrid Autos',
+  // Former website name, still used by the MOT testing station's company
+  // (Toyotech MOT Centre Ltd). Kept as the schema `alternateName` only.
+  altName: 'Toyotech MOT Centre',
   tagline: 'Expert care for all makes and models',
+  // What we do, in one line (hero eyebrow + footer). Add 'Tyres' once tyre
+  // services launch — until then they're "Coming soon" only.
+  strapline: ['MOTs', 'Servicing', 'Repairs', 'Hybrid specialists'],
   description:
-    'Toyotech MOT Centre in Bletchley, Milton Keynes — hybrid vehicle specialists offering MOTs, servicing, brakes, repairs and diagnostics. MOTs 7 days a week, same-day bookings.',
+    'Toyotech Hybrid Autos in Bletchley, Milton Keynes — independent garage for MOTs, servicing and repairs on all makes, plus hybrid specialists. MOTs 7 days a week, same-day bookings.',
   contactName: 'Mumthaz',
 };
 
