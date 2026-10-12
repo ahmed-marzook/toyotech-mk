@@ -48,12 +48,7 @@ FOR THE CLAUDE CODE AGENT (how to pick these up)
 A. MUST-HAVES
 ======================================================================
 
-Q05  DVSA MOT testing station number
-     Affects: could be shown on the site and in the schema as an
-     identifier; used to check the DVSA record matches GBP
-     ANSWER:
-     STATUS: open
-
+All answered: see section Z (CLOSED).
 
 ======================================================================
 B. FACTS AND CREDENTIALS (nothing goes on the site until confirmed)
@@ -370,6 +365,15 @@ Q04  Address wording
        say Fenny Stratford and need changing. Fenny Stratford can stay
        in the service-area list (areaServed), which is not the address.
      STATUS: closed. applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged) (Google listing still to update, see Q44)
+
+Q05  DVSA MOT testing station number
+     Affects: could be shown on the site and in the schema as an
+     identifier; used to check the DVSA record matches GBP
+     ANSWER: 5848BM. Toyotech MOT Centre Ltd, Unit 6, 80-86 Tavistock
+       Street, Bletchley (from DVSA's list of active MOT testing
+       stations, found by the user 12 Oct 2026).
+     STATUS: closed. applied: https://github.com/ahmed-marzook/toyotech-mk/pull/9
+       (MOT page, Home JSON-LD identifier, llms.txt)
 
 Q06  MOT classes tested
      Class 4 = cars and vans up to 3,000kg. Class 7 = goods vehicles
