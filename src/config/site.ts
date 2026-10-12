@@ -309,7 +309,7 @@ export const fallbackHours: HoursRow[] = [
 export const nav = [
   { label: 'Home', path: '/' },
   { label: 'Services', path: '/services' },
-  { label: 'MOT Checks', path: '/mot-checks' },
+  { label: 'MOT Checks', path: '/mot' },
   { label: 'Hybrid Battery', path: '/hybrid-battery' },
   { label: 'Contact', path: '/contact' },
 ];

@@ -57,7 +57,7 @@ ${services.map((s) => `- ${s.name}: ${s.description}`).join('\n')}
 - [Home](${abs('/')}): overview, opening hours, reviews and location
 - [Services](${abs('/services')}): every service we offer
 - [Hybrid battery repair](${abs('/hybrid-battery')}): symptoms of a failing hybrid battery, how we diagnose, repair or replace it, and the models covered
-- [What's checked at an MOT](${abs('/mot-checks')}): plain-English guide to every part inspected at a car MOT
+- [What's checked at an MOT](${abs('/mot')}): plain-English guide to every part inspected at a car MOT
 - [Contact and directions](${abs('/contact')}): phone numbers, WhatsApp, address and map
 `;
 
