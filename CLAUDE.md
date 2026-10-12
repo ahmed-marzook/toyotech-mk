@@ -242,7 +242,7 @@ The goal: be the garage that ChatGPT, Gemini, Perplexity, Claude and Apple Intel
 
 ## Images
 
-- **Hero photo is live:** `src/assets/hero.jpg` is the MOT bay (Honda on the ramp beside the Crypton emissions tester); the Honda's plate was blacked out by the client and the VW's in the background was covered before committing. Always check every plate in a photo, background cars included, before adding it. On desktop the hero gradient runs left to right so the photo shows on the right and the text side stays dark.
+- **Hero photo is live:** `src/assets/hero.webp` is the MOT bay (Honda on the ramp beside the Crypton emissions tester), supplied by the client with both plates (the Honda and the VW in the background) blurred. Always check every plate in a photo, background cars included, before adding it. On desktop the hero gradient runs left to right so the photo shows on the right and the text side stays dark.
 - Other photos still use clearly marked placeholder components (e.g. grey box with icon + "Image coming soon" label) for:
   - Hero background
   - Workshop/team photos
