@@ -39,19 +39,37 @@ const firstOpen = whatsappEnquiries.find((e) => !e.comingSoon)?.id;
     <p id="whatsapp-enquiry-intro" class="mt-1 text-slate-600">{generalIntro}</p>
 
     <label for="whatsapp-enquiry-reg" class="mt-5 block font-bold text-navy">Car registration</label>
-    <input
-      id="whatsapp-enquiry-reg"
-      name="reg"
-      type="text"
-      required
-      autocomplete="off"
-      autocapitalize="characters"
-      spellcheck="false"
-      maxlength="10"
-      placeholder="e.g. AB12 CDE"
-      aria-describedby="whatsapp-enquiry-reg-error"
-      class="mt-2 block min-h-12 w-full rounded-lg border-2 border-slate-300 bg-yellow-50 px-4 text-xl font-bold tracking-wider text-navy uppercase placeholder:font-normal placeholder:tracking-normal placeholder:normal-case focus:border-brand-blue"
-    />
+    <!--
+      Styled as a UK rear number plate: yellow plate, black characters, blue
+      "UK" identifier band (the national identifier since September 2021).
+      The band is decorative; the <label> above names the field. Border,
+      shadow and focus ring sit on the wrapper so the band and the input
+      always line up as one plate.
+    -->
+    <div
+      class="mt-2 flex overflow-hidden rounded-lg border-2 border-black shadow-sm has-focus-visible:outline-3 has-focus-visible:outline-offset-0 has-focus-visible:outline-navy has-focus-visible:shadow-[0_0_0_6px_var(--color-focus)] has-aria-invalid:border-brand-red-dark"
+    >
+      <span
+        aria-hidden="true"
+        class="flex w-11 shrink-0 flex-col items-center justify-end bg-[#063298] pb-1.5 text-sm font-black tracking-wide text-[#f8d038]"
+      >
+        <span class="mb-auto mt-2 h-4 w-4 rounded-full border border-dashed border-[#f8d038]"></span>
+        UK
+      </span>
+      <input
+        id="whatsapp-enquiry-reg"
+        name="reg"
+        type="text"
+        required
+        autocomplete="off"
+        autocapitalize="characters"
+        spellcheck="false"
+        maxlength="10"
+        placeholder="AB12 CDE"
+        aria-describedby="whatsapp-enquiry-reg-error"
+        class="block min-h-16 w-full min-w-0 bg-linear-to-b from-[#f8d038] to-[#f5ca2e] px-4 text-center font-[Arial,Helvetica,sans-serif] text-3xl font-black tracking-[0.12em] text-black uppercase outline-none placeholder:text-black/35 focus-visible:shadow-none focus-visible:outline-none"
+      />
+    </div>
     <p id="whatsapp-enquiry-reg-error" class="mt-1 text-sm font-semibold text-brand-red-dark" hidden>
       Please enter your car's registration.
     </p>
