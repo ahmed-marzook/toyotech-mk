@@ -180,7 +180,7 @@ export type Enquiry = {
   number: string;
   intro: string;
   outro: string;
-  /** Show the optional "anything else?" box */
+  /** Presets only: show the optional "Anything else?" box (the general form always shows it) */
   extra?: boolean;
   /** Shown in the general form but can't be picked yet */
   comingSoon?: boolean;
