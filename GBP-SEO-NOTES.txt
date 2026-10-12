@@ -29,7 +29,7 @@ Google Business Profile checklist
   using the same "hybrid specialists... genuine parts and warranty"
   language already used on the site.
 - Q&A section: seed it with a few of the same questions now answered on
-  /mot-checks/ and /hybrid-battery/ (e.g. "How often does my car need an
+  /mot/ and /hybrid-battery/ (e.g. "How often does my car need an
   MOT?", "Do you work on my hybrid model?") so the two sources reinforce
   each other.
 - Photos: upload real photos regularly once available (see
@@ -53,7 +53,7 @@ Site-side structured data added alongside these notes
 -------------------------------------------------------
 - BreadcrumbList JSON-LD on every page except Home
   (src/components/BreadcrumbSchema.astro).
-- FAQPage JSON-LD on /mot-checks/ and /hybrid-battery/, backed by a real,
+- FAQPage JSON-LD on /mot/ and /hybrid-battery/, backed by a real,
   visible FAQ section on each page (src/components/FAQSchema.astro).
 - sameAs on the Home page's AutoRepair schema, linking to the Google
   Business Profile listing (src/content/reviews.ts's listingUrl) — ties

@@ -45,7 +45,7 @@
    - Each service: icon + short description
    - No images on service cards (icon + text only, keeps the focus on the service info)
    - Feature "Genuine Parts and Warranty" and hybrid specialism callouts
-3. **MOT Checks** (`/mot-checks/`)
+3. **MOT Checks** (`/mot/`; old `/mot-checks/` redirects there)
    - Plain-English guide to every part inspected at a car MOT, grouped into 6 areas
    - Content lives in `src/content/mot-checks.ts`, sourced from DVSA's "Car parts checked at an MOT" under the Open Government Licence v3.0 — reworded, not copied, and attributed at the foot of the page
    - Also covers what an MOT does *not* include (engine, clutch, gearbox condition, servicing) as a bridge to the Services page

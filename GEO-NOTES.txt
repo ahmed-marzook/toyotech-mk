@@ -143,8 +143,9 @@ content to be worth publishing. A thin page hurts more than it helps.
   battery cooling fan/filter, brake care on hybrids), with the
   equipment used.
 - /class-7-mot/: only if Class 7 is tested.
-- /mot/ (MOT booking page, distinct from the /mot-checks/ guide):
-  price, classes, retest policy, what happens if it fails.
+- /mot/ is now the MOT guide + booking page (moved from /mot-checks/,
+  which redirects). Could add: retest policy, what happens if it fails.
+  No prices (decided 12 Oct 2026); Class 4 only.
 - Model pages, e.g. /toyota-prius-hybrid-battery/, once there are
   enough real jobs/reviews to say something specific.
 - Qualifications/"About us" section with technician training and
