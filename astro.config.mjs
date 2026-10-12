@@ -10,6 +10,10 @@ export default defineConfig({
   // Pages build to /services/index.html etc., so the trailing-slash URL is the
   // real one — keeps canonical URLs, sitemap entries and og:url identical.
   trailingSlash: 'always',
+  // Old URLs kept working after a rename (static meta-refresh page + canonical)
+  redirects: {
+    '/mot-checks': '/mot/',
+  },
   integrations: [react(), sitemap()],
   vite: {
     plugins: [tailwindcss()],

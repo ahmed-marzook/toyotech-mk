@@ -1,7 +1,7 @@
 ---
 import { MapPin, Phone } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import WhatsAppButton from '../components/WhatsAppButton.jsx';
+import WhatsAppButton, { WhatsAppIcon } from '../components/WhatsAppButton.jsx';
 import OpeningHours from '../components/OpeningHours.jsx';
 import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 import MapEmbed from '../components/MapEmbed.astro';
@@ -9,14 +9,14 @@ import GoogleReviews from '../components/GoogleReviews.astro';
 import WazeIcon from '../components/icons/WazeIcon.astro';
 import GoogleMapsIcon from '../components/icons/GoogleMapsIcon.astro';
 import BreadcrumbSchema from '../components/BreadcrumbSchema.astro';
-import { site, address, phones, map, serviceAreas } from '../config/site';
+import { site, address, phones, map, serviceAreas, hoursSummary, enquiryHref } from '../config/site';
 
 const directionsHref = map.directionsUrl;
 ---
 
 <BaseLayout
   title="Contact & Directions | Toyotech MOT Centre, Bletchley"
-  description="Contact Toyotech MOT Centre, Tavistock Street, Bletchley, Milton Keynes. WhatsApp or call for same-day bookings."
+  description="Contact Toyotech MOT Centre, Tavistock Street, Bletchley, Milton Keynes. WhatsApp or call for same-day bookings. MOTs 7 days a week, workshop Monday to Saturday."
 >
   <BreadcrumbSchema slot="head" items={[{ name: 'Contact', path: '/contact' }]} />
 
@@ -26,6 +26,7 @@ const directionsHref = map.directionsUrl;
       <p class="mt-3 max-w-2xl text-lg text-white/80">
         The quickest way to book is WhatsApp — send your reg and what you need.
       </p>
+      <p class="mt-2 text-white/80">{hoursSummary.workshop} · {hoursSummary.mot}</p>
       <div class="mt-6">
         <WhatsAppButton variant="large" />
       </div>
@@ -35,24 +36,37 @@ const directionsHref = map.directionsUrl;
   <section class="mx-auto grid max-w-6xl gap-10 px-4 py-12 lg:grid-cols-2">
     <div class="space-y-10">
       <div>
-        <h2 class="text-2xl font-bold text-navy">Call us</h2>
-        <p class="mt-1 text-slate-600">Ask for {site.contactName}.</p>
+        <h2 class="text-2xl font-bold text-navy">Call or WhatsApp us</h2>
         <ul class="mt-4 space-y-3">
           {
             phones.map((p) => (
-              <li>
-                <a
-                  href={`tel:${p.tel}`}
-                  class="card-motion flex items-center gap-4 rounded-xl bg-white p-4 ring-1 ring-slate-200 hover:ring-brand-blue"
-                >
-                  <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-red text-white">
-                    <Phone className="h-5 w-5" />
-                  </span>
-                  <span>
-                    <span class="block text-xl font-bold text-navy tabular-nums">{p.display}</span>
-                    <span class="block text-sm text-slate-500">{p.label}</span>
+              <li class="flex items-center gap-3 rounded-xl bg-white p-4 ring-1 ring-slate-200">
+                <a href={`tel:${p.tel}`} class="min-w-0 flex-1 hover:underline">
+                  <span class="block text-xl font-bold text-navy tabular-nums">{p.display}</span>
+                  <span class="block text-sm text-slate-500">
+                    {p.label}
+                    {p.whatsapp ? ' · call or WhatsApp' : ''}
                   </span>
                 </a>
+                <a
+                  href={`tel:${p.tel}`}
+                  class="btn-motion flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-red text-white hover:bg-brand-red-dark"
+                  aria-label={`Call ${p.display}`}
+                >
+                  <Phone className="h-5 w-5" />
+                </a>
+                {p.whatsapp && (
+                  <a
+                    href={enquiryHref(p.whatsapp)}
+                    data-whatsapp-enquiry={p.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-motion flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-whatsapp text-navy hover:bg-whatsapp-hover"
+                    aria-label={`WhatsApp ${p.display} (opens WhatsApp)`}
+                  >
+                    <WhatsAppIcon className="h-6 w-6" />
+                  </a>
+                )}
               </li>
             ))
           }

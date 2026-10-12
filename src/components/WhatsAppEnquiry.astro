@@ -1,0 +1,187 @@
+---
+/**
+ * WhatsApp quick-connect form. Every WhatsApp button (WhatsAppButton.jsx
+ * carries `data-whatsapp-enquiry`) opens this dialog instead of going
+ * straight to WhatsApp, and we open WhatsApp with the message already
+ * written, sent to the line that handles that job.
+ *
+ * - `data-whatsapp-enquiry=""`: general form, reg plate + "What do you need?"
+ * - `data-whatsapp-enquiry="<preset id>"`: that enquiry only, e.g. "mot"
+ *   (reg plate only) or "service-gold" (reg plate + extra information)
+ *
+ * Progressive enhancement: the buttons are plain wa.me links, so with JS off
+ * (or before this script runs) they still open WhatsApp on the right line.
+ * Nothing is sent to this site; the form only builds a link.
+ */
+import { X } from 'lucide-react';
+import { whatsappEnquiries, whatsappPresets } from '../config/site';
+
+const generalIntro = "Tell us your reg and what you need. We'll write the message for you.";
+const firstOpen = whatsappEnquiries.find((e) => !e.comingSoon)?.id;
+---
+
+<dialog
+  id="whatsapp-enquiry"
+  aria-labelledby="whatsapp-enquiry-title"
+  class="m-auto w-[calc(100%-2rem)] max-w-md rounded-2xl bg-white p-0 text-slate-800 shadow-2xl backdrop:bg-navy/70"
+>
+  <form id="whatsapp-enquiry-form" class="relative p-6" novalidate>
+    <button
+      type="button"
+      data-close
+      class="btn-motion absolute top-2 right-2 flex h-11 w-11 items-center justify-center rounded-full text-slate-500 hover:bg-slate-100 hover:text-navy"
+      aria-label="Close"
+    >
+      <X className="h-5 w-5" />
+    </button>
+
+    <h2 id="whatsapp-enquiry-title" class="pr-10 text-2xl font-black text-navy">Message us on WhatsApp</h2>
+    <p id="whatsapp-enquiry-intro" class="mt-1 text-slate-600">{generalIntro}</p>
+
+    <label for="whatsapp-enquiry-reg" class="mt-5 block font-bold text-navy">Car registration</label>
+    <input
+      id="whatsapp-enquiry-reg"
+      name="reg"
+      type="text"
+      required
+      autocomplete="off"
+      autocapitalize="characters"
+      spellcheck="false"
+      maxlength="10"
+      placeholder="e.g. AB12 CDE"
+      aria-describedby="whatsapp-enquiry-reg-error"
+      class="mt-2 block min-h-12 w-full rounded-lg border-2 border-slate-300 bg-yellow-50 px-4 text-xl font-bold tracking-wider text-navy uppercase placeholder:font-normal placeholder:tracking-normal placeholder:normal-case focus:border-brand-blue"
+    />
+    <p id="whatsapp-enquiry-reg-error" class="mt-1 text-sm font-semibold text-brand-red-dark" hidden>
+      Please enter your car's registration.
+    </p>
+
+    <fieldset id="whatsapp-enquiry-jobs" class="mt-5">
+      <legend class="font-bold text-navy">What do you need?</legend>
+      <div class="mt-2 grid grid-cols-2 gap-2">
+        {
+          whatsappEnquiries.map((e) => (
+            <label
+              class:list={[
+                'flex min-h-12 items-center gap-2 rounded-lg border-2 px-3 py-2 font-semibold',
+                e.comingSoon
+                  ? 'cursor-not-allowed border-dashed border-slate-200 text-slate-500'
+                  : 'cursor-pointer border-slate-200 has-checked:border-brand-blue has-checked:bg-brand-blue/5',
+              ]}
+            >
+              <input
+                type="radio"
+                name="job"
+                value={e.id}
+                checked={e.id === firstOpen}
+                disabled={e.comingSoon}
+                class="h-5 w-5 shrink-0 accent-brand-blue"
+              />
+              <span>
+                {e.label}
+                {e.comingSoon && <span class="block text-xs font-bold tracking-wide uppercase">Coming soon</span>}
+              </span>
+            </label>
+          ))
+        }
+      </div>
+    </fieldset>
+
+    <div id="whatsapp-enquiry-extra-wrap" hidden>
+      <label for="whatsapp-enquiry-extra" class="mt-5 block font-bold text-navy">
+        Anything else? <span class="font-normal text-slate-500">(optional)</span>
+      </label>
+      <textarea
+        id="whatsapp-enquiry-extra"
+        name="extra"
+        rows="3"
+        maxlength="500"
+        placeholder="e.g. mileage, preferred day, warning lights, anything you've noticed"
+        class="mt-2 block w-full rounded-lg border-2 border-slate-300 px-4 py-3 text-base text-navy focus:border-brand-blue"
+      ></textarea>
+    </div>
+
+    <button
+      type="submit"
+      class="btn-motion mt-6 inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-whatsapp px-6 py-4 text-lg font-bold text-navy hover:bg-whatsapp-hover hover:shadow-lg"
+    >
+      Open WhatsApp<span class="sr-only"> (opens in a new tab)</span>
+    </button>
+    <p class="mt-3 text-center text-xs text-slate-500">You can check and edit the message before you send it.</p>
+  </form>
+</dialog>
+
+<script is:inline define:vars={{ jobs: whatsappEnquiries, presets: whatsappPresets, generalIntro }}>
+  (() => {
+    const $ = (id) => document.getElementById(id);
+    const dialog = $('whatsapp-enquiry');
+    const form = $('whatsapp-enquiry-form');
+    const reg = $('whatsapp-enquiry-reg');
+    const error = $('whatsapp-enquiry-reg-error');
+    const title = $('whatsapp-enquiry-title');
+    const intro = $('whatsapp-enquiry-intro');
+    const jobsField = $('whatsapp-enquiry-jobs');
+    const extraWrap = $('whatsapp-enquiry-extra-wrap');
+    const extra = $('whatsapp-enquiry-extra');
+    if (!dialog || !form || !reg || typeof dialog.showModal !== 'function') return;
+
+    // The preset this dialog was opened for, or null for the general form
+    let preset = null;
+    let lastOpened;
+
+    const clearError = () => {
+      error.hidden = true;
+      reg.removeAttribute('aria-invalid');
+    };
+
+    // Every WhatsApp button opens the form instead of going straight to WhatsApp
+    document.addEventListener('click', (event) => {
+      const trigger = event.target instanceof Element && event.target.closest('[data-whatsapp-enquiry]');
+      if (!trigger || event.ctrlKey || event.metaKey || event.shiftKey) return;
+      event.preventDefault();
+      const id = trigger.getAttribute('data-whatsapp-enquiry');
+      // A different button starts afresh, so one package's notes don't carry into another
+      if (id !== lastOpened) extra.value = '';
+      lastOpened = id;
+      preset = presets.find((p) => p.id === id) ?? null;
+      title.textContent = preset ? preset.title : 'Message us on WhatsApp';
+      intro.textContent = preset
+        ? `Tell us your reg${preset.extra ? ' and anything we should know' : ''}. We'll write the WhatsApp message for you.`
+        : generalIntro;
+      jobsField.hidden = Boolean(preset);
+      extraWrap.hidden = !preset?.extra;
+      clearError();
+      dialog.showModal();
+      reg.focus();
+    });
+
+    reg.addEventListener('input', clearError);
+    dialog.querySelector('[data-close]')?.addEventListener('click', () => dialog.close());
+    // Click on the backdrop closes it
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const plate = reg.value.toUpperCase().replace(/[^A-Z0-9 ]/g, '').replace(/\s+/g, ' ').trim();
+      if (plate.replace(/ /g, '').length < 2) {
+        error.hidden = false;
+        reg.setAttribute('aria-invalid', 'true');
+        reg.focus();
+        return;
+      }
+      const jobId = new FormData(form).get('job');
+      const job = preset ?? jobs.find((j) => j.id === jobId && !j.comingSoon) ?? jobs[0];
+      // Keep in step with enquiryHref() in src/config/site.ts
+      let text = `${job.intro}, reg ${plate}. ${job.outro}`;
+      const more = job.extra ? extra.value.trim() : '';
+      if (more) text += `\n\nExtra information: ${more}`;
+      const href = `https://wa.me/${job.number}?text=${encodeURIComponent(text)}`;
+      // Opened from the submit click, so popup blockers allow it; fall back to same tab if not
+      if (!window.open(href, '_blank', 'noopener')) window.location.href = href;
+      dialog.close();
+      form.reset();
+    });
+  })();
+</script>

@@ -37,7 +37,7 @@ const faqs = [
   title="What's Checked at an MOT? Every Part Tested | Toyotech, Bletchley"
   description="A plain-English guide to every part checked at a car MOT — brakes, tyres, steering, lights, emissions and more — plus what an MOT doesn't cover. Book your MOT in Bletchley, Milton Keynes."
 >
-  <BreadcrumbSchema slot="head" items={[{ name: 'MOT Checks', path: '/mot-checks' }]} />
+  <BreadcrumbSchema slot="head" items={[{ name: 'MOT Checks', path: '/mot' }]} />
   <FAQSchema slot="head" items={faqs} />
 
   <section class="bg-navy text-white">
@@ -48,6 +48,15 @@ const faqs = [
         our testers look at in Bletchley, in plain English.
       </p>
     </div>
+  </section>
+
+  <section class="mx-auto flex max-w-6xl flex-col items-center gap-5 px-4 py-12 text-center">
+    <h2 class="text-3xl font-black text-navy">Book your MOT in Bletchley</h2>
+    <p class="max-w-lg text-slate-600">
+      Class 4 MOTs for cars and light vans, 7 days a week, with same-day bookings. If anything fails, we'll
+      explain it and show you before any work starts.
+    </p>
+    <WhatsAppButton variant="large" enquiry="mot" label="Book your MOT on WhatsApp" />
   </section>
 
   <section class="bg-slate-50">
@@ -166,15 +175,6 @@ const faqs = [
         }
       </dl>
     </div>
-  </section>
-
-  <section class="mx-auto flex max-w-6xl flex-col items-center gap-5 px-4 py-12 text-center">
-    <h2 class="text-3xl font-black text-navy">Book your MOT in Bletchley</h2>
-    <p class="max-w-lg text-slate-600">
-      Same-day bookings, open 7 days a week. If anything fails, we'll explain it and show you before any work
-      starts.
-    </p>
-    <WhatsAppButton variant="large" />
   </section>
 
   <section class="bg-slate-50">

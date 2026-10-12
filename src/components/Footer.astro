@@ -1,7 +1,7 @@
 ---
 import { MapPin, Phone, Clock } from 'lucide-react';
 import Logo from './Logo.astro';
-import { site, address, phones, nav, legal, url } from '../config/site';
+import { site, address, phones, nav, companies, hoursSummary, url } from '../config/site';
 
 const year = new Date().getFullYear();
 ---
@@ -34,6 +34,7 @@ const year = new Date().getFullYear();
               <a href={`tel:${p.tel}`} class="inline-flex min-h-11 items-center gap-2 hover:text-white">
                 <Phone className="h-4 w-4 text-brand-red" />
                 {p.display}
+                {p.whatsapp && <span class="text-white/60">· WhatsApp</span>}
               </a>
             </li>
           ))
@@ -45,7 +46,7 @@ const year = new Date().getFullYear();
       <h2 class="mb-3 font-bold text-white">Opening</h2>
       <p class="flex gap-2 text-sm">
         <Clock className="mt-0.5 h-4 w-4 shrink-0 text-brand-red" />
-        <span>Open 7 days a week<br />Same-day bookings available</span>
+        <span>{hoursSummary.workshop}<br />{hoursSummary.mot}<br />Same-day bookings available</span>
       </p>
       <nav aria-label="Footer">
         <ul class="mt-4 flex gap-4 text-sm">
@@ -67,9 +68,13 @@ const year = new Date().getFullYear();
       &copy; {year} {site.name} · {site.altName} ·
       <a href={url('/privacy')} class="underline hover:text-white/80">Privacy Policy</a>
     </p>
-    <p class="mt-1">
-      {legal.companyName} is registered in {legal.jurisdiction}, company no. {legal.companyNumber}. Registered
-      office: {legal.registeredOffice}.
-    </p>
+    {
+      companies.map((c) => (
+        <p class="mt-1">
+          {c.companyName} ({c.role}) is registered in {c.jurisdiction}, company no. {c.companyNumber}. Registered
+          office: {c.registeredOffice}.
+        </p>
+      ))
+    }
   </div>
 </footer>
