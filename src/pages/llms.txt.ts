@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { site, address, phones, whatsapp, companies, hoursSummary, serviceAreas, url } from '../config/site';
+import { site, address, phones, whatsapp, companies, motStation, hoursSummary, serviceAreas, url } from '../config/site';
 import { services } from '../content/services';
 import { hybridModels } from '../content/hybrid-models';
 import { googleReviews } from '../content/reviews';
@@ -31,6 +31,7 @@ export const GET: APIRoute = async ({ site: origin }) => {
 - WhatsApp (quickest way to book): ${whatsapp.lines.map((l) => `${l.display} (${l.label})`).join(', ')} — ${whatsapp.href}
 - Contact: ${site.contactName}
 - Areas served: ${serviceAreas.join(', ')}
+- DVSA MOT testing station: site number ${motStation.siteNumber} (${motStation.classes}), run by ${motStation.operator}
 - Legal entities: ${companies.map((c) => `${c.companyName} (${c.role}), registered in ${c.jurisdiction}, company no. ${c.companyNumber}`).join('; ')}
 - Google rating: ${googleReviews.rating} from ${googleReviews.count} reviews (${googleReviews.listingUrl})
 

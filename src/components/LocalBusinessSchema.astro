@@ -11,7 +11,7 @@
  * No aggregateRating: Google ignores "self-serving" review markup a business
  * puts on its own site, and the rating already lives on the Business Profile.
  */
-import { site, phones, map, legal } from '../config/site';
+import { site, phones, map, legal, motStation } from '../config/site';
 import { services } from '../content/services';
 import { googleReviews } from '../content/reviews';
 import { hybridModels } from '../content/hybrid-models';
@@ -28,13 +28,20 @@ const schema = {
   name: site.name,
   alternateName: site.altName,
   legalName: legal.companyName,
-  // Companies House registration — a hard identifier that lets crawlers
-  // corroborate the entity against the public register.
-  identifier: {
-    '@type': 'PropertyValue',
-    propertyID: 'Companies House company number',
-    value: legal.companyNumber,
-  },
+  // Companies House registration and DVSA MOT site number — hard identifiers
+  // that let crawlers corroborate the entity against the public registers.
+  identifier: [
+    {
+      '@type': 'PropertyValue',
+      propertyID: 'Companies House company number',
+      value: legal.companyNumber,
+    },
+    {
+      '@type': 'PropertyValue',
+      propertyID: 'DVSA MOT testing station site number',
+      value: motStation.siteNumber,
+    },
+  ],
   foundingDate: legal.incorporated,
   description: site.description,
   slogan: 'Expert care for all makes and models. Genuine parts and warranty.',
