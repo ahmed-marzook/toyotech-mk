@@ -1,8 +1,8 @@
-# Toyotech MOT Centre — Website Project
+# Toyotech Hybrid Autos — Website Project
 
 ## Business Overview
 
-- **Name:** Toyotech MOT Centre / Toyotech Hybrid Autos
+- **Name:** Toyotech Hybrid Autos (renamed from "Toyotech MOT Centre" on 12 Oct 2026, the client wants a generic name covering MOTs, servicing, repairs and later tyres; it also matches the Google listing and signage). "Toyotech MOT Centre" now appears only as the MOT company's legal name (Toyotech MOT Centre Ltd) and the schema `alternateName`. Services strapline (`site.strapline`, hero eyebrow + footer): MOTs · Servicing · Repairs · Hybrid specialists; add Tyres when they launch.
 - **Legal entities (two, room for a third later):**
   - Workshop: Toyotech Hybrid Autos Limited, company no. 16013011, registered in England and Wales, incorporated 11 October 2024, SIC 45200 (Maintenance and repair of motor vehicles). Registered office: Unit 3, 80-86 Tavistock Street, Bletchley, Milton Keynes, MK2 2PB. Source: [Companies House](https://find-and-update.company-information.service.gov.uk/company/16013011). Runs the website and is the data controller (`legal` in `src/config/site.ts`).
   - MOT testing station: Toyotech MOT Centre Ltd, company no. 17095416, incorporated 16 March 2026. Registered office: Unit 6, 80-86 Tavistock Street, Bletchley, Milton Keynes, MK2 2PB. Source: [Companies House](https://find-and-update.company-information.service.gov.uk/company/17095416).
@@ -149,11 +149,11 @@ Currently the site's WhatsApp/social link preview shows text only, no image — 
 ```html
 <meta
   property="og:title"
-  content="Toyotech MOT Centre | Hybrid Specialists in Milton Keynes"
+  content="Toyotech Hybrid Autos | MOTs, Servicing & Repairs in Bletchley"
 />
 <meta
   property="og:description"
-  content="Toyotech MOT Centre in Bletchley, Milton Keynes — hybrid vehicle specialists offering MOTs, servicing, brakes, repairs and diagnostics. Open 7 days, same-day bookings."
+  content="Toyotech Hybrid Autos in Bletchley, Milton Keynes — independent garage for MOTs, servicing and repairs on all makes, plus hybrid specialists. MOTs 7 days a week, same-day bookings."
 />
 <meta
   property="og:image"

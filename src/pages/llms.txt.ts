@@ -19,7 +19,7 @@ export const GET: APIRoute = async ({ site: origin }) => {
     h.closedFlag ? `- ${h.day}: Closed` : `- ${h.day}: ${h.open}–${h.close}`,
   );
 
-  const body = `# ${site.name} (${site.altName})
+  const body = `# ${site.name} (formerly ${site.altName})
 
 > Independent garage and MOT centre in Bletchley, Milton Keynes, specialising in hybrid vehicles. MOTs, servicing, diagnostics and repairs for all makes and models, with genuine parts and warranty. Class 4 MOTs 7 days a week; workshop Monday to Saturday. Same-day bookings available.
 

@@ -37,7 +37,7 @@ import { Image } from 'astro:assets';
 import { MapPin, ChevronDown } from 'lucide-react';
 import WazeIcon from './icons/WazeIcon.astro';
 import GoogleMapsIcon from './icons/GoogleMapsIcon.astro';
-import { address, map } from '../config/site';
+import { address, map, site } from '../config/site';
 import workshopMap from '../assets/workshop-map.png';
 
 interface Props {
@@ -60,7 +60,7 @@ const { class: className = '' } = Astro.props;
   <div class="relative aspect-[4/3] w-full bg-slate-100 sm:aspect-video">
     <Image
       src={workshopMap}
-      alt={`Map showing Toyotech MOT Centre at ${address.full}`}
+      alt={`Map showing ${site.name} at ${address.full}`}
       class="h-full w-full object-cover"
       widths={[400, 800, 1127]}
       sizes="(min-width: 1024px) 600px, 100vw"

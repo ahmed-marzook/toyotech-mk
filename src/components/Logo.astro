@@ -11,7 +11,7 @@ interface Props {
   class?: string;
   subline?: string;
 }
-const { class: className = '', subline = 'MOT Centre' } = Astro.props;
+const { class: className = '', subline = 'Hybrid Autos' } = Astro.props;
 
 const logos = import.meta.glob<{ default: ImageMetadata }>('/src/assets/logo.{png,webp,svg,jpg,jpeg}');
 const logoPath = Object.keys(logos)[0];
@@ -22,7 +22,7 @@ const logo = logoPath ? (await logos[logoPath]()).default : undefined;
   logo ? (
     <Image src={logo} alt={`Toyotech ${subline}`} class:list={['h-12 w-auto', className]} />
   ) : (
-    // Exposed as one image named "Toyotech MOT Centre". The brand red on navy is
+    // Exposed as one image named "Toyotech Hybrid Autos". The brand red on navy is
     // 2.99:1 — logotypes are exempt from WCAG 1.4.3, but the white outline on the
     // wordmark keeps it legible anyway.
     <span role="img" aria-label={`Toyotech ${subline}`} class:list={['inline-flex flex-col leading-none', className]}>
