@@ -173,6 +173,7 @@ Currently the site's WhatsApp/social link preview shows text only, no image — 
 - Target roughly **1200×630px** landscape for the large WhatsApp/Facebook card style — a smaller/square image falls back to a tiny thumbnail.
 - Until real photography exists, generate a placeholder `og-image.png` from the logo on a branded red/blue background (`src/assets/og-image.png`), swap for a real workshop photo later.
 - Each page (`index.astro`, `services.astro`, `contact.astro`) should be able to override `title`/`description`/`og:image` via props passed into the shared `<SEO>` partial, rather than one static tag set site-wide.
+- The image URL is versioned (`ogImage` in `src/config/site.ts`, currently `/og-image.png?v=2`). Facebook caches the image by URL and "Scrape Again" only refreshes the text, so bump `v` every time the image changes.
 - WhatsApp/Facebook cache previews aggressively — after deploying, re-scrape the URL via [Facebook's Sharing Debugger](https://developers.facebook.com/tools/debug/) (same crawler WhatsApp uses) to force a refresh rather than waiting.
 
 ## Accessibility
