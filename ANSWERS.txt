@@ -38,86 +38,21 @@ FOR THE CLAUDE CODE AGENT (how to pick these up)
    hours, address).
 7. Commit the updated ANSWERS.txt to this branch, then summarise to the
    user what changed and which questions are still open.
+8. Once a question is fully answered and applied (or noted), move it to
+   section Z (CLOSED) and prefix its STATUS with "closed.". If part of
+   it is still unanswered, open a new follow-up question in section G
+   for that part rather than leaving the old one half-open.
 
 
 ======================================================================
 A. MUST-HAVES
 ======================================================================
 
-Q01  Fourth phone number
-     The site shows 07502 811204, but the project notes (CLAUDE.md)
-     say 07450 281120 4 from the signage. Which is correct?
-     Affects: src/config/site.ts (phones), CLAUDE.md
-     ANSWER: Neither. Meeting 12 Oct 2026: 07502 811204 is to be
-       removed permanently (see Q02). Drop "07450 281120 4" from
-       CLAUDE.md as well.
-     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged)
-
-Q02  Phone numbers: which are live, and what is each one for?
-       07450 277250  (site label: Mobile / WhatsApp)
-       01908 639629  (Landline)
-       07450 011199  (Mobile)
-       07502 811204  (Mobile)
-     Which should be the main number for calls? Should any be removed?
-     Affects: src/config/site.ts (phones order and labels), schema
-     telephone, llms.txt, GBP
-     ANSWER: (meeting 12 Oct 2026) Numbers are now split by job:
-       General, site-wide:      01908 639629 (main number for calls)
-       MOT & Tyres:             phone 01908 639629
-                                WhatsApp 07476 094818 (NEW number)
-       Servicing & quotes:      phone and WhatsApp 07450 277250
-       Remove permanently:      07450 011199 and 07502 811204
-       Which WhatsApp the site-wide button uses is split out as Q37.
-     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged)
-
-Q03  Opening hours, day by day
-     Site backup hours say 09:00-18:00, 7 days. Is that right? Do the
-     Google Sheet and the Google listing match?
-     Affects: src/config/site.ts (fallbackHours), the Google Sheet, GBP
-     ANSWER: (meeting 12 Oct 2026) Two sets of hours:
-       Garage / workshop: 09:00-18:00, Monday to Saturday (6 days).
-       MOT testing: 7 days a week (times not given).
-       Monday:    workshop 09:00-18:00; MOT times?
-       Tuesday:   workshop 09:00-18:00; MOT times?
-       Wednesday: workshop 09:00-18:00; MOT times?
-       Thursday:  workshop 09:00-18:00; MOT times?
-       Friday:    workshop 09:00-18:00; MOT times?
-       Saturday:  workshop 09:00-18:00; MOT times?
-       Sunday:    workshop closed; MOT open, times?
-       Bank holidays: not discussed
-     FOLLOW-UP (12 Oct 2026): MOT testing is 09:00-18:00 every day,
-       including Sunday. So: Mon-Sat 09:00-18:00 workshop and MOTs;
-       Sunday 09:00-18:00 MOTs only. Bank holidays still unknown.
-     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged) (site fallback hours, footer and copy).
-       The Google Sheet still needs its notes changing by hand: Mon-Sat
-       "Workshop and MOTs", Sunday "MOTs only, workshop closed", all
-       days 09:00-18:00.
-
-Q04  Address wording
-     "Bletchley" (site, Companies House) or "Fenny Stratford, Bletchley"
-     (Google listing)? Must be identical everywhere.
-     Affects: src/config/site.ts (address), LocalBusinessSchema, GBP and
-     every directory listing
-     ANSWER: "Bletchley". Strip "Fenny Stratford" from the display
-       address (meeting 12 Oct 2026). The site address already says
-       Bletchley; the Google listing and CLAUDE.md's listing line still
-       say Fenny Stratford and need changing. Fenny Stratford can stay
-       in the service-area list (areaServed), which is not the address.
-     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged) (Google listing still to update, see Q44)
-
 Q05  DVSA MOT testing station number
      Affects: could be shown on the site and in the schema as an
      identifier; used to check the DVSA record matches GBP
      ANSWER:
      STATUS: open
-
-Q06  MOT classes tested
-     Class 4 = cars and vans up to 3,000kg. Class 7 = goods vehicles
-     3,000-3,500kg. Any others?
-     Affects: src/content/services.ts (MOT description), knowsAbout in
-     LocalBusinessSchema, possible /class-7-mot/ page
-     ANSWER: Class 4 only (meeting 12 Oct 2026). No Class 7 page.
-     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged)
 
 
 ======================================================================
@@ -181,32 +116,6 @@ Q14  Service areas (where customers come from)
      ANSWER:
      STATUS: open
 
-Q15  Services list
-     Anything wrong, missing, or not offered in the 14 services on the
-     Services page? Any to feature first on the homepage?
-     Affects: src/content/services.ts
-     ANSWER: (meeting 12 Oct 2026, partly) The 14 services were not
-       reviewed one by one. New: Tyres is a service (not in the 14).
-       Four dedicated booking / enquiry pages wanted:
-         - MOT (Class 4 only)
-         - Servicing, in Bronze, Silver and Gold tiers (see Q40)
-         - Repairs & Quotes: submit the vehicle's issue, ask for an
-           estimate (see Q43)
-         - Tyres: tyre enquiries (see Q41)
-     FOLLOW-UP: Servicing packages added to the existing Services page
-       (Q40); the MOT Checks page's WhatsApp button asks for the reg
-       only and goes to 07476 094818. Tyres "Coming soon" (Q41).
-     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged)
-
-Q16  Prices
-     Price of a standard MOT, interim service, full service, hybrid
-     battery health check. Show prices on the site, "from" prices, or
-     "message for a quote"?
-     Affects: Services page, schema offers, GBP Services tab
-     ANSWER: No prices displayed anywhere on the site (meeting 12 Oct
-       2026). No schema offers with prices.
-     STATUS: noted (no prices on the site)
-
 Q17  Extras
      Courtesy car? Collection and delivery? Card payments? Parking?
      EV (fully electric) servicing? Wait while you wait?
@@ -219,17 +128,6 @@ Q18  Common customer questions
      Affects: new FAQ entries (and FAQPage schema)
      ANSWER:
      STATUS: open
-
-Q19  Homepage claims still true every week?
-     "Open 7 days a week" and "Same-day bookings".
-     Affects: src/pages/index.astro (highlights, intro), site.description
-     ANSWER: "Open 7 days a week" is only true for MOT testing; the
-       workshop is Monday to Saturday (meeting 12 Oct 2026). Reword to
-       e.g. "MOTs 7 days a week, workshop Monday to Saturday". Found in
-       index.astro (highlight, intro, description), site.description,
-       Footer.astro, mot-checks.astro, hybrid-battery.astro.
-       "Same-day bookings" was not discussed: keep as is.
-     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged)
 
 
 ======================================================================
@@ -250,36 +148,16 @@ Q21  Social media
      ANSWER:
      STATUS: open
 
-Q22  Brand guidelines and logo
-     Preferred font or colours beyond the signage red and navy? Is
-     there a logo file with a transparent background?
-     Affects: src/styles/global.css, src/assets/logo.png
-     ANSWER: Modern automotive workshop branding in red, blue and
-       white (meeting 12 Oct 2026), which matches the current palette.
-       Font and a transparent-background logo were not discussed.
-     STATUS: noted (no change; logo file still to request)
-
 Q23  Contact name and WhatsApp message
      Is "Ask for Mumthaz" OK? Is the pre-filled WhatsApp message OK?
      ("Hello Toyotech, I am interested in booking a service or MOT.
      Could you let me know your availability?")
      Affects: src/config/site.ts (contactName, whatsappMessage)
-     ANSWER:
+     ANSWER: (partly, 12 Oct 2026) "Ask for Mumthaz" removed from the
+       Contact page at the user's request. Pre-filled messages are now
+       written by the WhatsApp form per job. Still asked: keep Mumthaz's
+       name anywhere else (llms.txt "Contact: Mumthaz")?
      STATUS: open
-
-Q24  Booking form
-     A short form (name, car reg, issue) that pre-fills the WhatsApp
-     message, or keep the plain WhatsApp button?
-     Affects: new component on Contact / Home
-     ANSWER: Yes, a mini "WhatsApp quick-connect" form that asks for
-       the registration plate ONLY and opens a pre-filled WhatsApp
-       message for the customer to send (meeting 12 Oct 2026). No name
-       or issue fields.
-     FOLLOW-UP (12 Oct 2026): clicking any "Message us on WhatsApp"
-       button opens a simple form: reg plate plus what they want
-       (service, MOT, general repair). Added Tyres too, from the meeting.
-     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged). MOT and Tyres go to WhatsApp
-       07476 094818; Service and Repair to 07450 277250.
 
 Q25  Google reviews block
      Fine to update by hand (current), or should it auto-update? (Needs
@@ -376,8 +254,190 @@ F. NEW FROM THE 12 OCTOBER 2026 MEETING
 ======================================================================
 
 Source: "Toyotech Website & Operations Review" meeting notes,
-12 Oct 2026, 12:15 PM. Answers already recorded against Q01-Q04, Q06,
-Q15, Q16, Q19, Q22 and Q24 above; the items below are new.
+12 Oct 2026, 12:15 PM. Most of its answers (and Q37-Q43, Q45) are now
+in section Z (CLOSED); what's still to do is below.
+
+Q44  Off-site to-dos agreed at the meeting (not code)
+     ANSWER:
+       - Opening-hours Google Sheet: change the notes to "Workshop and
+         MOTs" (Mon-Sat) and "MOTs only, workshop closed" (Sunday), all
+         09:00-18:00. The website's backup hours already say this.
+       - Update the Google Business Profile with the new numbers
+         (01908 639629, 07450 277250, 07476 094818; remove 07450 011199
+         and 07502 811204), the split hours (workshop Mon-Sat
+         09:00-18:00, MOTs 7 days 09:00-18:00), and the address without
+         "Fenny Stratford".
+       - Staff to ask customers verbally for a Google review when the
+         MOT is done.
+       - Waiting area: more comfort, refreshment table with biscuits,
+         mini fridge with cold drinks, self-serve tea and coffee.
+     STATUS: open (to do; tick off each item when done)
+
+======================================================================
+G. FOLLOW-UPS FROM CLOSED QUESTIONS
+======================================================================
+
+Q46  Servicing package contents (from Q40)
+     The Bronze/Silver/Gold cards on the Services page are live with
+     EXAMPLE contents (interim / full / major service). Are they right?
+     What should be added or removed? Is the hybrid battery health
+     check in Gold OK? Are the 6 / 12 / 24 month timings OK?
+     Affects: src/content/service-packages.ts
+     ANSWER:
+     STATUS: open
+
+Q47  Data controller for the website (from Q38)
+     The privacy policy says Toyotech Hybrid Autos Limited runs the
+     website and is the data controller. Is that right, or should it be
+     Toyotech MOT Centre Ltd (or both)?
+     Affects: src/config/site.ts (legal), src/pages/privacy.astro
+     ANSWER:
+     STATUS: open
+
+Q48  Bank holiday hours (from Q03)
+     Open on bank holidays? Workshop, MOTs, both, or neither?
+     Affects: the Google Sheet notes, GBP special hours
+     ANSWER:
+     STATUS: open
+
+Q49  Logo with a transparent background (from Q22)
+     Is there a logo file without the black background?
+     Affects: src/assets/logo.png
+     ANSWER:
+     STATUS: open
+
+======================================================================
+Z. CLOSED (answered and applied or noted; kept for the record)
+======================================================================
+
+Q01  Fourth phone number
+     The site shows 07502 811204, but the project notes (CLAUDE.md)
+     say 07450 281120 4 from the signage. Which is correct?
+     Affects: src/config/site.ts (phones), CLAUDE.md
+     ANSWER: Neither. Meeting 12 Oct 2026: 07502 811204 is to be
+       removed permanently (see Q02). Drop "07450 281120 4" from
+       CLAUDE.md as well.
+     STATUS: closed. applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged)
+
+Q02  Phone numbers: which are live, and what is each one for?
+       07450 277250  (site label: Mobile / WhatsApp)
+       01908 639629  (Landline)
+       07450 011199  (Mobile)
+       07502 811204  (Mobile)
+     Which should be the main number for calls? Should any be removed?
+     Affects: src/config/site.ts (phones order and labels), schema
+     telephone, llms.txt, GBP
+     ANSWER: (meeting 12 Oct 2026) Numbers are now split by job:
+       General, site-wide:      01908 639629 (main number for calls)
+       MOT & Tyres:             phone 01908 639629
+                                WhatsApp 07476 094818 (NEW number)
+       Servicing & quotes:      phone and WhatsApp 07450 277250
+       Remove permanently:      07450 011199 and 07502 811204
+       Which WhatsApp the site-wide button uses is split out as Q37.
+     STATUS: closed. applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged)
+
+Q03  Opening hours, day by day
+     Site backup hours say 09:00-18:00, 7 days. Is that right? Do the
+     Google Sheet and the Google listing match?
+     Affects: src/config/site.ts (fallbackHours), the Google Sheet, GBP
+     ANSWER: (meeting 12 Oct 2026) Two sets of hours:
+       Garage / workshop: 09:00-18:00, Monday to Saturday (6 days).
+       MOT testing: 7 days a week (times not given).
+       Monday:    workshop 09:00-18:00; MOT times?
+       Tuesday:   workshop 09:00-18:00; MOT times?
+       Wednesday: workshop 09:00-18:00; MOT times?
+       Thursday:  workshop 09:00-18:00; MOT times?
+       Friday:    workshop 09:00-18:00; MOT times?
+       Saturday:  workshop 09:00-18:00; MOT times?
+       Sunday:    workshop closed; MOT open, times?
+       Bank holidays: not discussed
+     FOLLOW-UP (12 Oct 2026): MOT testing is 09:00-18:00 every day,
+       including Sunday. So: Mon-Sat 09:00-18:00 workshop and MOTs;
+       Sunday 09:00-18:00 MOTs only. Bank holidays still unknown.
+     STATUS: closed. applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged) (site fallback hours, footer and copy).
+       The Google Sheet still needs its notes changing by hand: Mon-Sat
+       "Workshop and MOTs", Sunday "MOTs only, workshop closed", all
+       days 09:00-18:00.
+
+Q04  Address wording
+     "Bletchley" (site, Companies House) or "Fenny Stratford, Bletchley"
+     (Google listing)? Must be identical everywhere.
+     Affects: src/config/site.ts (address), LocalBusinessSchema, GBP and
+     every directory listing
+     ANSWER: "Bletchley". Strip "Fenny Stratford" from the display
+       address (meeting 12 Oct 2026). The site address already says
+       Bletchley; the Google listing and CLAUDE.md's listing line still
+       say Fenny Stratford and need changing. Fenny Stratford can stay
+       in the service-area list (areaServed), which is not the address.
+     STATUS: closed. applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged) (Google listing still to update, see Q44)
+
+Q06  MOT classes tested
+     Class 4 = cars and vans up to 3,000kg. Class 7 = goods vehicles
+     3,000-3,500kg. Any others?
+     Affects: src/content/services.ts (MOT description), knowsAbout in
+     LocalBusinessSchema, possible /class-7-mot/ page
+     ANSWER: Class 4 only (meeting 12 Oct 2026). No Class 7 page.
+     STATUS: closed. applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged)
+
+Q15  Services list
+     Anything wrong, missing, or not offered in the 14 services on the
+     Services page? Any to feature first on the homepage?
+     Affects: src/content/services.ts
+     ANSWER: (meeting 12 Oct 2026, partly) The 14 services were not
+       reviewed one by one. New: Tyres is a service (not in the 14).
+       Four dedicated booking / enquiry pages wanted:
+         - MOT (Class 4 only)
+         - Servicing, in Bronze, Silver and Gold tiers (see Q40)
+         - Repairs & Quotes: submit the vehicle's issue, ask for an
+           estimate (see Q43)
+         - Tyres: tyre enquiries (see Q41)
+     FOLLOW-UP: Servicing packages added to the existing Services page
+       (Q40); the MOT Checks page's WhatsApp button asks for the reg
+       only and goes to 07476 094818. Tyres "Coming soon" (Q41).
+     STATUS: closed. applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged)
+
+Q16  Prices
+     Price of a standard MOT, interim service, full service, hybrid
+     battery health check. Show prices on the site, "from" prices, or
+     "message for a quote"?
+     Affects: Services page, schema offers, GBP Services tab
+     ANSWER: No prices displayed anywhere on the site (meeting 12 Oct
+       2026). No schema offers with prices.
+     STATUS: closed. noted (no prices on the site)
+
+Q19  Homepage claims still true every week?
+     "Open 7 days a week" and "Same-day bookings".
+     Affects: src/pages/index.astro (highlights, intro), site.description
+     ANSWER: "Open 7 days a week" is only true for MOT testing; the
+       workshop is Monday to Saturday (meeting 12 Oct 2026). Reword to
+       e.g. "MOTs 7 days a week, workshop Monday to Saturday". Found in
+       index.astro (highlight, intro, description), site.description,
+       Footer.astro, mot-checks.astro, hybrid-battery.astro.
+       "Same-day bookings" was not discussed: keep as is.
+     STATUS: closed. applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged)
+
+Q22  Brand guidelines and logo
+     Preferred font or colours beyond the signage red and navy? Is
+     there a logo file with a transparent background?
+     Affects: src/styles/global.css, src/assets/logo.png
+     ANSWER: Modern automotive workshop branding in red, blue and
+       white (meeting 12 Oct 2026), which matches the current palette.
+       Font and a transparent-background logo were not discussed.
+     STATUS: closed. noted (no change; logo file still to request)
+
+Q24  Booking form
+     A short form (name, car reg, issue) that pre-fills the WhatsApp
+     message, or keep the plain WhatsApp button?
+     Affects: new component on Contact / Home
+     ANSWER: Yes, a mini "WhatsApp quick-connect" form that asks for
+       the registration plate ONLY and opens a pre-filled WhatsApp
+       message for the customer to send (meeting 12 Oct 2026). No name
+       or issue fields.
+     FOLLOW-UP (12 Oct 2026): clicking any "Message us on WhatsApp"
+       button opens a simple form: reg plate plus what they want
+       (service, MOT, general repair). Added Tyres too, from the meeting.
+     STATUS: closed. applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged). MOT and Tyres go to WhatsApp
+       07476 094818; Service and Repair to 07450 277250.
 
 Q37  Site-wide WhatsApp number
      The floating WhatsApp button, header and home hero all use
@@ -388,7 +448,7 @@ Q37  Site-wide WhatsApp number
      Affects: src/config/site.ts (whatsapp), FloatingWhatsApp, Header,
      index.astro hero, contact.astro
      ANSWER: Use the service garage number, 07450 277250.
-     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged)
+     STATUS: closed. applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged)
 
 Q38  Company numbers (two now, maybe three later)
      The meeting said there are 2 registered companies: one for the
@@ -406,7 +466,7 @@ Q38  Company numbers (two now, maybe three later)
        Toyotech MOT Centre Ltd, 17095416, incorporated 16 Mar 2026,
          Unit 6, 80-86 Tavistock Street, Bletchley, Milton Keynes,
          MK2 2PB (MOT testing station)
-     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged). Still to confirm: the privacy policy
+     STATUS: closed. applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged). Still to confirm: the privacy policy
        names Toyotech Hybrid Autos Limited as the website's data
        controller (as before). Check that's right.
 
@@ -420,7 +480,7 @@ Q39  MOT availability check
      Affects: new component on the MOT page
      ANSWER: Don't build it yet; it's a future idea. Use the reg-plate
        WhatsApp form instead (Q24).
-     STATUS: noted (in CLAUDE.md Future Ideas)
+     STATUS: closed. noted (in CLAUDE.md Future Ideas)
 
 Q40  Servicing tiers: Bronze, Silver, Gold
      What's included in each? (Listed as a follow-up in the meeting.)
@@ -430,7 +490,7 @@ Q40  Servicing tiers: Bronze, Silver, Gold
        pre-filled with EXAMPLE contents (interim / full / major
        service), each with its own WhatsApp button: reg + extra
        information, sent to 07450 277250.
-     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged)
+     STATUS: closed. applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged)
        (not yet pushed). Example contents still need Mumthaz to check:
        src/content/service-packages.ts
 
@@ -439,7 +499,7 @@ Q41  Tyres
      balancing, alignment, TPMS, budget/mid/premium brands, run-flats.)
      Affects: new Tyres page, src/content/services.ts, schema
      ANSWER: Not needed yet. Show as "Coming soon".
-     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged) (Tyres is a disabled "Coming soon"
+     STATUS: closed. applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged) (Tyres is a disabled "Coming soon"
        option in the WhatsApp form). Re-open when tyres launch.
 
 Q42  Repairs & Quotes page
@@ -450,7 +510,7 @@ Q42  Repairs & Quotes page
      ANSWER: Covered by the WhatsApp form (Q24): reg plate plus
        "Repair or quote"; the message ends "The problem is: " so the
        customer types the issue in WhatsApp.
-     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged)
+     STATUS: closed. applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged)
 
 Q43  Google review QR sign
      A sign in the customer viewing area with a QR code that opens
@@ -459,19 +519,7 @@ Q43  Google review QR sign
      g.page/r/.../review). The agent can then make a printable A4 sign.
      Affects: printable sign (not the site)
      ANSWER: Not needed. Being ordered from a separate site.
-     STATUS: noted
-
-Q44  Off-site actions agreed (record only)
-     ANSWER:
-       - Update the Google Business Profile with the new numbers and
-         split hours (workshop Mon-Sat 09:00-18:00, MOTs 7 days), and
-         change the address to drop "Fenny Stratford" (see Q02-Q04).
-         Waits on Q03's MOT times.
-       - Staff to ask customers verbally for a Google review when the
-         MOT is done.
-       - Waiting area: more comfort, refreshment table with biscuits,
-         mini fridge with cold drinks, self-serve tea and coffee.
-     STATUS: noted
+     STATUS: closed. noted
 
 Q45  Future ideas (record only; add to CLAUDE.md "Future Ideas")
      ANSWER:
@@ -485,4 +533,4 @@ Q45  Future ideas (record only; add to CLAUDE.md "Future Ideas")
          an MOT for [Reg] on [Date] at 4:00 PM"). Garage confirms by
          WhatsApp and blocks the slot by hand on an admin dashboard. No
          payments. Needs somewhere to store slots (backend or a Sheet).
-     STATUS: noted
+     STATUS: closed. noted
