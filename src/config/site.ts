@@ -8,7 +8,7 @@
  * images by URL and "Scrape Again" doesn't refresh them, so bump `v`
  * whenever the image changes (e.g. after `npm run og-image`).
  */
-export const ogImage = '/og-image.png?v=2';
+export const ogImage = '/og-image.png?v=3';
 
 export const site = {
   name: 'Toyotech Hybrid Autos',
