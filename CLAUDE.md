@@ -37,7 +37,7 @@
   - Blue: `#0B2545` (dark navy) / `#1E5AA8` (brand blue)
   - Red: `#D5222A` (Toyotech red)
   - White for contrast/text on dark backgrounds
-- **Logo:** Toyotech swoosh logo provided — black background, silver/grey swoosh, red "Toyotech" wordmark, blue "Hybrid Autos" subtext, red/blue/green ring icon. Place in `src/assets/logo.png`; needs a transparent-background version for use on both light and dark site backgrounds (request from client or clean up in an image editor)
+- **Logo:** Toyotech swoosh logo provided — black background, silver/grey swoosh, red "Toyotech" wordmark, blue "Hybrid Autos" subtext, red/blue/green ring icon. `src/assets/logo.png` is now the client artwork (navy background removed by colour-unmixing, cropped tight; no "Hybrid Autos" in the artwork, so `Logo.astro` adds it as a text sub-line). It's an interim raster: the client is converting it to SVG. The silver swoosh nearly disappears on white, so use it on navy only.
 - **Tone:** Trustworthy, local, fast turnaround, hybrid specialists
 
 ## Pages
