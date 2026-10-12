@@ -51,7 +51,7 @@ Q01  Fourth phone number
      ANSWER: Neither. Meeting 12 Oct 2026: 07502 811204 is to be
        removed permanently (see Q02). Drop "07450 281120 4" from
        CLAUDE.md as well.
-     STATUS: applied: commit 2c1cffd on claude/meeting-oct-2026-updates (not yet pushed)
+     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged)
 
 Q02  Phone numbers: which are live, and what is each one for?
        07450 277250  (site label: Mobile / WhatsApp)
@@ -68,7 +68,7 @@ Q02  Phone numbers: which are live, and what is each one for?
        Servicing & quotes:      phone and WhatsApp 07450 277250
        Remove permanently:      07450 011199 and 07502 811204
        Which WhatsApp the site-wide button uses is split out as Q37.
-     STATUS: applied: commit 2c1cffd on claude/meeting-oct-2026-updates (not yet pushed)
+     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged)
 
 Q03  Opening hours, day by day
      Site backup hours say 09:00-18:00, 7 days. Is that right? Do the
@@ -88,7 +88,7 @@ Q03  Opening hours, day by day
      FOLLOW-UP (12 Oct 2026): MOT testing is 09:00-18:00 every day,
        including Sunday. So: Mon-Sat 09:00-18:00 workshop and MOTs;
        Sunday 09:00-18:00 MOTs only. Bank holidays still unknown.
-     STATUS: applied: commit 2c1cffd on claude/meeting-oct-2026-updates (not yet pushed) (site fallback hours, footer and copy).
+     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged) (site fallback hours, footer and copy).
        The Google Sheet still needs its notes changing by hand: Mon-Sat
        "Workshop and MOTs", Sunday "MOTs only, workshop closed", all
        days 09:00-18:00.
@@ -103,7 +103,7 @@ Q04  Address wording
        Bletchley; the Google listing and CLAUDE.md's listing line still
        say Fenny Stratford and need changing. Fenny Stratford can stay
        in the service-area list (areaServed), which is not the address.
-     STATUS: applied: commit 2c1cffd on claude/meeting-oct-2026-updates (not yet pushed) (Google listing still to update, see Q44)
+     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged) (Google listing still to update, see Q44)
 
 Q05  DVSA MOT testing station number
      Affects: could be shown on the site and in the schema as an
@@ -117,7 +117,7 @@ Q06  MOT classes tested
      Affects: src/content/services.ts (MOT description), knowsAbout in
      LocalBusinessSchema, possible /class-7-mot/ page
      ANSWER: Class 4 only (meeting 12 Oct 2026). No Class 7 page.
-     STATUS: applied: commit 2c1cffd on claude/meeting-oct-2026-updates (not yet pushed)
+     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged)
 
 
 ======================================================================
@@ -196,7 +196,7 @@ Q15  Services list
      FOLLOW-UP: Servicing packages added to the existing Services page
        (Q40); the MOT Checks page's WhatsApp button asks for the reg
        only and goes to 07476 094818. Tyres "Coming soon" (Q41).
-     STATUS: applied: commit 3d0a839 on claude/meeting-oct-2026-updates
+     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged)
 
 Q16  Prices
      Price of a standard MOT, interim service, full service, hybrid
@@ -229,7 +229,7 @@ Q19  Homepage claims still true every week?
        index.astro (highlight, intro, description), site.description,
        Footer.astro, mot-checks.astro, hybrid-battery.astro.
        "Same-day bookings" was not discussed: keep as is.
-     STATUS: applied: commit 2c1cffd on claude/meeting-oct-2026-updates (not yet pushed)
+     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged)
 
 
 ======================================================================
@@ -278,7 +278,7 @@ Q24  Booking form
      FOLLOW-UP (12 Oct 2026): clicking any "Message us on WhatsApp"
        button opens a simple form: reg plate plus what they want
        (service, MOT, general repair). Added Tyres too, from the meeting.
-     STATUS: applied: commit 2c1cffd on claude/meeting-oct-2026-updates (not yet pushed). MOT and Tyres go to WhatsApp
+     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged). MOT and Tyres go to WhatsApp
        07476 094818; Service and Repair to 07450 277250.
 
 Q25  Google reviews block
@@ -388,7 +388,7 @@ Q37  Site-wide WhatsApp number
      Affects: src/config/site.ts (whatsapp), FloatingWhatsApp, Header,
      index.astro hero, contact.astro
      ANSWER: Use the service garage number, 07450 277250.
-     STATUS: applied: commit 2c1cffd on claude/meeting-oct-2026-updates (not yet pushed)
+     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged)
 
 Q38  Company numbers (two now, maybe three later)
      The meeting said there are 2 registered companies: one for the
@@ -406,7 +406,7 @@ Q38  Company numbers (two now, maybe three later)
        Toyotech MOT Centre Ltd, 17095416, incorporated 16 Mar 2026,
          Unit 6, 80-86 Tavistock Street, Bletchley, Milton Keynes,
          MK2 2PB (MOT testing station)
-     STATUS: applied: commit 2c1cffd on claude/meeting-oct-2026-updates (not yet pushed). Still to confirm: the privacy policy
+     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged). Still to confirm: the privacy policy
        names Toyotech Hybrid Autos Limited as the website's data
        controller (as before). Check that's right.
 
@@ -430,7 +430,7 @@ Q40  Servicing tiers: Bronze, Silver, Gold
        pre-filled with EXAMPLE contents (interim / full / major
        service), each with its own WhatsApp button: reg + extra
        information, sent to 07450 277250.
-     STATUS: applied: commit 3d0a839 on claude/meeting-oct-2026-updates
+     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged)
        (not yet pushed). Example contents still need Mumthaz to check:
        src/content/service-packages.ts
 
@@ -439,7 +439,7 @@ Q41  Tyres
      balancing, alignment, TPMS, budget/mid/premium brands, run-flats.)
      Affects: new Tyres page, src/content/services.ts, schema
      ANSWER: Not needed yet. Show as "Coming soon".
-     STATUS: applied: commit 3d0a839 (Tyres is a disabled "Coming soon"
+     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged) (Tyres is a disabled "Coming soon"
        option in the WhatsApp form). Re-open when tyres launch.
 
 Q42  Repairs & Quotes page
@@ -450,7 +450,7 @@ Q42  Repairs & Quotes page
      ANSWER: Covered by the WhatsApp form (Q24): reg plate plus
        "Repair or quote"; the message ends "The problem is: " so the
        customer types the issue in WhatsApp.
-     STATUS: applied: commit 2c1cffd on claude/meeting-oct-2026-updates (not yet pushed)
+     STATUS: applied: https://github.com/ahmed-marzook/toyotech-mk/pull/8 (merged)
 
 Q43  Google review QR sign
      A sign in the customer viewing area with a QR code that opens
