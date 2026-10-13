@@ -1,12 +1,12 @@
 ---
-import { Star, Quote, ExternalLink } from 'lucide-react';
+import { Star, Quote, ExternalLink, PenLine } from 'lucide-react';
 import { googleReviews } from '../content/reviews';
 
 interface Props {
   class?: string;
 }
 const { class: className = '' } = Astro.props;
-const { rating, count, listingUrl, reviews, businessName } = googleReviews;
+const { rating, count, listingUrl, reviewUrl, reviews, businessName } = googleReviews;
 
 // Fill level (0–1) for each of the five stars, e.g. 4.8 → [1, 1, 1, 1, 0.8]
 const stars = Array.from({ length: 5 }, (_, i) => Math.max(0, Math.min(1, rating - i)));
@@ -61,5 +61,22 @@ const stars = Array.from({ length: 5 }, (_, i) => Math.max(0, Math.min(1, rating
         ))
       }
     </ul>
+
+    <!-- Neutral invitation to everyone (Google forbids review gating or incentives). -->
+    <div
+      class="mt-8 flex flex-col items-center gap-4 rounded-2xl bg-white p-6 text-center shadow-sm ring-1 ring-slate-200 sm:flex-row sm:justify-between sm:text-left"
+    >
+      <p class="text-lg font-bold text-navy">
+        Been to us? <span class="font-normal text-slate-600">We'd love to hear how it went.</span>
+      </p>
+      <a
+        href={reviewUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-motion inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-brand-blue px-5 py-3 font-bold text-white hover:shadow-md"
+      >
+        <PenLine className="h-4 w-4" /> Leave a Google review<span class="sr-only"> (opens in a new tab)</span>
+      </a>
+    </div>
   </div>
 </section>
