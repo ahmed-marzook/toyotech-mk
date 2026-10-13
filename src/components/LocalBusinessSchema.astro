@@ -11,7 +11,7 @@
  * No aggregateRating: Google ignores "self-serving" review markup a business
  * puts on its own site, and the rating already lives on the Business Profile.
  */
-import { site, phones, map, legal, motStation, ogImage } from '../config/site';
+import { site, phones, map, legal, motStation, ogImage, socialProfiles } from '../config/site';
 import { services } from '../content/services';
 import { googleReviews } from '../content/reviews';
 import { hybridModels } from '../content/hybrid-models';
@@ -67,7 +67,11 @@ const schema = {
   // Ties this site to the Google Business Profile entity (helps Google connect
   // the two, distinct from the aggregateRating we deliberately don't self-publish above).
   // Add other verified citations (Bing Places, Apple Business Connect, Yell, ...) here as they go live.
-  sameAs: [googleReviews.listingUrl, `https://find-and-update.company-information.service.gov.uk/company/${legal.companyNumber}`],
+  sameAs: [
+    googleReviews.listingUrl,
+    `https://find-and-update.company-information.service.gov.uk/company/${legal.companyNumber}`,
+    ...socialProfiles,
+  ],
   areaServed,
   openingHoursSpecification: hours
     .filter((h) => !h.closedFlag)

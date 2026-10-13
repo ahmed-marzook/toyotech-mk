@@ -15,6 +15,8 @@ export const googleReviews = {
   rating: 4.8,
   count: 10,
   listingUrl: 'https://share.google/igMJfXrwPXxMLlpxE',
+  /** "Write a review" link from the Business Profile's "Get more reviews" panel */
+  reviewUrl: 'https://g.page/r/CToQZa_ixw-FEBE/review',
   reviews: [
     { quote: 'Great mechanic shop, very friendly and they go above and beyond' },
     {

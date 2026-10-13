@@ -9,7 +9,7 @@
   - DVSA MOT testing station site number: **5848BM** (Toyotech MOT Centre Ltd, Unit 6, 80-86 Tavistock Street, Bletchley; from DVSA's list of active MOT testing stations). `motStation` in `src/config/site.ts`; shown on the MOT page under the booking CTA, in the Home JSON-LD `identifier` and in llms.txt.
   - Both live in `companies` in `src/config/site.ts` and are disclosed in the Footer and the Privacy Policy's "Who we are" section (Companies Act 2006 trading disclosures + Provision of Services Regulations 2009). Add a third company to that array.
 - **Specialty:** Hybrid vehicle servicing, plus general MOTs and servicing for all cars
-- **Address:** No. 80-86, Tavistock Street, Bletchley, Milton Keynes, MK2 2PB. Display "Bletchley" only, never "Fenny Stratford" (decided 12 Oct 2026; the Google listing still needs updating to match).
+- **Address:** No. 80-86, Tavistock Street, Bletchley, Milton Keynes, MK2 2PB. Display "Bletchley" only, never "Fenny Stratford" (decided 12 Oct 2026). The GBP address field is entered as Bletchley; Google itself adds "Fenny Stratford" as the neighbourhood on the public listing and owners can't remove it. That's fine for NAP (street, number, town and postcode all match), so don't keep re-editing the address.
 - **Contact (split by job, decided 12 Oct 2026):** ask for Mumthaz
   - General / main line, MOTs & tyres: phone 01908 639629
   - MOTs: call or WhatsApp 07476 094818 (tyres too, once they launch)
@@ -69,7 +69,7 @@
    - Primary CTA: "Message us on WhatsApp" button (deep link, see below)
    - Phone numbers listed as tap-to-call links (mobile-first)
    - Address + Google Maps embed (see Map Embed section below) — always shown alongside a plain-text address and "Get directions" link, never as the only way to find the workshop
-   - **No social media icons/links anywhere on the site**
+   - **No social media icons/links anywhere on the site.** The Facebook page (`socialProfiles` in `src/config/site.ts`) appears only in the Home JSON-LD `sameAs`, which is invisible.
 
 ## Opening Hours — Google Sheet Integration
 
@@ -124,6 +124,7 @@ Parsing rules:
   3. **Manually curated static reviews block** — hardcode a handful of hand-picked reviews + a "Read more reviews on Google" link/button out to the Google listing — zero maintenance, no API cost, safest default given the static-hosting constraint.
 - **Default approach:** start with option 3 (static curated block) since there's no backend; revisit build-time API fetch (option 1) later if reviews need to stay live without manual updates.
 - Link out to the full listing: `https://share.google/igMJfXrwPXxMLlpxE`
+- "Leave a Google review" button under the review cards (Home and Contact) links to the write-a-review URL `https://g.page/r/CToQZa_ixw-FEBE/review` (`reviewUrl` in `src/content/reviews.ts`). Keep the wording a neutral invitation to everyone: Google forbids review gating and incentives.
 - Sample reviews to seed the static block with:
   - "Great mechanic shop, very friendly and they go above and beyond"
   - "Brought in a Toyota Prius expecting to pay a lot. Instead they gave me a great deal with speedy turn around... Very happy with the top notch service."

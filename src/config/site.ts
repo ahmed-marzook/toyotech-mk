@@ -101,6 +101,13 @@ export const motStation = {
  * places customers come from. Confirm with Mumthaz and keep in step with the
  * Google Business Profile's service-area list.
  */
+/**
+ * The business's other official profiles. Used only in the JSON-LD `sameAs`
+ * (invisible) so search engines and AI assistants can link them to this
+ * business. No visible social links on the site.
+ */
+export const socialProfiles = ['https://www.facebook.com/people/Toyotech-Hybrid-Autos/61552325180158/'];
+
 export const serviceAreas = [
   'Bletchley',
   'Fenny Stratford',
