@@ -7,6 +7,10 @@
  * interim/full/major service items, pre-filled as a starting point. Confirm
  * them with Mumthaz (ANSWERS.txt Q40). No prices, by decision (Q16).
  */
+
+/** Hidden until the client decides on the packages. Set to true to show them on the Services page. */
+export const showServicePackages = false;
+
 export type ServicePackage = {
   tier: 'Bronze' | 'Silver' | 'Gold';
   enquiry: string;
