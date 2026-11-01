@@ -11,11 +11,10 @@
 - **Specialty:** Hybrid vehicle servicing, plus general MOTs and servicing for all cars
 - **Address:** No. 80-86, Tavistock Street, Bletchley, Milton Keynes, MK2 2PB. Display "Bletchley" only, never "Fenny Stratford" (decided 12 Oct 2026). The GBP address field is entered as Bletchley; Google itself adds "Fenny Stratford" as the neighbourhood on the public listing and owners can't remove it. That's fine for NAP (street, number, town and postcode all match), so don't keep re-editing the address.
 - **Contact:** ask for Mumthaz
-  - WhatsApp (everything: MOTs, servicing, repairs; decided 1 Nov 2026): 07846 881064, the WhatsApp Business number
-  - General / main line, MOTs & tyres: phone 01908 639629
-  - MOTs: phone 07476 094818 (calls only)
-  - Servicing & quotes: phone 07450 277250 (calls only)
-  - 07450 011199 and 07502 811204 are permanently removed; don't add them back.
+  - WhatsApp (everything: MOTs, servicing, repairs; decided 1 Nov 2026) and calls: 07846 881064, the WhatsApp Business number
+  - Calls: landline 01908 639629
+  - These are the only two numbers shown on the site (client's decision, Nov 2026).
+  - 07450 277250, 07476 094818, 07450 011199 and 07502 811204 are permanently removed; don't add them back.
 - **Hours:** Workshop 09:00-18:00 Monday to Saturday. MOT testing 09:00-18:00, 7 days a week. Same-day bookings available. Don't write "open 7 days" for the workshop.
 - **MOT classes:** Class 4 only.
 - **Prices:** none shown anywhere on the site.
@@ -236,7 +235,7 @@ The goal: be the garage that ChatGPT, Gemini, Perplexity, Claude and Apple Intel
 ## WhatsApp Contact
 
 - **One number for everything:** 07846 881064 (`whatsapp` in `src/config/site.ts`), the WhatsApp Business number. Every WhatsApp button and enquiry goes there.
-- The Contact page lists the WhatsApp number first (WhatsApp button only, no call button), then the call numbers (`phones` in `src/config/site.ts`), each with a call button.
+- The Contact page lists both numbers (`phones` in `src/config/site.ts`), each with a call button, plus a WhatsApp button for 07846 881064 (`whatsapp: true` on the phone entry). The Footer and the Privacy Policy show the same two numbers.
 - Every WhatsApp button is a plain `wa.me` link that works without JS. With JS, `src/components/WhatsAppEnquiry.astro` intercepts the click and opens a small form, builds the pre-filled message and opens WhatsApp. Nothing is sent to the site.
   - General buttons (`<WhatsAppButton />`, header, floating, hero, Contact's number list): reg plate + "What do you need?" + optional "Anything else?" box (shown for every choice) (MOT; Service; Repair or quote; Tyres shown as "Coming soon", disabled). Choices live in `whatsappEnquiries` in `src/config/site.ts`.
   - Preset buttons (`<WhatsAppButton enquiry="…" />`) skip the choice: `mot` (MOT page) asks for the reg only; `service-bronze` / `service-silver` / `service-gold` (Services page packages) ask for the reg plus an optional "Anything else?" box. Presets live in `whatsappPresets`; without JS the button links straight to WhatsApp with that preset's message.

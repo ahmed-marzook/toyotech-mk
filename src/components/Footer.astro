@@ -1,7 +1,8 @@
 ---
 import { MapPin, Phone, Clock } from 'lucide-react';
 import Logo from './Logo.astro';
-import { site, address, phones, nav, companies, hoursSummary, url } from '../config/site';
+import { WhatsAppIcon } from './WhatsAppButton.jsx';
+import { site, address, phones, whatsapp, nav, companies, hoursSummary, url } from '../config/site';
 
 const year = new Date().getFullYear();
 ---
@@ -27,15 +28,27 @@ const year = new Date().getFullYear();
     </div>
 
     <div>
-      <h2 class="mb-3 font-bold text-white">Call us</h2>
+      <h2 class="mb-3 font-bold text-white">Call or WhatsApp</h2>
       <ul class="space-y-1 text-sm">
         {
           phones.map((p) => (
-            <li>
+            <li class="flex items-center gap-1">
               <a href={`tel:${p.tel}`} class="inline-flex min-h-11 items-center gap-2 hover:text-white">
                 <Phone className="h-4 w-4 text-brand-red" />
                 {p.display}
               </a>
+              {p.whatsapp && (
+                <a
+                  href={whatsapp.href}
+                  data-whatsapp-enquiry=""
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 text-white/60 hover:text-white"
+                >
+                  <WhatsAppIcon className="h-4 w-4 text-whatsapp" />
+                  WhatsApp<span class="sr-only"> {p.display} (opens WhatsApp)</span>
+                </a>
+              )}
             </li>
           ))
         }
