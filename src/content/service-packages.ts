@@ -1,8 +1,7 @@
 /**
  * Servicing packages shown on the Services page. Each one has its own
  * WhatsApp button (`enquiry` = an id from `whatsappPresets` in
- * src/config/site.ts) that asks for the reg plus extra information and goes
- * to the servicing line.
+ * src/config/site.ts) that asks for the reg plus extra information.
  *
  * EXAMPLE CONTENTS: the Bronze/Silver/Gold inclusions below are typical UK
  * interim/full/major service items, pre-filled as a starting point. Confirm

@@ -10,10 +10,11 @@
   - Both live in `companies` in `src/config/site.ts` and are disclosed in the Footer and the Privacy Policy's "Who we are" section (Companies Act 2006 trading disclosures + Provision of Services Regulations 2009). Add a third company to that array.
 - **Specialty:** Hybrid vehicle servicing, plus general MOTs and servicing for all cars
 - **Address:** No. 80-86, Tavistock Street, Bletchley, Milton Keynes, MK2 2PB. Display "Bletchley" only, never "Fenny Stratford" (decided 12 Oct 2026). The GBP address field is entered as Bletchley; Google itself adds "Fenny Stratford" as the neighbourhood on the public listing and owners can't remove it. That's fine for NAP (street, number, town and postcode all match), so don't keep re-editing the address.
-- **Contact (split by job, decided 12 Oct 2026):** ask for Mumthaz
+- **Contact:** ask for Mumthaz
+  - WhatsApp (everything: MOTs, servicing, repairs; decided 1 Nov 2026): 07846 881064, the WhatsApp Business number
   - General / main line, MOTs & tyres: phone 01908 639629
-  - MOTs: call or WhatsApp 07476 094818 (tyres too, once they launch)
-  - Servicing & quotes: phone and WhatsApp 07450 277250 (also the site-wide WhatsApp button)
+  - MOTs: phone 07476 094818 (calls only)
+  - Servicing & quotes: phone 07450 277250 (calls only)
   - 07450 011199 and 07502 811204 are permanently removed; don't add them back.
 - **Hours:** Workshop 09:00-18:00 Monday to Saturday. MOT testing 09:00-18:00, 7 days a week. Same-day bookings available. Don't write "open 7 days" for the workshop.
 - **MOT classes:** Class 4 only.
@@ -57,7 +58,7 @@
    - Feature "Genuine Parts and Warranty" and hybrid specialism callouts
    - **Servicing packages:** Bronze (interim), Silver (full), Gold (major) cards in `src/content/service-packages.ts`, each with its own WhatsApp button. The inclusions are pre-filled EXAMPLES (typical UK interim/full/major service items) awaiting confirmation from Mumthaz. No prices.
 3. **MOT** (`/mot/`, nav label "MOT"; the old `/mot-checks/` URL redirects there via `redirects` in `astro.config.mjs`)
-   - "Book your MOT in Bletchley" WhatsApp CTA sits straight under the page heading (reg-only form to the MOT line). From lg up the CTA text sits beside the shopfront photo (two columns); stacked and centred on mobile
+   - "Book your MOT in Bletchley" WhatsApp CTA sits straight under the page heading (reg-only form). From lg up the CTA text sits beside the shopfront photo (two columns); stacked and centred on mobile
    - Plain-English guide to every part inspected at a car MOT, grouped into 6 areas
    - Content lives in `src/content/mot-checks.ts`, sourced from DVSA's "Car parts checked at an MOT" under the Open Government Licence v3.0 — reworded, not copied, and attributed at the foot of the page
    - Also covers what an MOT does *not* include (engine, clutch, gearbox condition, servicing) as a bridge to the Services page
@@ -197,6 +198,7 @@ Subtle, CSS-only motion — no JS animation libraries, no new npm dependencies. 
 - **Scroll reveal** (fade + 1rem slide-up): service cards (Services) and Google review cards (Home and Contact). Mark elements with `data-reveal`; `src/components/RevealOnScroll.astro` (tiny vanilla IntersectionObserver snippet, in `BaseLayout`) reveals anything already on screen, then adds `html.js-reveal` — only then are off-screen elements hidden until they scroll in. Put `data-reveal` on a wrapper, not on an element that also has a hover transform.
 - **Hover/tap:** `.btn-motion` (buttons: scale 1.04 hover, 0.97 press) and `.card-motion` (cards: lift + scale 1.02, shadow). One timing everywhere: `--duration-fast` 180ms, `--ease-motion` ease-out. Hover transforms only apply under `(hover: hover)` so they don't stick after a tap on touch screens. Don't add Tailwind `transition`/`transition-colors` alongside these classes — it overrides the transition list.
 - **Floating WhatsApp button (mobile):** gentle scale pulse (1 → 1.06) + soft expanding ring, 3 cycles (~4s) after a 0.8s delay, then stops — under 5s, so no pause control is needed (WCAG 2.2.2). The button also has a dismiss control.
+- **Other WhatsApp buttons:** the same pulse, without the ring (it would overflow on wide buttons), on the desktop header button and on each page's main top button (Home, MOT, Hybrid Battery, Contact). The page buttons use `md:motion-safe:animate-cta-pulse`, so on mobile only the floating button moves. Services package buttons and end-of-page buttons stay still.
 - **MapEmbed `<details>`:** `.details-motion` animates height/opacity via `::details-content` + `interpolate-size`; browsers without support just open instantly.
 - **Opening hours:** the "today" row background fades in (it's applied after hydration), and the "Today" label and "Open now/Closed" badge use `motion-safe:animate-fade-in`.
 - **Performance:** only `transform` and `opacity` are animated (compositor-only, cheap on low-end phones). Verified at 390px with 4× CPU throttling: no layout shift (CLS 0), no non-composited animations, Lighthouse mobile 100 across the board.
@@ -233,12 +235,12 @@ The goal: be the garage that ChatGPT, Gemini, Perplexity, Claude and Apple Intel
 
 ## WhatsApp Contact
 
-- **Site-wide number:** 07450 277250 (service garage). MOT & tyres WhatsApp: 07476 094818.
-- The Contact page lists every number once (`phones` in `src/config/site.ts`), each with a call button, plus a WhatsApp button for the mobiles (`whatsapp` on the phone entry).
-- Every WhatsApp button is a plain `wa.me` link that works without JS. With JS, `src/components/WhatsAppEnquiry.astro` intercepts the click and opens a small form, builds the pre-filled message and opens WhatsApp on the right line. Nothing is sent to the site.
-  - General buttons (`<WhatsAppButton />`, header, floating, hero): reg plate + "What do you need?" + optional "Anything else?" box (shown for every choice) (MOT → 07476 094818; Service, Repair or quote → 07450 277250; Tyres shown as "Coming soon", disabled). Choices live in `whatsappEnquiries` in `src/config/site.ts`.
-  - Preset buttons (`<WhatsAppButton enquiry="…" />`) skip the choice: `mot` (MOT page) asks for the reg only and goes to 07476 094818; `service-bronze` / `service-silver` / `service-gold` (Services page packages) ask for the reg plus an optional "Anything else?" box and go to 07450 277250. `servicing` (the WhatsApp button beside 07450 277250 in the Contact page's number list) asks for the reg plus extra information. Presets live in `whatsappPresets`; without JS the button links straight to that preset's line.
-- **Tyres:** not offered yet ("Coming soon" in the form only). Will use the MOT WhatsApp line when it launches.
+- **One number for everything:** 07846 881064 (`whatsapp` in `src/config/site.ts`), the WhatsApp Business number. Every WhatsApp button and enquiry goes there.
+- The Contact page lists the WhatsApp number first (WhatsApp button only, no call button), then the call numbers (`phones` in `src/config/site.ts`), each with a call button.
+- Every WhatsApp button is a plain `wa.me` link that works without JS. With JS, `src/components/WhatsAppEnquiry.astro` intercepts the click and opens a small form, builds the pre-filled message and opens WhatsApp. Nothing is sent to the site.
+  - General buttons (`<WhatsAppButton />`, header, floating, hero, Contact's number list): reg plate + "What do you need?" + optional "Anything else?" box (shown for every choice) (MOT; Service; Repair or quote; Tyres shown as "Coming soon", disabled). Choices live in `whatsappEnquiries` in `src/config/site.ts`.
+  - Preset buttons (`<WhatsAppButton enquiry="…" />`) skip the choice: `mot` (MOT page) asks for the reg only; `service-bronze` / `service-silver` / `service-gold` (Services page packages) ask for the reg plus an optional "Anything else?" box. Presets live in `whatsappPresets`; without JS the button links straight to WhatsApp with that preset's message.
+- **Tyres:** not offered yet ("Coming soon" in the form only). Will use the same WhatsApp number when it launches.
 - Make this the primary CTA button site-wide (header, home hero, contact page)
 - Style as a prominent green WhatsApp-branded button, distinct from the red/blue theme, so it's instantly recognisable
 

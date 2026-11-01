@@ -19,9 +19,9 @@ const variants = {
  * Primary site-wide CTA. It's a plain link, so render it without a
  * `client:*` directive — no JS is shipped for it. `data-whatsapp-enquiry`
  * makes WhatsAppEnquiry.astro open the reg-plate form on click; without JS
- * the link goes straight to WhatsApp on the service garage line. Pass
- * `enquiry` (an id from `whatsappPresets`) to open that enquiry directly,
- * e.g. the MOT page's reg-only form, sent to the MOT line.
+ * the link goes straight to WhatsApp. Pass `enquiry` (an id from
+ * `whatsappPresets`) to open that enquiry directly, e.g. the MOT page's
+ * reg-only form.
  *
  * Text and icon are navy, not white: white on WhatsApp green (#25D366) is
  * 1.98:1 and fails WCAG AA; navy on the same green is 7.76:1.

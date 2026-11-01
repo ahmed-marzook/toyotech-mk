@@ -202,7 +202,7 @@ const lastUpdated = 'October 2026';
           phones.map((p) => (
             <li>
               <a href={`tel:${p.tel}`} class="font-semibold text-brand-blue underline underline-offset-4">{p.display}</a>
-              <span class="text-slate-500"> — {p.label}{p.whatsapp ? ' (call or WhatsApp)' : ''}</span>
+              <span class="text-slate-500"> — {p.label}</span>
             </li>
           ))
         }

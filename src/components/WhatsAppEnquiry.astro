@@ -3,7 +3,7 @@
  * WhatsApp quick-connect form. Every WhatsApp button (WhatsAppButton.jsx
  * carries `data-whatsapp-enquiry`) opens this dialog instead of going
  * straight to WhatsApp, and we open WhatsApp with the message already
- * written, sent to the line that handles that job.
+ * written.
  *
  * - `data-whatsapp-enquiry=""`: general form, reg plate + "What do you need?"
  *   + optional "Anything else?" box
@@ -11,11 +11,11 @@
  *   (reg plate only) or "service-gold" (reg plate + extra information)
  *
  * Progressive enhancement: the buttons are plain wa.me links, so with JS off
- * (or before this script runs) they still open WhatsApp on the right line.
+ * (or before this script runs) they still open WhatsApp.
  * Nothing is sent to this site; the form only builds a link.
  */
 import { X } from 'lucide-react';
-import { whatsappEnquiries, whatsappPresets } from '../config/site';
+import { whatsapp, whatsappEnquiries, whatsappPresets } from '../config/site';
 
 const generalIntro = "Tell us your reg and what you need. We'll write the message for you.";
 const firstOpen = whatsappEnquiries.find((e) => !e.comingSoon)?.id;
@@ -137,7 +137,7 @@ const extraMax = 300;
   </form>
 </dialog>
 
-<script is:inline define:vars={{ jobs: whatsappEnquiries, presets: whatsappPresets, generalIntro }}>
+<script is:inline define:vars={{ jobs: whatsappEnquiries, presets: whatsappPresets, generalIntro, number: whatsapp.number }}>
   (() => {
     const $ = (id) => document.getElementById(id);
     const dialog = $('whatsapp-enquiry');
@@ -212,7 +212,7 @@ const extraMax = 300;
       const more = !extraWrap.hidden ? extra.value.trim() : '';
       // "The problem is: " (repair) reads best with the details straight after it
       if (more) text += job.outro.endsWith(': ') ? more : `\n\nExtra information: ${more}`;
-      const href = `https://wa.me/${job.number}?text=${encodeURIComponent(text)}`;
+      const href = `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
       // Opened from the submit click, so popup blockers allow it; fall back to same tab if not
       if (!window.open(href, '_blank', 'noopener')) window.location.href = href;
       dialog.close();

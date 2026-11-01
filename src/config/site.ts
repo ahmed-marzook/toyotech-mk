@@ -151,38 +151,18 @@ export type Phone = {
   label: string;
   display: string;
   tel: string;
-  /** Also on WhatsApp: the preset its WhatsApp button opens (see `whatsappPresets`) */
-  whatsapp?: string;
 };
 
 /**
- * Every number, split by job (meeting 12 Oct 2026). All can be called; the
- * mobiles are on WhatsApp too. The first is the main number used site-wide
- * (header, hero, schema `telephone`).
+ * Numbers for calls, split by job (meeting 12 Oct 2026). The first is the
+ * main number used site-wide (header, hero, schema `telephone`). WhatsApp has
+ * its own number, see `whatsapp`.
  */
 export const phones: Phone[] = [
   { label: 'Main line and MOTs', display: '01908 639629', tel: '+441908639629' },
-  { label: 'Servicing and quotes', display: '07450 277250', tel: '+447450277250', whatsapp: 'servicing' },
-  { label: 'MOTs', display: '07476 094818', tel: '+447476094818', whatsapp: 'mot' },
+  { label: 'Servicing and quotes', display: '07450 277250', tel: '+447450277250' },
+  { label: 'MOTs', display: '07476 094818', tel: '+447476094818' },
 ];
-
-export type WhatsAppLine = {
-  label: string;
-  display: string;
-  number: string;
-  /** Preset the line's own button opens (see `whatsappPresets`) */
-  enquiry: string;
-};
-
-/** Service garage line — the site-wide WhatsApp button and the no-JS fallback. */
-const serviceWhatsApp: WhatsAppLine = {
-  label: 'Servicing and repairs',
-  display: '07450 277250',
-  number: '447450277250',
-  enquiry: 'servicing',
-};
-/** MOT line. Tyres will use it too once they launch. */
-const motWhatsApp: WhatsAppLine = { label: 'MOTs', display: '07476 094818', number: '447476094818', enquiry: 'mot' };
 
 /**
  * One kind of WhatsApp enquiry. The pre-filled message is
@@ -196,7 +176,6 @@ export type Enquiry = {
   label: string;
   /** Dialog heading when a button opens this enquiry directly */
   title: string;
-  number: string;
   intro: string;
   outro: string;
   /** Presets only: show the optional "Anything else?" box (the general form always shows it) */
@@ -211,7 +190,6 @@ const mot: Enquiry = {
   id: 'mot',
   label: 'MOT',
   title: 'Book an MOT',
-  number: motWhatsApp.number,
   intro: "Hello Toyotech, I'd like to book an MOT for my car",
   outro: availability,
 };
@@ -220,7 +198,6 @@ const servicePackage = (tier: string): Enquiry => ({
   id: `service-${tier.toLowerCase()}`,
   label: `${tier} service`,
   title: `Book a ${tier} service`,
-  number: serviceWhatsApp.number,
   intro: `Hello Toyotech, I'd like to book a ${tier} service for my car`,
   outro: availability,
   extra: true,
@@ -233,7 +210,6 @@ export const whatsappEnquiries: Enquiry[] = [
     id: 'service',
     label: 'Service',
     title: 'Book a service',
-    number: serviceWhatsApp.number,
     intro: "Hello Toyotech, I'd like to book a service for my car",
     outro: availability,
   },
@@ -241,7 +217,6 @@ export const whatsappEnquiries: Enquiry[] = [
     id: 'repair',
     label: 'Repair or quote',
     title: 'Repair or quote',
-    number: serviceWhatsApp.number,
     intro: "Hello Toyotech, I'd like a quote for a repair on my car",
     outro: 'The problem is: ',
   },
@@ -249,7 +224,6 @@ export const whatsappEnquiries: Enquiry[] = [
     id: 'tyres',
     label: 'Tyres',
     title: 'Tyres',
-    number: motWhatsApp.number,
     intro: "Hello Toyotech, I'm looking for tyres for my car",
     outro: 'Could you let me know what you have?',
     comingSoon: true,
@@ -261,35 +235,25 @@ export const whatsappEnquiries: Enquiry[] = [
  * skipping the "what do you need?" choice: the MOT page asks for the reg
  * only; the servicing packages ask for the reg plus extra information.
  */
-export const whatsappPresets: Enquiry[] = [
-  mot,
-  ...['Bronze', 'Silver', 'Gold'].map(servicePackage),
-  {
-    id: 'servicing',
-    label: 'Servicing and repairs',
-    title: 'Message the service garage',
-    number: serviceWhatsApp.number,
-    intro: "Hello Toyotech, I'd like help with servicing or a repair on my car",
-    outro: 'Could you get back to me?',
-    extra: true,
-  },
-];
+export const whatsappPresets: Enquiry[] = [mot, ...['Bronze', 'Silver', 'Gold'].map(servicePackage)];
 
-const waLink = (number: string, text: string) => `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
+/** WhatsApp Business number: every WhatsApp button and enquiry goes here (MOTs, servicing, repairs). */
+const whatsappNumber = '447846881064';
+
+const waLink = (text: string) => `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
 
 const whatsappMessage = 'Hello Toyotech, I am interested in booking a service or MOT. Could you let me know your availability?';
 
 export const whatsapp = {
-  number: serviceWhatsApp.number,
-  display: serviceWhatsApp.display,
-  href: waLink(serviceWhatsApp.number, whatsappMessage),
-  lines: [serviceWhatsApp, motWhatsApp],
+  number: whatsappNumber,
+  display: '07846 881064',
+  href: waLink(whatsappMessage),
 };
 
 /** Plain wa.me link for an enquiry (no reg): what the button does without JS. */
 export function enquiryHref(id?: string): string {
   const e = whatsappPresets.find((p) => p.id === id);
-  return e ? waLink(e.number, `${e.intro}. ${e.outro}`.trim()) : whatsapp.href;
+  return e ? waLink(`${e.intro}. ${e.outro}`.trim()) : whatsapp.href;
 }
 
 /** Published Google Sheet (File → Share → Publish to web → CSV). */
