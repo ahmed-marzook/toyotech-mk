@@ -55,7 +55,7 @@
    - Each service: icon + short description
    - No images on service cards (icon + text only, keeps the focus on the service info)
    - Feature "Genuine Parts and Warranty" and hybrid specialism callouts
-   - **Servicing packages:** Bronze (interim), Silver (full), Gold (major) cards in `src/content/service-packages.ts`, each with its own WhatsApp button. The inclusions are pre-filled EXAMPLES (typical UK interim/full/major service items) awaiting confirmation from Mumthaz. No prices.
+   - **Servicing packages:** Bronze (interim), Silver (full), Gold (major) cards in `src/content/service-packages.ts`, each with its own WhatsApp button. The inclusions are pre-filled EXAMPLES (typical UK interim/full/major service items) awaiting confirmation from Mumthaz. No prices. **Currently hidden** until the client decides (`showServicePackages` in that file; set it to true to bring the section back).
 3. **MOT** (`/mot/`, nav label "MOT"; the old `/mot-checks/` URL redirects there via `redirects` in `astro.config.mjs`)
    - "Book your MOT in Bletchley" WhatsApp CTA sits straight under the page heading (reg-only form). From lg up the CTA text sits beside the shopfront photo (two columns); stacked and centred on mobile
    - Plain-English guide to every part inspected at a car MOT, grouped into 6 areas
