@@ -38,28 +38,6 @@ const directionsHref = map.directionsUrl;
       <div>
         <h2 class="text-2xl font-bold text-navy">Call or WhatsApp us</h2>
         <ul class="mt-4 space-y-3">
-          <li class="flex items-center gap-3 rounded-xl bg-white p-4 ring-1 ring-slate-200">
-            <a
-              href={whatsapp.href}
-              data-whatsapp-enquiry=""
-              target="_blank"
-              rel="noopener noreferrer"
-              class="min-w-0 flex-1 hover:underline"
-            >
-              <span class="block text-xl font-bold text-navy tabular-nums">{whatsapp.display}</span>
-              <span class="block text-sm text-slate-500">WhatsApp for MOTs, servicing and repairs</span>
-            </a>
-            <a
-              href={whatsapp.href}
-              data-whatsapp-enquiry=""
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-motion flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-whatsapp text-navy hover:bg-whatsapp-hover"
-              aria-label={`WhatsApp ${whatsapp.display} (opens WhatsApp)`}
-            >
-              <WhatsAppIcon className="h-6 w-6" />
-            </a>
-          </li>
           {
             phones.map((p) => (
               <li class="flex items-center gap-3 rounded-xl bg-white p-4 ring-1 ring-slate-200">
@@ -74,6 +52,18 @@ const directionsHref = map.directionsUrl;
                 >
                   <Phone className="h-5 w-5" />
                 </a>
+                {p.whatsapp && (
+                  <a
+                    href={whatsapp.href}
+                    data-whatsapp-enquiry=""
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-motion flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-whatsapp text-navy hover:bg-whatsapp-hover"
+                    aria-label={`WhatsApp ${p.display} (opens WhatsApp)`}
+                  >
+                    <WhatsAppIcon className="h-6 w-6" />
+                  </a>
+                )}
               </li>
             ))
           }

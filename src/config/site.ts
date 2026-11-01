@@ -151,17 +151,21 @@ export type Phone = {
   label: string;
   display: string;
   tel: string;
+  /** Also on WhatsApp: gets a WhatsApp button beside its call button */
+  whatsapp?: boolean;
 };
 
+/** WhatsApp Business number: every WhatsApp button and enquiry goes here (MOTs, servicing, repairs). It takes calls too. */
+const whatsappNumber = '447846881064';
+const whatsappDisplay = '07846 881064';
+
 /**
- * Numbers for calls, split by job (meeting 12 Oct 2026). The first is the
- * main number used site-wide (header, hero, schema `telephone`). WhatsApp has
- * its own number, see `whatsapp`.
+ * The only two numbers on the site. The first is the main number used
+ * site-wide (header, hero, schema `telephone`).
  */
 export const phones: Phone[] = [
-  { label: 'Main line and MOTs', display: '01908 639629', tel: '+441908639629' },
-  { label: 'Servicing and quotes', display: '07450 277250', tel: '+447450277250' },
-  { label: 'MOTs', display: '07476 094818', tel: '+447476094818' },
+  { label: 'Landline', display: '01908 639629', tel: '+441908639629' },
+  { label: 'Call or WhatsApp', display: whatsappDisplay, tel: `+${whatsappNumber}`, whatsapp: true },
 ];
 
 /**
@@ -237,16 +241,13 @@ export const whatsappEnquiries: Enquiry[] = [
  */
 export const whatsappPresets: Enquiry[] = [mot, ...['Bronze', 'Silver', 'Gold'].map(servicePackage)];
 
-/** WhatsApp Business number: every WhatsApp button and enquiry goes here (MOTs, servicing, repairs). */
-const whatsappNumber = '447846881064';
-
 const waLink = (text: string) => `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
 
 const whatsappMessage = 'Hello Toyotech, I am interested in booking a service or MOT. Could you let me know your availability?';
 
 export const whatsapp = {
   number: whatsappNumber,
-  display: '07846 881064',
+  display: whatsappDisplay,
   href: waLink(whatsappMessage),
 };
 
