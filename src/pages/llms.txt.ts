@@ -28,7 +28,7 @@ export const GET: APIRoute = async ({ site: origin }) => {
 - Business type: Car repair garage, MOT testing centre, hybrid vehicle specialist
 - Address: 80-86 Tavistock Street, Bletchley, Milton Keynes, ${address.postcode}, United Kingdom
 - Phone: ${phones.map((p) => `${p.display} (${p.label})`).join(', ')}
-- WhatsApp (quickest way to book): ${whatsapp.lines.map((l) => `${l.display} (${l.label})`).join(', ')} — ${whatsapp.href}
+- WhatsApp (quickest way to book): ${whatsapp.display} — ${whatsapp.href}
 - Contact: ${site.contactName}
 - Areas served: ${serviceAreas.join(', ')}
 - DVSA MOT testing station: site number ${motStation.siteNumber} (${motStation.classes}), run by ${motStation.operator}
